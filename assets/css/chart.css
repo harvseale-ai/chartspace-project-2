@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+}
+
+
+.card {
+  /* width: 760px; */
+  background: #f5f6f8;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.card-title-block h2 {
+  margin: 0;
+  font-size: 64px;
+  line-height: 1;
+}
+
+.card-title-block p {
+  margin: 10px 0 0;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.actions span {
+  font-size: 16px;
+  color: #555;
+}
+
+.chart-wrap {
+  margin-top: 24px;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.grid-line {
+  stroke: #d8dce2;
+  stroke-width: 1;
+}
+
+.axis-line {
+  stroke: #bcc2cb;
+  stroke-width: 1.5;
+}
+
+.focus-line {
+  stroke: #b7bcc5;
+  stroke-width: 1;
+  stroke-dasharray: 8 10;
+}
+
+.line-light,
+.line-dark {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.line-light {
+  stroke: #8e949f;
+}
+
+.line-dark {
+  stroke: #23252b;
+}
+
+.point-light {
+  fill: #8e949f;
+  stroke: #f5f6f8;
+  stroke-width: 4;
+}
+
+.point-dark {
+  fill: #23252b;
+  stroke: #f5f6f8;
+  stroke-width: 4;
+}
+
+.point-active {
+  fill: #198f35;
+  stroke: #ffffff;
+  stroke-width: 6;
+}
+
+.axis-label {
+  font-size: 16px;
+  fill: #666a73;
+  font-family: Arial, sans-serif;
+}
+
+.month-label {
+  font-size: 16px;
+  fill: #666a73;
+  font-family: Arial, sans-serif;
+  text-anchor: middle;
+}
+
+.title-group h2 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.chart-desc {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: #6b7280; /* soft grey */
+}
+
+
+
+/* .chart {
+  padding-left: 40px;
+} */
+
+h2 {
+  font-weight: 700;
+}
+
+/* ---------------------- */
+
+.chart-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+}
+
+.chart-card {
+  flex-shrink: 0;
+}
+
+.chart-side-panel {
+  width: 450px;
+  min-height: 390px;
+  background: #3c3c3f;
+  color: #f1f1f1;
+  border-radius: 28px;
+  padding: 26px 22px;
+  box-sizing: border-box;
+}
+
+.chart-side-panel h3 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.chart-side-panel p {
+  margin: 18px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #f1f1f1;
+}
+
+.side-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.8);
+}
+

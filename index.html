@@ -1,21 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="logo">
-        <img src="/assets/images/ci-logo.png" alt="CI Logo - a graphical brand mark representing the CI organization or product">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Template</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/chart.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div class="logo-circle">LOGO</div>
+          <p class="page-tagline">Chart Dashboard</p>
+        </div>
+
+        <!-- <div class="topbar-center">
+          <div class="search-bar">
+            <span class="search-text">Search</span>
+            <span class="search-icon">⌕</span>
+          </div>
+        </div> -->
+
+        <div class="topbar-right">
+          <button class="icon-circle" aria-label="Notifications">◠</button>
+          <div class="profile-circle" id="userToggle">H</div>
+        </div>
+        <div class="floating-menu" id="floatingMenu">
+          <div class="menu-item-row">
+            <div class="menu-item-left">
+              <span class="menu-icon">◫</span>
+              <span>Charts</span>
+            </div>
+            <span class="menu-icon-right">⊞</span>
+          </div>
+
+          <div class="menu-item-row">
+            <div class="menu-item-left">
+              <span class="menu-icon">📄</span>
+              <span>Data Options</span>
+            </div>
+          </div>
+
+          <div class="menu-item-row">
+            <div class="menu-item-left">
+              <span class="menu-icon">👜</span>
+              <span>About</span>
+            </div>
+          </div>
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-item-row">
+            <div class="menu-item-left">
+              <span class="menu-icon">🖥</span>
+              <span>Site Map</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-user-panel" id="floatingUserPanel">
+          <div class="user-panel-top">
+            <div class="user-panel-profile">
+              <div class="user-mini-icon">◔</div>
+              <span>User</span>
+            </div>
+
+            <button class="share-btn">Share</button>
+          </div>
+
+          <div class="menu-divider"></div>
+
+          <div class="menu-item-row">
+            <div class="menu-item-left">
+              <span class="menu-icon">💬</span>
+              <span>Feedback</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <section class="content-top">
+          <div class="content-inner">
+          <div class="chart-wrapper">
+
+          </div>
+            <div class="chart-zone">
+              <aside class="chart-side-panel chart-side-panel-left">
+                <h3>Description</h3>
+                <div class="side-divider"></div>
+                <p>text here...</p>
+              </aside>  
+
+
+
+              <div class="card chart-card">
+                <div class="card-header">
+                  <div class="title-group">
+                    <h2>Chart</h2>
+                    <p class="chart-desc">Is this chart description</p>
+                  </div>
+
+                  <div class="actions">
+                    <span>👍 Yes</span>
+                    <span>👎 No</span>
+                  </div>
+                </div>
+
+                <div class="chart-wrap chart">
+                  <svg
+                    id="chartSvg"
+                    class="chart-svg"
+                    viewBox="0 0 760 420"
+                    aria-label="Line chart"
+                    role="img"
+                  ></svg>
+                </div>
+              </div>
+            
+            <aside class="chart-side-panel chart-side-panel-right">
+              <h3>Outcome</h3>
+              <div class="side-divider"></div>
+              <p>Chart text here...</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="content-bottom">
+          <div class="content-inner">
+          <div class="table-panel">
+            <div class="table-panel-header">
+              <h2>Number of tables <span>(7)</span></h2>
+              <button class="collapse-btn" aria-label="Collapse section">
+                ⌃
+              </button>
+            </div>
+
+            <div class="table-head row">
+              <div>Action</div>
+              <div>Object name</div>
+              <div>Status change</div>
+              <div>Detected</div>
+              <div>Source</div>
+              <div>Impact tag</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check checked">✓</span>
+                <button class="status-pill">Review <span>⌄</span></button>
+              </div>
+              <div>Skills and Post-16 E...</div>
+              <div>Mention</div>
+              <div>Timestamp</div>
+              <div>Skills Monit...</div>
+              <div>Medium</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check"></span>
+                <button class="status-pill muted">Ignore <span>⌄</span></button>
+              </div>
+              <div>Object name</div>
+              <div>New</div>
+              <div>12/09/2025</div>
+              <div>Bill amend...</div>
+              <div>Low</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check"></span>
+                <button class="status-pill muted">Ignore <span>⌄</span></button>
+              </div>
+              <div>Object name</div>
+              <div>Mention</div>
+              <div>12/09/2025</div>
+              <div>Bill amend...</div>
+              <div>Low</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check"></span>
+                <button class="status-pill">Review <span>⌄</span></button>
+              </div>
+              <div>Object name</div>
+              <div>Updated</div>
+              <div>12/09/2025</div>
+              <div>Bill amend...</div>
+              <div>Low</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check"></span>
+                <button class="status-pill muted">Ignore <span>⌄</span></button>
+              </div>
+              <div>Object name</div>
+              <div>New</div>
+              <div>12/09/2025</div>
+              <div>Bill amend...</div>
+              <div>Low</div>
+            </div>
+          </div>
+          </div>
+        </section>
+
+        <section class="content-bottom">
+          <div class="content-inner">
+          <div class="table-panel">
+            <div class="table-panel-header">
+              <h2>Number of tables <span>(7)</span></h2>
+              <button class="collapse-btn" aria-label="Collapse section">
+                ⌃
+              </button>
+            </div>
+
+            <div class="table-head row">
+              <div>Action</div>
+              <div>Object name</div>
+              <div>Status change</div>
+              <div>Detected</div>
+              <div>Source</div>
+              <div>Impact tag</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check checked">✓</span>
+                <button class="status-pill dark">Action <span>⌄</span></button>
+              </div>
+              <div>Teaching Equalities...</div>
+              <div>Updated</div>
+              <div>12/09/2025</div>
+              <div>Bill Monito...</div>
+              <div>High</div>
+            </div>
+
+            <div class="table-row row">
+              <div class="action-cell">
+                <span class="check"></span>
+                <button class="status-pill muted">Ignore <span>⌄</span></button>
+              </div>
+              <div>Object name</div>
+              <div>New</div>
+              <div>12/09/2025</div>
+              <div>Bill amend...</div>
+              <div>Low</div>
+            </div>
+          </div>
+          </div>
+        </section>
+      </main>
     </div>
-    <div class="header">
-        <h1>Welcome to CI</h1>
-        <p>Your gateway to continuous integration and seamless development workflows.</p>
-    </div> 
-    <div class="background-img">
-        <img src="/assets/images/background-img.jpg" alt="Background Image - a scenic photograph used as a backdrop for the website, enhancing visual appeal and user experience">
-    </div>
-</body>
+    <footer class="footer">
+      © 2026 Chart Dashboard
+    </footer>
+    <script src="assets/js/app.js"></script>
+  </body>
 </html>
