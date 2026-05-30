@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!--this is a comment test versions -->
+    <!-- this is a comment test versions -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Template</title>
+    <title>ChartSpace</title>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/chart.css" />
+    <link rel="icon" type="image/png" href="assets/images/chartspace-logo.png">
+
   </head>
   <body>
     <div class="page-shell">
-
       <header class="topbar">
         <div class="topbar-left">
           <button class="menu-btn" id="menuToggle" aria-label="Open menu">
@@ -19,254 +20,510 @@
             <span></span>
           </button>
 
-          <div class="logo-circle">LOGO</div>
-          <p class="page-tagline">Chart Dashboard</p>
+          <div class="logo-circle">
+            <img
+              src="assets/images/chartspace-logo.png"
+              alt="Chartspace logo"
+            />
+          </div>
+
+          <h3 class="page-tagline">ChartSpace</h3>
         </div>
 
-        <!-- <div class="topbar-center">
-          <div class="search-bar">
-            <span class="search-text">Search</span>
-            <span class="search-icon">⌕</span>
-          </div>
-        </div> -->
+
 
         <div class="topbar-right">
-          <button class="icon-circle" aria-label="Notifications">◠</button>
-          <div class="profile-circle" id="userToggle">H</div>
-        </div>
-        <div class="floating-menu" id="floatingMenu">
-          <div class="menu-item-row">
-            <div class="menu-item-left">
-              <span class="menu-icon">◫</span>
-              <span>Charts</span>
+
+          <button class="icon-circle" id="exportBtn">
+            <div class="menu-icon">
+              <i data-lucide="download"></i>
+              <span id="exportCount" class="export-count">0</span>
             </div>
-            <span class="menu-icon-right">⊞</span>
+          </button>
+
+          <button class="icon-circle" id="themeToggle" aria-label="Toggle light and dark mode">
+            <div class="menu-icon"> <i data-lucide="eclipse"></i></div>
+          </button>
+
+          <button
+              class="profile-circle"
+              id="weatherBtn"
+              aria-label="Open user menu"
+            >
+            <div class="menu-icon-weather">
+              <i data-lucide="cloud-sun"></i>
+            </div>
+          </button>
+
+          <div id="weatherPopup" class="weather-popup">
+            <p id="weatherText">Loading weather...</p>
           </div>
 
-          <div class="menu-item-row">
+        </div>
+
+        <div class="floating-menu" id="floatingMenu">
+          <div class="menu-item-row" id="navCharts">
             <div class="menu-item-left">
-              <span class="menu-icon">📄</span>
+              <i data-lucide="bar-chart-3"></i>
+              <span>Charts</span>
+            </div>
+
+            <button
+              id="openAllToggle"
+              class="menu-icon-right-btn"
+              aria-label="Open all panels"
+            >
+              <i data-lucide="maximize-2"></i>
+            </button>
+          </div>
+
+          <div class="menu-item-row" id="navDataOptions">
+            <div class="menu-item-left">
+              <i data-lucide="file-text"></i>
               <span>Data Options</span>
             </div>
           </div>
 
-          <div class="menu-item-row">
+          <div class="menu-divider"></div>
+
+          <div class="menu-item-row" id="aboutBtn">
             <div class="menu-item-left">
-              <span class="menu-icon">👜</span>
+              <i data-lucide="info"></i>
               <span>About</span>
-            </div>
-          </div>
-
-          <div class="menu-divider"></div>
-
-          <div class="menu-item-row">
-            <div class="menu-item-left">
-              <span class="menu-icon">🖥</span>
-              <span>Site Map</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="floating-user-panel" id="floatingUserPanel">
-          <div class="user-panel-top">
-            <div class="user-panel-profile">
-              <div class="user-mini-icon">◔</div>
-              <span>User</span>
-            </div>
-
-            <button class="share-btn">Share</button>
-          </div>
-
-          <div class="menu-divider"></div>
-
-          <div class="menu-item-row">
-            <div class="menu-item-left">
-              <span class="menu-icon">💬</span>
-              <span>Feedback</span>
             </div>
           </div>
         </div>
       </header>
 
       <main class="page-content">
-        <section class="content-top">
+        <section class="content-top" id="sectionCharts">
           <div class="content-inner">
-          <div class="chart-wrapper">
+            <div class="chart-wrapper">
+              <div class="chart-zone" id="chartZone">
+                <div class="chart-panel-group">
+                  <aside
+                    class="chart-side-panel chart-side-panel-left chart-side-panel-outside"
+                    id="descriptionPanel"
+                  >
+                    <h3>Description</h3>
+                    <div class="side-divider"></div>
+                    <div class="side-panel-content">
+                      <div class="panel-section">
+                        <strong>Data Overview</strong>
+                        <p>
+                          Data Type: Monthly aggregated records<br />
+                          Last Updated: 12 Sep 2025
+                        </p>
+                      </div>
 
-          </div>
-            <div class="chart-zone">
-              <aside class="chart-side-panel chart-side-panel-left">
-                <h3>Description</h3>
-                <div class="side-divider"></div>
-                <p>text here...</p>
-              </aside>  
+                      <div class="panel-section">
+                        <strong>Transformation</strong>
+                        <p>
+                          Raw data is grouped by month and normalised<br />
+                          Duplicate entries are removed<br />
+                          Values are averaged across reporting periods
+                        </p>
+                      </div>
 
+                      <div class="panel-section">
+                        <strong>Chart Details</strong>
+                        <p>
+                          Type: Line chart (dual series)<br />
+                          Focus: Trend of key performance metric<br />
+                          Highlight: Peak activity in April
+                        </p>
+                      </div>
 
+                      <div class="panel-section">
+                        <strong>Insights</strong>
+                        <p>
+                          Steady growth observed from Jan → Apr<br />
+                          Slight decline in May<br />
+                          Recovery begins in June
+                        </p>
+                      </div>
+                    </div>
+                  </aside>
 
-              <div class="card chart-card">
-                <div class="card-header">
-                  <div class="title-group">
-                    <h2>Chart</h2>
-                    <p class="chart-desc">Is this chart description</p>
+                  <aside
+                    class="chart-side-panel chart-side-panel-left chart-side-panel-inside"
+                    id="summaryPanel"
+                  >
+                    <h3>Summary</h3>
+                    <div class="side-divider"></div>
+                    <div class="side-panel-content">
+                      <div class="panel-section">
+                        <strong>Status Overview</strong>
+                        <p>
+                          Data Type: Monthly aggregated records<br />
+                          Last Updated: 12 Sep 2025
+                        </p>
+                      </div>
+
+                      <div class="panel-section">
+                        <strong>Transformation</strong>
+                        <p>
+                          Raw data is grouped by month and normalised<br />
+                          Duplicate entries are removed<br />
+                          Values are averaged across reporting periods
+                        </p>
+                      </div>
+
+                      <div class="panel-section">
+                        <strong>Chart Details</strong>
+                        <p>
+                          Type: Line chart (dual series)<br />
+                          Focus: Trend of key performance metric<br />
+                          Highlight: Peak activity in April
+                        </p>
+                      </div>
+
+                      <div class="panel-section">
+                        <strong>Insights</strong>
+                        <p>
+                          Steady growth observed from Jan → Apr<br />
+                          Slight decline in May<br />
+                          Recovery begins in June
+                        </p>
+                      </div>
+                    </div>
+                  </aside>
+                </div>
+
+                <div class="card chart-card">
+                  <div class="card-header">
+                    <div class="card-title-block">
+                      <div class="chart-title-row">
+                        <h2>Industry Monitor</h2>
+
+                        <button
+                          id="chartInfoToggle"
+                          class="chart-info-btn"
+                          aria-label="Toggle chart info"
+                        >
+                          ⓘ
+                        </button>
+                      </div>
+
+                      <p>Tracked event volume over the last 6 months</p>
+                    </div>
+
+                    <div class="chart-summary">
+                      <div class="summary-item">
+                        <span class="summary-value">26</span>
+                        <span class="summary-label">Peak events</span>
+                      </div>
+
+                      <div class="summary-item">
+                        <span class="summary-value">+12%</span>
+                        <span class="summary-label">MoM change</span>
+                      </div>
+
+                      <div class="summary-item">
+                        <span class="summary-value">42</span>
+                        <span class="summary-label">Total events</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="actions">
-                    <span>👍 Yes</span>
-                    <span>👎 No</span>
+                  <div class="chart-wrap chart">
+                    <svg
+                      id="chartSvg"
+                      class="chart-svg"
+                      viewBox="0 0 760 420"
+                      aria-label="Line chart"
+                      role="img"
+                    ></svg>
                   </div>
                 </div>
 
-                <div class="chart-wrap chart">
-                  <svg
-                    id="chartSvg"
-                    class="chart-svg"
-                    viewBox="0 0 760 420"
-                    aria-label="Line chart"
-                    role="img"
-                  ></svg>
+                <div class="chart-panel-group">
+                  <aside
+                    class="chart-side-panel chart-side-panel-right chart-side-panel-inside"
+                    id="outcomePanel"
+                  >
+                    <h3>Outcome</h3>
+                    <div class="side-divider"></div>
+                    <div class="side-panel-content">
+                      <div class="panel-section">
+                        <strong>Table Mapping</strong>
+                        <p>
+                          Each row represents a detected event<br />
+                          Status reflects user action<br />
+                          Source links back to originating dataset
+                        </p>
+                      </div>
+
+                      <div class="panel-section">
+                        <strong>Notes</strong>
+                        <p>
+                          Data is refreshed weekly<br />
+                          Minor delays may occur during ingestion<br />
+                          Outliers are not removed in this view
+                        </p>
+                      </div>
+                    </div>
+                  </aside>
+
+                  <aside
+                    class="chart-side-panel chart-side-panel-right chart-side-panel-outside"
+                    id="recommendedActionPanel"
+                  >
+                    <h3>Recommended Action</h3>
+                    <div class="side-divider"></div>
+                    <div class="side-panel-content">
+                      <div class="panel-section">
+                        <strong>Plan of Action</strong>
+                        <p>
+                          Each row represents a detected event<br />
+                          Status reflects user action<br />
+                          Source links back to originating dataset
+                        </p>
+                      </div>
+
+                      <div class="panel-section">
+                        <strong>Notes</strong>
+                        <p>
+                          Data is refreshed weekly<br />
+                          Minor delays may occur during ingestion<br />
+                          Outliers are not removed in this view
+                        </p>
+                      </div>
+                    </div>
+                  </aside>
                 </div>
               </div>
-            
-            <aside class="chart-side-panel chart-side-panel-right">
-              <h3>Outcome</h3>
-              <div class="side-divider"></div>
-              <p>Chart text here...</p>
-            </aside>
+            </div>
           </div>
         </section>
 
-        <section class="content-bottom">
+        <section class="content-bottom" id="sectionDataOptions">
           <div class="content-inner">
-          <div class="table-panel">
-            <div class="table-panel-header">
-              <h2>Number of tables <span>(7)</span></h2>
-              <button class="collapse-btn" aria-label="Collapse section">
-                ⌃
-              </button>
-            </div>
+            <div class="table-panel">
+                <div class="table-toolbar">
+                  <div class="dataset-switcher">
+                    <button class="dataset-btn active" data-dataset="finance">
+                      Finance
+                    </button>
+                    <button class="dataset-btn" data-dataset="healthcare">
+                      Healthcare
+                    </button>
+                    <button class="dataset-btn" data-dataset="education">
+                      Education
+                    </button>
+                  </div>
+                </div>
 
-            <div class="table-head row">
-              <div>Action</div>
-              <div>Object name</div>
-              <div>Status change</div>
-              <div>Detected</div>
-              <div>Source</div>
-              <div>Impact tag</div>
-            </div>
+                <div class="table-panel-header">
+                  <h2 id="tableTitle">Finance events <span>(7)</span></h2>
 
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check checked">✓</span>
-                <button class="status-pill">Review <span>⌄</span></button>
+                  <div class="date-filter-wrap">
+                    <button class="date-range-btn" id="actionColumnToggle">
+                      Actions
+                    </button>
+                    <button class="date-range-btn" id="tableDateRangeBtn">
+                      Last 30 days
+                    </button>
+
+                    <div class="date-filter-panel" id="tableDateFilterPanel">
+                      <div class="date-filter-header">
+                        <span>Updated in the last</span>
+                        <button
+                          class="date-filter-close"
+                          id="tableDateFilterClose"
+                          aria-label="Close filter"
+                        >
+                          ⌃
+                        </button>
+                      </div>
+
+                      <label class="date-filter-option">
+                        <input
+                          type="radio"
+                          name="tableDateRange"
+                          value="24 hours"
+                        />
+                        <span>24 hours</span>
+                      </label>
+
+                      <label class="date-filter-option">
+                        <input
+                          type="radio"
+                          name="tableDateRange"
+                          value="7 days"
+                        />
+                        <span>7 days</span>
+                      </label>
+
+                      <label class="date-filter-option">
+                        <input
+                          type="radio"
+                          name="tableDateRange"
+                          value="14 days"
+                        />
+                        <span>14 days</span>
+                      </label>
+
+                      <label class="date-filter-option">
+                        <input
+                          type="radio"
+                          name="tableDateRange"
+                          value="30 days"
+                          checked
+                        />
+                        <span>30 days</span>
+                      </label>
+
+                      <label class="date-filter-option">
+                        <input
+                          type="radio"
+                          name="tableDateRange"
+                          value="90 days"
+                        />
+                        <span>90 days</span>
+                      </label>
+
+                      <label class="date-filter-option">
+                        <input
+                          type="radio"
+                          name="tableDateRange"
+                          value="180 days"
+                        />
+                        <span>180 days</span>
+                      </label>
+
+                      <button class="apply-filter-btn" id="tableApplyDateFilter">
+                        Apply filters
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              <div class="table-scroll-x">
+                <div class="table-head row" id="tableHead">
+                  <div>Actions</div>
+                  <div><span class="truncate-text">Entity / Event</span></div>
+                  <div><span class="truncate-text">Change Type</span></div>
+                  <div><span class="truncate-text">Detected Date</span></div>
+                  <div><span class="truncate-text">Confidence</span></div>
+                  <div><span class="truncate-text">Source</span></div>
+                </div>
+
+                <div id="tableRows"></div>
               </div>
-              <div>Skills and Post-16 E...</div>
-              <div>Mention</div>
-              <div>Timestamp</div>
-              <div>Skills Monit...</div>
-              <div>Medium</div>
             </div>
-
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check"></span>
-                <button class="status-pill muted">Ignore <span>⌄</span></button>
-              </div>
-              <div>Object name</div>
-              <div>New</div>
-              <div>12/09/2025</div>
-              <div>Bill amend...</div>
-              <div>Low</div>
-            </div>
-
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check"></span>
-                <button class="status-pill muted">Ignore <span>⌄</span></button>
-              </div>
-              <div>Object name</div>
-              <div>Mention</div>
-              <div>12/09/2025</div>
-              <div>Bill amend...</div>
-              <div>Low</div>
-            </div>
-
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check"></span>
-                <button class="status-pill">Review <span>⌄</span></button>
-              </div>
-              <div>Object name</div>
-              <div>Updated</div>
-              <div>12/09/2025</div>
-              <div>Bill amend...</div>
-              <div>Low</div>
-            </div>
-
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check"></span>
-                <button class="status-pill muted">Ignore <span>⌄</span></button>
-              </div>
-              <div>Object name</div>
-              <div>New</div>
-              <div>12/09/2025</div>
-              <div>Bill amend...</div>
-              <div>Low</div>
-            </div>
-          </div>
-          </div>
-        </section>
-
-        <section class="content-bottom">
-          <div class="content-inner">
-          <div class="table-panel">
-            <div class="table-panel-header">
-              <h2>Number of tables <span>(7)</span></h2>
-              <button class="collapse-btn" aria-label="Collapse section">
-                ⌃
-              </button>
-            </div>
-
-            <div class="table-head row">
-              <div>Action</div>
-              <div>Object name</div>
-              <div>Status change</div>
-              <div>Detected</div>
-              <div>Source</div>
-              <div>Impact tag</div>
-            </div>
-
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check checked">✓</span>
-                <button class="status-pill dark">Action <span>⌄</span></button>
-              </div>
-              <div>Teaching Equalities...</div>
-              <div>Updated</div>
-              <div>12/09/2025</div>
-              <div>Bill Monito...</div>
-              <div>High</div>
-            </div>
-
-            <div class="table-row row">
-              <div class="action-cell">
-                <span class="check"></span>
-                <button class="status-pill muted">Ignore <span>⌄</span></button>
-              </div>
-              <div>Object name</div>
-              <div>New</div>
-              <div>12/09/2025</div>
-              <div>Bill amend...</div>
-              <div>Low</div>
-            </div>
-          </div>
           </div>
         </section>
       </main>
     </div>
-    <footer class="footer">
-      © 2026 Chart Dashboard
-    </footer>
+
+    <footer class="footer">© 2026 Chart Dashboard</footer>
+
+    <div id="aboutOverlay" class="about-overlay">
+      <div class="about-card">
+        <button id="closeAbout" class="about-close">
+          <i data-lucide="x"></i>
+        </button>
+
+
+        <h2>About ChartSpace</h2>
+
+          <p class="about-subtitle">A visual monitoring dashboard for tracking sector activity and logged changes.</p>
+
+          <p class="about-body">
+            ChartSpace helps turn monthly activity data into a clear, readable view so users can quickly understand what is changing, where activity is increasing, and which events may need review.
+          </p>
+
+          <p class="about-body">
+            The dashboard combines chart summaries, sector filters, event tables, and contextual notes into one workspace. It is designed to make complex monitoring data easier to scan, compare, and explain without needing to move between multiple reports or tools.
+          </p>
+
+          <ul>
+            <li>Monitor monthly activity across key sectors</li>
+            <li>Review detected events, changes, confidence levels, and sources</li>
+            <li>Compare sector trends using a clean visual chart layout</li>
+            <li>Use light and dark mode for a flexible viewing experience</li>
+          </ul>
+
+          <p class="about-body-final">
+            Built for fast insight, simple navigation, and clear decision support.
+          </p>
+
+      </div>
+    </div>
+
     <script src="assets/js/app.js"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    </script>
+
+    <script>
+      const themeToggle = document.querySelector("#themeToggle");
+
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+          themeToggle.innerHTML = '<div class="menu-icon"> <i data-lucide="eclipse"></i></div>';
+        } else {
+          themeToggle.innerHTML = '<div class="menu-icon"> <i data-lucide="eclipse"></i></div>';
+        }
+
+        lucide.createIcons();
+      });
+    </script>
+
+    <script>
+      const weatherBtn = document.querySelector("#weatherBtn");
+      const weatherPopup = document.querySelector("#weatherPopup");
+      const weatherText = document.querySelector("#weatherText");
+
+      weatherBtn.addEventListener("click", async () => {
+        weatherPopup.style.display =
+          weatherPopup.style.display === "block" ? "none" : "block";
+
+        weatherText.textContent = "Loading weather...";
+
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current_weather=true";
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const temp = data.current_weather.temperature;
+        const wind = data.current_weather.windspeed;
+
+        weatherText.innerHTML = `
+          <strong>London Weather</strong><br>
+          Temperature: ${temp}°C<br>
+          Wind: ${wind} km/h
+        `;
+      });
+    </script>
+
+    <script>
+      const aboutBtn = document.querySelector("#aboutBtn");
+      const aboutOverlay = document.querySelector("#aboutOverlay");
+      const closeAbout = document.querySelector("#closeAbout");
+
+      aboutBtn.addEventListener("click", () => {
+        aboutOverlay.classList.add("show");
+        lucide.createIcons();
+      });
+
+      closeAbout.addEventListener("click", () => {
+        aboutOverlay.classList.remove("show");
+      });
+
+      aboutOverlay.addEventListener("click", (event) => {
+        if (event.target === aboutOverlay) {
+          aboutOverlay.classList.remove("show");
+        }
+      });
+    </script>
+
   </body>
 </html>

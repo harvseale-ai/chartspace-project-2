@@ -1,179 +1,649 @@
+/* ===========================================================================================================================
+   CHART CARD LAYOUT
+   Purpose:
+   - Styles the main chart card container inside the chart workspace.
+   - Controls the card background, spacing, border radius, and shadow.
+   - Also styles the chart title area and subtitle text.
+   Related HTML:
+   - .card
+   - .chart-card
+   - .card-header
+   - .card-title-block h2
+   - .card-title-block p
+============================================================================================================================= */
+
 * {
   box-sizing: border-box;
 }
 
-
+/* Base card style used for the chart container.
+   Gives the chart its white card look, internal spacing, and shadow. */
 .card {
-  /* width: 760px; */
-  background: #f5f6f8;
-  border-radius: 28px;
-  padding: 28px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  width: 100%;
+  background: var(--color-chart-card-bg);
+  border-radius: 19px;
+  padding: 19px;
+  box-shadow: var(--shadow-chart-card);
 }
 
+/* Specific width rule for the chart card inside the chart zone.
+   This controls the main chart block width on desktop. */
+.chart-card {
+  flex: 0 0 auto;
+  width: 938px;
+}
+
+/* Header row inside the chart card.
+   This lays out the left title block and the right summary/controls area. */
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 20px;
+  gap: 13px;
 }
 
+/* Main chart title.
+   Large heading used for the chart name or monitor title. */
 .card-title-block h2 {
   margin: 0;
-  font-size: 64px;
+  font-size: 43px;
   line-height: 1;
+  font-weight: 700;
 }
 
+/* Subtitle under the chart title.
+   Used for supporting context such as time range or chart description. */
 .card-title-block p {
-  margin: 10px 0 0;
-  font-size: 16px;
-  color: #6b7280;
+  margin: 7px 0 0;
+  font-size: 11px;
+  color: var(--color-chart-text-secondary);
 }
 
+
+
+/* ===========================================================================================================================
+   CHART CHART-CONTROLS
+   Purpose:
+   - Styles small interactive controls related to the chart.
+   - Includes feedback buttons, metric labels, and the toggle switch.
+   Related HTML:
+   - .chart-controls
+   - .chart-metric-label
+   - .chart-feedback-btn
+   - .chart-switch
+   - .chart-switch-slider
+============================================================================================================================= */
+
+/* Container for grouped chart controls.
+   Allows controls to sit in one row and wrap if space gets tighter. */
+.chart-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Small label text used near metrics or switches.
+   Helps explain what a nearby value or control represents. */
+.chart-metric-label {
+  font-size: 13px;
+  color: var(--color-chart-metric);
+}
+
+/* Button style for chart feedback actions.
+   Keeps the buttons minimal so they feel like lightweight UI actions. */
+.chart-feedback-btn {
+  border: none;
+  background: var(--color-transparent);
+  color: var(--color-chart-feedback);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Inner text/icon spacing inside chart feedback buttons. */
+.chart-feedback-btn span {
+  font-size: 13px;
+}
+
+/* Active state for selected chart feedback button.
+   Makes the selected action darker and bolder. */
+.chart-feedback-btn.active {
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+/* Outer wrapper for the chart toggle switch.
+   Creates the fixed-size switch area. */
+.chart-switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+}
+
+/* Native checkbox is hidden visually.
+   The visible switch is built using the slider element instead. */
+.chart-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Visible slider background for the custom switch.
+   This is the track behind the moving toggle circle. */
+.chart-switch-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--color-chart-toggle-track);
+  border-radius: 999px;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+/* Circular knob inside the custom switch.
+   Moves left to right when checked. */
+.chart-switch-slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 2px;
+  top: 2px;
+  background: var(--color-text-inverse);
+  border-radius: 50%;
+  transition: 0.25s ease;
+}
+
+/* Checked state for the switch track.
+   Changes background colour when the toggle is on. */
+.chart-switch input:checked + .chart-switch-slider {
+  background: var(--color-chart-toggle-active);
+}
+
+/* Checked state for the switch knob.
+   Moves the knob to the right when enabled. */
+.chart-switch input:checked + .chart-switch-slider::before {
+  transform: translateX(20px);
+}
+
+/* ------------ */
+
+/* =========================
+   CHART HEADER ACTIONS
+   Purpose:
+   - Styles the small action group in the chart header.
+   - Used for light actions or text-based controls.
+   Related HTML:
+   - .actions
+========================= */
+
+/* Horizontal action group in the chart header.
+   Keeps action items aligned and evenly spaced. */
 .actions {
   display: flex;
-  gap: 20px;
-  padding-top: 10px;
+  align-items: center;
+  gap: 16px;
 }
 
+/* Small text styling for items inside the actions group. */
 .actions span {
-  font-size: 16px;
-  color: #555;
+  font-size: 11px;
+  color: var(--color-chart-action-text);
 }
 
+/* =========================
+   CHART INFO BUTTON
+   Purpose:
+   - Styles the chart title row and info toggle button.
+   - Used near the title to open or explain chart-side information.
+   Related HTML:
+   - .chart-title-row
+   - .chart-info-btn
+========================= */
+
+/* Groups the chart title and info button in one row. */
+.chart-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+body.dark-mode .chart-title-row h2 {
+  color: var(--color-text-main);
+}
+
+/* Minimal info button style used beside the title. */
+.chart-info-btn {
+  border: none;
+  background: var(--color-transparent);
+  font-size: 11px;
+  line-height: 1;
+  color: var(--color-text-main);
+  cursor: pointer;
+  margin-top: 7px;
+}
+
+/* =========================
+   CHART SUMMARY
+   Purpose:
+   - Styles the summary metrics shown in the chart header.
+   - Used to show quick headline numbers like peak events or totals.
+   Related HTML:
+   - .chart-summary
+   - .summary-item
+   - .summary-value
+   - .summary-label
+========================= */
+
+/* Container for summary metrics on the right side of the chart header. */
+.chart-summary {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Individual summary metric block.
+   Stacks the numeric value above its label. */
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Main numeric value in the chart summary. */
+.summary-value {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+/* Small label under each summary value.
+   Explains what the number represents. */
+.summary-label {
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* ===========================================================================================================================
+   SVG CHART STYLES
+   Purpose:
+   - Styles the chart display area and the SVG elements drawn inside it.
+   - Controls the spacing around the chart, SVG sizing, line styles, points, and axis labels.
+   Related HTML / JS:
+   - .chart-wrap
+   - .chart-svg
+   - SVG elements generated by JavaScript:
+     .grid-line, .axis-line, .focus-line, .line-light, .line-dark,
+     .point-light, .point-dark, .point-active, .axis-label, .month-label
+============================================================================================================================= */
+
+/* =========================
+   CHART AREA
+   Purpose:
+   - Controls spacing around the SVG chart and makes the SVG scale correctly inside the card.
+   Related HTML:
+   - .chart-wrap
+   - .chart-svg
+========================= */
+
+/* Outer spacing above the SVG chart area.
+   Creates visual separation between the chart header and the chart itself. */
 .chart-wrap {
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
+/* Makes the SVG responsive inside its container.
+   Width fills the chart card, height scales automatically with the viewBox. */
 .chart-svg {
   width: 100%;
   height: auto;
   display: block;
 }
 
+/* Horizontal background grid lines inside the chart.
+   These give users visual reference points for chart values. */
 .grid-line {
-  stroke: #d8dce2;
+  stroke: var(--color-chart-grid-line);
   stroke-width: 1;
 }
 
+/* Baseline / main axis line.
+   Slightly stronger than grid lines to anchor the chart visually. */
 .axis-line {
-  stroke: #bcc2cb;
-  stroke-width: 1.5;
-}
-
-.focus-line {
-  stroke: #b7bcc5;
+  stroke: var(--color-control-dark);
   stroke-width: 1;
-  stroke-dasharray: 8 10;
 }
 
+/* Vertical focus line used to highlight the active point or selected month.
+   Dashed styling makes it distinct from the main axis and grid. */
+.focus-line {
+  stroke: var(--color-chart-focus-line);
+  stroke-width: 1;
+  stroke-dasharray: 5 7;
+}
+
+/* Shared styling for both chart series lines.
+   Keeps both lines smooth and consistent, with the colour set separately below. */
 .line-light,
 .line-dark {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 4;
+  stroke-width: 3;
 }
 
+/* Lighter data series line. */
 .line-light {
-  stroke: #8e949f;
+  stroke: var(--color-chart-series-light);
 }
 
+/* Darker data series line. */
 .line-dark {
-  stroke: #23252b;
+  stroke: var(--color-chart-series-dark);
 }
 
+/* Data points for the lighter series.
+   Uses a light fill with a pale stroke to separate points from the line below. */
 .point-light {
-  fill: #8e949f;
-  stroke: #f5f6f8;
-  stroke-width: 4;
+  fill: var(--color-chart-series-light);
+  stroke: var(--color-chart-card-bg);
+  stroke-width: 3;
 }
 
+/* Data points for the darker series. */
 .point-dark {
-  fill: #23252b;
-  stroke: #f5f6f8;
+  fill: var(--color-chart-series-dark);
+  stroke: var(--color-chart-card-bg);
+  stroke-width: 3;
+}
+
+/* Highlighted active point.
+   Stronger contrast makes the active point stand out clearly. */
+.point-active {
+  fill: var(--color-chart-active-point);
+  stroke: var(--color-text-inverse);
   stroke-width: 4;
 }
 
-.point-active {
-  fill: #198f35;
-  stroke: #ffffff;
-  stroke-width: 6;
-}
 
-.axis-label {
-  font-size: 16px;
-  fill: #666a73;
-  font-family: Arial, sans-serif;
-}
 
+/* Shared text styling for axis and month labels.
+   Keeps chart text consistent and readable. */
+.axis-label,
 .month-label {
-  font-size: 16px;
-  fill: #666a73;
+  font-size: 11px;
+  fill: var(--color-chart-axis-label);
   font-family: Arial, sans-serif;
+}
+
+/* Centers month labels under each data point. */
+.month-label {
   text-anchor: middle;
 }
 
-.title-group h2 {
-  margin: 0;
-  font-size: 36px;
-}
 
-.chart-desc {
-  margin: 6px 0 0;
-  font-size: 16px;
-  color: #6b7280; /* soft grey */
-}
+/* ===========================================================================================================================
+   SIDE PANELS
+   Purpose:
+   - Controls the chart workspace layout and the expandable side panels around the chart.
+   - Includes desktop panel layout, panel content rules, inside/outside panel height behaviour,
+     hover effects, and panel grouping.
+   Related HTML:
+   - .chart-zone
+   - .chart-panel-group
+   - .chart-side-panel
+   - .chart-side-panel-inside
+   - .chart-side-panel-outside
+   - .side-divider
+   - .side-panel-content
+   - .panel-section
+============================================================================================================================= */
 
-
-
-/* .chart {
-  padding-left: 40px;
-} */
-
-h2 {
-  font-weight: 700;
-}
-
-/* ---------------------- */
-
+/* Main chart workspace container.
+   Holds the left panel group, chart card, and right panel group in one row on desktop. */
 .chart-zone {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 28px;
+  align-items: flex-end;
+  gap: 19px;
   width: 100%;
+  max-width: 1284px;
+  margin: 0 auto;
 }
 
-.chart-card {
-  flex-shrink: 0;
-}
-
+/* Base side panel style used for all chart-side panels.
+   Controls width, spacing, dark background, and hover animation. */
 .chart-side-panel {
-  width: 450px;
-  min-height: 390px;
-  background: #3c3c3f;
-  color: #f1f1f1;
-  border-radius: 28px;
-  padding: 26px 22px;
-  box-sizing: border-box;
+  flex: 0 0 154px;
+  padding: 17px 15px;
+  margin-bottom: 20px;
+  background: var(--color-chart-side-panel-bg);
+  color: var(--color-chart-side-panel-text);
+  border-radius: 19px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Side panel heading style. */
 .chart-side-panel h3 {
-  margin: 0 0 16px;
-  font-size: 18px;
+  margin: 0 0 11px;
+  font-size: 12px;
   font-weight: 500;
 }
 
+/* Side panel body text style. */
 .chart-side-panel p {
-  margin: 18px 0 0;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #f1f1f1;
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--color-chart-side-panel-muted);
 }
 
+/* Divider under the side panel heading.
+   Visually separates the title from the panel content. */
 .side-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.8);
+  margin: 0 0 12px;
+  background: var(--color-chart-side-divider);
 }
 
+/* Inner content wrapper for expandable panels.
+   Height is controlled by max-height rules below. */
+.side-panel-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* A reusable content block inside each side panel.
+   Used to separate summary sections like Insights, Notes, and Overview. */
+.panel-section {
+  margin-bottom: 14px;
+}
+
+/* Section title inside a side panel block. */
+.panel-section strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+}
+
+/* Paragraph text inside a side panel content block. */
+.panel-section p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* desktop closed state
+   Inside panels show more preview content by default because they sit closer to the chart. */
+.chart-side-panel-inside .side-panel-content {
+  max-height: 180px;
+}
+
+/* desktop closed state
+   Outside panels show less preview content by default because they are secondary. */
+.chart-side-panel-outside .side-panel-content {
+  max-height: 80px;
+}
+
+/* desktop open state
+   Inside panels expand further and allow internal scrolling when content exceeds the limit. */
+.chart-side-panel-inside.expanded .side-panel-content {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* desktop open state
+   Outside panels expand, but remain shorter than inside panels to preserve hierarchy. */
+.chart-side-panel-outside.expanded .side-panel-content {
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Hover effect for side panels.
+   Gives the panels a slightly more interactive, elevated feel. */
+.chart-side-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-chart-side-panel-hover);
+}
+
+/* Scrollbar width for expanded side panel content.
+   Only applies when the content area becomes scrollable. */
+.chart-side-panel.expanded .side-panel-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Scrollbar thumb styling for expanded side panel content.
+   Keeps the scrollbar subtle and consistent with the dark panel design. */
+.chart-side-panel.expanded .side-panel-content::-webkit-scrollbar-thumb {
+  background: var(--color-chart-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+/* desktop default
+   Groups left and right panel pairs side by side on larger screens. */
+.chart-panel-group {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  align-items: flex-end;
+}
+
+
+/* ===========================================================================================================================
+   RESPONSIVE SIDE PANELS
+   Purpose:
+   - Adjusts side panel grouping and chart layout at narrower breakpoints.
+   - Creates three layout states:
+     1. desktop
+     2. narrow desktop / split-screen
+     3. tablet / mobile stacked layout
+============================================================================================================================= */
+
+/* narrow desktop / split-screen
+   Stacks each left/right panel pair vertically when the screen gets tighter,
+   while keeping the chart in the middle. */
+@media (max-width: 1500px) {
+  .chart-panel-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+}
+
+/* tablet / mobile layout
+   Moves the chart card to the top and stacks both panel groups underneath. */
+@media (max-width: 1100px) {
+  .chart-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    max-width: 100%;
+    margin: 0 auto 16px;
+  }
+
+  /* Chart appears first in the stacked mobile/tablet layout. */
+  .chart-card {
+    order: 1;
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Panel groups become full-width stacked blocks below the chart. */
+  .chart-panel-group {
+    width: 100%;
+    margin: 0;
+    min-height: auto;
+  }
+
+  /* Side panels become full width in the stacked layout. */
+  .chart-side-panel {
+    width: 100%;
+    flex: none;
+    margin: 0;
+    min-height: auto;
+  }
+
+  /* Left panel group is placed after the chart. */
+  .chart-panel-group:first-of-type {
+    order: 2;
+  }
+
+  /* Right panel group is placed after the left panel group. */
+  .chart-panel-group:last-of-type {
+    order: 3;
+  }
+
+  /* mobile-style closed state
+     Both panel types collapse fully when closed to reduce visual clutter on smaller screens. */
+  .chart-side-panel-inside .side-panel-content,
+  .chart-side-panel-outside .side-panel-content {
+    max-height: 0;
+  }
+
+  /* Inside panels on mobile/tablet still allow more reading space when opened. */
+  .chart-side-panel-inside.expanded .side-panel-content {
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+
+  /* Outside panels on mobile/tablet stay slightly shorter when opened. */
+  .chart-side-panel-outside.expanded .side-panel-content {
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .card-title-block {
+    width: auto;
+  }
+
+  .chart-title-row {
+    display: block;
+    width: auto;
+  }
+
+  .chart-title-row h2 {
+    display: inline;
+    width: auto;
+  }
+
+  .chart-info-btn {
+    display: inline;
+    vertical-align: top;
+  }
+}

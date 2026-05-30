@@ -1,450 +1,591 @@
+/* Final recommended order for style.css
+
+This is the clean order:
+
+1. GLOBAL
+2. PAGE SHELL
+3. TOP BAR
+4. TOP BAR ELEMENTS
+5. FLOATING NAV / USER PANELS
+6. TABLE
+    * TABLE PANEL
+    * TABLE TOP BAR
+    * DATE FILTER TOOLBAR
+    * TABLE HEADER
+    * TABLE GRID
+    * TABLE ROWS
+    * TABLE ACTIONS
+7. FOOTER
+
+That would make the file read in the same order as the page. */
+
+/* ===========================================================================================================================
+   GLOBAL
+   Purpose:
+   - Sets the base reset and root page styles used across the entire app.
+   - Establishes box sizing, removes default browser spacing, and applies the main font and background.
+   Related HTML:
+   - affects the whole document
+   - html
+   - body
+============================================================================================================================= */
+
+/* Global reset.
+   Ensures padding and margin start from zero and all sizing uses border-box. */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+:root {
+  /* Page surfaces */
+  --color-page-dark: #1b1b1d;
+  --color-app-bg: #d9dde3;
+  --color-section-bg: #cfd5dc;
+  --color-lower-section-bg: #f3f3f4;
+  --color-card-bg: #f7f7f8;
+  --color-panel-bg: #eef1f5;
+
+  /* Text */
+  --color-text-main: #2f343b;
+  --color-text-soft: #5b616b;
+  --color-text-muted: #8d949d;
+  --color-text-subtle: #9ba1aa;
+  --color-text-inverse: #ffffff;
+  --color-text-black: #000000;
+
+  /* Borders and dividers */
+  --color-border: #d2d6dd;
+  --color-divider: #e1e3e7;
+  --color-row-divider: #e6e8eb;
+  --color-rule: #9ea5ae;
+  --color-border-strong: #8d949d;
+
+  /* Controls */
+  --color-control-bg: #d6dae2;
+  --color-control-hover: #eef1f5;
+  --color-control-muted: #d9dde4;
+  --color-control-dark-hover: #bfc5cf;
+  --color-control-dark: #bcc2cb;
+
+  /* Brand / active */
+  --color-brand: #355c7d;
+  --color-brand-hover: #2a4964;
+  --color-brand-soft: rgba(53, 92, 125, 0.14);
+  --color-brand-row: rgba(53, 92, 125, 0.08);
+  --color-icon-main: #4f5661;
+  --color-icon-soft: #4f5661;
+
+  /* Decision states */
+  --color-critical: #2f3238;
+  --color-success: #6f8f72;
+  --color-ignore: transparent;
+  --color-avatar: #6d4aa3;
+
+  /* Chart */
+  --color-transparent: transparent;
+  --color-chart-card-bg: #f5f6f8;
+  --color-chart-text-secondary: #6b7280;
+  --color-chart-metric: #6b6f8d;
+  --color-chart-feedback: #5d5f88;
+  --color-chart-action-text: #555;
+  --color-chart-toggle-track: #c8ccd4;
+  --color-chart-toggle-active: #31c457;
+  --color-chart-grid-line: #d8dce2;
+  --color-chart-focus-line: #b7bcc5;
+  --color-chart-series-light: #8e949f;
+  --color-chart-series-dark: #23252b;
+  --color-chart-active-point: #198f35;
+  --color-chart-axis-label: #666a73;
+  --color-chart-side-panel-bg: #3c3c3f;
+  --color-chart-side-panel-text: #f1f1f1;
+  --color-chart-side-panel-muted: #e5e7eb;
+  --color-chart-side-divider: rgba(255, 255, 255, 0.8);
+  --color-chart-scrollbar-thumb: rgba(255, 255, 255, 0.25);
+  --color-chart-card-border: transparent;
+  --color-table-row-text: #6b7280;
+
+  /* Interactive effects */
+  --color-hover-glass: rgba(255, 255, 255, 0.26);
+  --color-hover-glass-strong: rgba(255, 255, 255, 0.28);
+  --color-hover-muted: rgba(0, 0, 0, 0.03);
+  --color-hover-menu: rgba(0, 0, 0, 0.06);
+
+  /* Shadows */
+  --shadow-soft: 0 6px 14px rgba(0, 0, 0, 0.08);
+  --shadow-panel: 0 18px 40px rgba(0, 0, 0, 0.14);
+  --shadow-tight: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-dropdown: 0 8px 18px rgba(0, 0, 0, 0.12);
+  --shadow-floating: 0 8px 20px rgba(0, 0, 0, 0.12);
+  --shadow-date-panel: 0 12px 30px rgba(0, 0, 0, 0.18);
+  --shadow-toggle: 0 2px 5px rgba(0, 0, 0, 0.18);
+  --shadow-chart-card: 0 7px 20px rgba(0, 0, 0, 0.28), inset 0 0 0 1px var(--color-chart-card-border);
+  --shadow-chart-side-panel-hover: 0 6px 14px rgba(0, 0, 0, 0.2);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-panel: 21px;
+  --radius-pill: 999px;
+  
+  --dashboard-max-width: 1320px;
+  --floating-panel-width: 228px;
+  --floating-panel-gap: 21px;
+}
+
+/* Dark Mode Palet */
+body.dark-mode {
+  /* Page surfaces */
+  --color-page-dark: #000000;
+  --color-app-bg: #050505;
+  --color-section-bg: #0b0b0b;
+  --color-lower-section-bg: #111111;
+  --color-card-bg: #111111;
+  --color-panel-bg: #181818;
+
+  /* Text */
+  --color-text-main: #ffffff;
+  --color-text-soft: #d6d6d6;
+  --color-text-muted: #a6a6a6;
+  --color-text-subtle: #7a7a7a;
+  --color-text-inverse: #000000;
+  --color-text-black: #ffffff;
+
+  /* Borders and dividers */
+  --color-border: #2a2a2a;
+  --color-divider: #333333;
+  --color-row-divider: #2a2a2a;
+  --color-rule: #777777;
+  --color-border-strong: #ffffff;
+
+  /* Controls */
+  --color-control-bg: #181818;
+  --color-control-hover: #222222;
+  --color-control-muted: #2a2a2a;
+  --color-control-dark-hover: #333333;
+  --color-control-dark: #222222;
+
+  /* Brand / active */
+  --color-brand: #ffffff;
+  --color-brand-hover: #d6d6d6;
+  --color-brand-soft: #222222;
+  --color-brand-row: #181818;
+  --color-icon-main: #ffffff;
+  --color-icon-soft: #d6d6d6;
+
+  /* Decision states */
+  --color-critical: #ffffff;
+  --color-success: #ffffff;
+  --color-ignore: transparent;
+  --color-avatar: #ffffff;
+
+  /* Chart */
+  --color-transparent: transparent;
+  --color-chart-card-bg: #141414;
+  --color-chart-text-secondary: #d6d6d6;
+  --color-chart-metric: #d6d6d6;
+  --color-chart-feedback: #d6d6d6;
+  --color-chart-action-text: #c2c2c2;
+  --color-chart-toggle-track: #2a2a2a;
+  --color-chart-toggle-active: #ffffff;
+  --color-chart-grid-line: #333333;
+  --color-chart-focus-line: #4a4a4a;
+  --color-chart-series-light: #bdbdbd;
+  --color-chart-series-dark: #ffffff;
+  --color-chart-active-point: #ffffff;
+  --color-chart-axis-label: #a6a6a6;
+  --color-chart-side-panel-bg: #1f1f1f;
+  --color-chart-side-panel-text: #ffffff;
+  --color-chart-side-panel-muted: #d6d6d6;
+  --color-chart-side-divider: #5a5a5a;
+  --color-chart-scrollbar-thumb: #6a6a6a;
+  --color-chart-card-border: #ffffff;
+  --color-table-row-text: #d6d6d6;
+
+  /* Interactive effects */
+  --color-hover-glass: rgba(255, 255, 255, 0.08);
+  --color-hover-glass-strong: rgba(255, 255, 255, 0.12);
+  --color-hover-muted: rgba(255, 255, 255, 0.06);
+  --color-hover-menu: rgba(255, 255, 255, 0.1);
+
+  /* Shadows */
+  --shadow-soft: 0 6px 14px rgba(255, 255, 255, 0.04);
+  --shadow-panel: 0 18px 40px rgba(255, 255, 255, 0.08);
+  --shadow-tight: 0 2px 6px rgba(255, 255, 255, 0.06);
+  --shadow-dropdown: 0 8px 18px rgba(255, 255, 255, 0.08);
+  --shadow-floating: 0 8px 20px rgba(255, 255, 255, 0.08);
+  --shadow-date-panel: 0 12px 30px rgba(255, 255, 255, 0.08);
+  --shadow-toggle: 0 2px 5px rgba(255, 255, 255, 0.12);
+  --shadow-chart-card: 0 7px 20px rgba(255, 255, 255, 0.08), inset 0 0 0 1px var(--color-chart-card-border);
+  --shadow-chart-side-panel-hover: 0 6px 14px rgba(255, 255, 255, 0.08);
+}
+
+button {
+  font-family: inherit;
+}
+
+.btn-base {
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-control-bg);
+  color: var(--color-text-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.btn-base:hover {
+  background: var(--color-control-hover);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
+}
+
+.btn-base.is-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-text-inverse);
+}
+
+/* Root height setup.
+   Allows full-height page sections and layout wrappers to size correctly. */
+html,
+body {
   height: 100%;
 }
 
+/* Base page styling.
+   Sets the app background and the main font used across the dashboard. */
 body {
-  background: #1b1b1d;
+  background: var(--color-page-dark);
   font-family: Arial, sans-serif;
 }
 
+/* =========================
+   PAGE SHELL
+   Purpose:
+   - Defines the main app canvas and the shared page layout wrappers.
+   - Controls the full-page shell, inner content areas, and section backgrounds.
+   Related HTML:
+   - .page-shell
+   - .page-content
+   - .content-top
+   - .content-bottom
+   - .content-inner
+========================= */
+
+/* Main app shell.
+   Creates the light dashboard background and establishes a positioning context for page-level elements. */
 .page-shell {
   min-height: 100vh;
-  background: #d9dde3;
+  background: var(--color-app-bg);
   position: relative;
 }
 
+/* Main content wrapper inside the page shell.
+   Keeps the page content stacked vertically beneath the topbar. */
+.page-content {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.2s ease;
+}
+
+/* Upper content section.
+   Used for the chart workspace area and its background. */
+.content-top {
+  background: var(--color-section-bg);
+  padding: 27px 13px;
+}
+
+/* Lower content section.
+   Used for the table workspace area and footer spacing below it. */
+.content-bottom {
+  /* margin-top: 30px; */
+  background: var(--color-lower-section-bg);
+  padding: 27px 13px 80px;
+}
+
+/* Shared content width wrapper.
+   Keeps page sections centered and limits the content width consistently. */
+.content-inner {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* =========================
+   TOP BAR
+   Purpose:
+   - Builds the sticky application header.
+   - Positions the left, center, and right header areas.
+   Related HTML:
+   - .topbar
+   - .topbar-left
+   - .topbar-right
+   - .topbar-center
+========================= */
+
+/* Sticky top navigation bar.
+   Keeps the main app header visible while scrolling. */
 .topbar {
   position: sticky;
-  /* position: fixed; */
   top: 0;
   left: 0;
-  width: 100%;
-
-  top: 0;
   z-index: 1000;
 
-  height: 84px;
-  background: #eef1f5;
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  border-bottom: 1px solid #cfd5dc;
+
+  background: var(--color-panel-bg);
+  border-bottom: 1px solid var(--color-section-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* Left and right header groups.
+   Aligns buttons and branding items in the header. */
 .topbar-left,
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 8px;
 }
 
+/* Center header area.
+   Used for centered content like a search bar without affecting side alignment. */
 .topbar-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 0 30px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-}
-
-.menu-btn {
-  width: 42px;
-  height: 42px;
-  border: none;
-  background: transparent;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-.menu-btn span {
-  width: 22px;
-  height: 2px;
-  background: #4f545c;
-  display: block;
-  border-radius: 999px;
-}
-
-.logo-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #d8dce1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: #30343a;
-}
-
-.page-tagline {
-  font-size: 16px;
-  color: #373b42;
-}
-
-/* .search-bar {
-  width: 60%;
-  max-width: 770px;
-  height: 58px;
-  background: #d3d8e0;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  color: #6f7680;
-  font-size: 16px; */
-
-
-.search-bar {
+  padding: 0 20px;
   width: 100%;
-  max-width: 410px;
-  height: 58px;
-  background: #d3d8e0;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  color: #6f7680;
-  font-size: 16px;
-}
-
-.search-text {
-  color: #767d87;
-}
-
-.search-icon {
-  font-size: 24px;
-  line-height: 1;
-}
-
-.icon-circle,
-.profile-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.icon-circle {
-  background: #d8dce1;
-  border: none;
-  color: #2f343b;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.profile-circle {
-  background: #4f74e8;
-  color: #111;
-  font-size: 24px;
-  font-weight: 500;
-}
-
-.page-content {
-  min-height: calc(100vh - 84px);
-  display: flex;
-  flex-direction: column;
-  /* padding-top: 84px; */
-}
-
-.content-top {
-  flex: 4;
-  background: #cfd5dc;
-  border-bottom: 1px solid #bfc6ce;
-}
-
-.content-bottom {
-  flex: 1;
-  background: #f3f3f4;
-}
-
-.content-bottom {
-  background: #f3f3f4;
-  margin-top: -30px;
-  padding: 40px;
-}
-
-.table-panel {
-  background: #f7f7f8;
-  border: 1px solid #d9dce1;
-  border-radius: 24px;
-  padding: 14px 18px 10px;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.table-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 4px 14px;
-  border-bottom: 1px solid #e1e3e7;
-}
-
-.table-panel-header h2 {
-  font-size: 18px;
-  font-weight: 500;
-  color: #8d949d;
-}
-
-.table-panel-header h2 span {
-  margin-left: 6px;
-}
-
-.collapse-btn {
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  color: #444;
-  cursor: pointer;
-}
-
-.row {
-  display: grid;
-  grid-template-columns: 340px 1.3fr 1fr 1fr 1fr 140px;
-  align-items: center;
-  column-gap: 18px;
-}
-
-.table-head {
-  padding: 18px 12px;
-  color: #969da6;
-  font-size: 16px;
-  font-weight: 600;
-  border-bottom: 1px solid #e1e3e7;
-}
-
-.table-row {
-  padding: 16px 12px;
-  color: #949aa3;
-  font-size: 16px;
-  border-bottom: 1px solid #e6e8eb;
-}
-
-.table-row:last-child {
-  border-bottom: none;
-}
-
-.action-cell {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.check {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  border: 2px solid #a4aab3;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.check.checked {
-  background: #2f3238;
-  border-color: #2f3238;
-}
-
-.status-pill {
-  border: none;
-  background: #cfd4dc;
-  color: #444a52;
-  border-radius: 999px;
-  padding: 10px 18px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.status-pill span {
-  margin-left: 8px;
-}
-
-.status-pill.dark {
-  background: #bcc2cb;
-  color: #333942;
-}
-
-.status-pill.muted {
-  background: #d9dde4;
-  color: #9ba1aa;
-}
-
-.chart-wrapper {
-  display: flex;
-  justify-content: center;   /* centers horizontally */
-  align-items: center;       /* centers vertically */
-  height: 100%;
-  padding: 40px;
-  position: relative;
-}
-
-.card {
-  max-width: 900px;
-  width: 100%;
-}
-
-.content-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-
-/* ------------------------------------------ */
-
-.floating-menu,
-.floating-user-panel {
-  position: absolute;
-  top: 110px;
-  background: #eef1f5;
-  border-radius: 32px;
-  padding: 24px;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
-  display: none;
-}
-
-.floating-menu {
-  left: 40px;
-  width: 340px;
-}
-
-.floating-user-panel {
-  right: 32px;
-  width: 340px;
-}
-
-.floating-menu.open,
-.floating-user-panel.open {
-  display: block;
-}
-
-.menu-item-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 8px;
-}
-
-.menu-item-left {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.menu-icon,
-.menu-icon-right {
-  font-size: 28px;
-  color: #333;
-}
-
-.menu-item-row span {
-  font-size: 18px;
-  color: #373b42;
-}
-
-.menu-divider {
-  height: 1px;
-  background: #9ea5ae;
-  margin: 14px 0;
-}
-
-.user-panel-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 4px 16px;
-}
-
-.user-panel-profile {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.user-mini-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #6a35c9;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-
-.share-btn {
-  border: none;
-  background: #4f74e8;
-  color: white;
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.profile-circle {
-  background: #4f74e8;
-  color: #111;
-  font-size: 24px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.floating-menu,
-.floating-user-panel {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.2s ease;
   pointer-events: none;
 }
 
-.floating-menu.open,
-.floating-user-panel.open {
-  opacity: 1;
-  transform: translateY(0);
+/* Re-enables interaction for the actual search bar inside the center area.
+   The parent is pointer-events: none so only the real control should be clickable. */
+.topbar-center .search-bar {
   pointer-events: auto;
 }
 
-/* ---------------- */
-.floating-menu,
-.floating-user-panel {
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+/* =========================
+   TOP BAR ELEMENTS
+   Purpose:
+   - Styles the individual controls and branding elements inside the header.
+   - Includes menu button, logo, search bar, and circular action buttons.
+   Related HTML:
+   - .menu-btn
+   - .logo-circle
+   - .page-tagline
+   - .search-bar
+   - .search-text
+   - .search-icon
+   - .icon-circle
+   - .profile-circle
+========================= */
+
+/* Hamburger menu button.
+   Uses stacked spans to create the three-line menu icon. */
+.menu-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
 }
 
+/* Individual hamburger lines inside the menu button. */
+.menu-btn span {
+  width: 15px;
+  height: 2px;
+  background: var(--color-text-soft);
+  display: block;
+  border-radius: var(--radius-pill);
+}
+
+/* Circular logo holder in the header.
+   Keeps the logo image clipped neatly inside a round shape. */
+.logo-circle {
+  width: 44px;
+  height: 44px;
+  margin-right: 3px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Logo image inside the circular logo holder.
+   Fills the container without distorting aspect ratio. */
+.logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Small app name / tagline in the header. */
+.page-tagline {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+/* Search bar container.
+   Styles the centered pill-shaped search area in the topbar. */
+.search-bar {
+  width: 100%;
+  max-width: 275px;
+  height: 39px;
+  padding: 0 19px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--color-control-bg);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-soft);
+  font-size: 11px;
+}
+
+/* Search placeholder / text styling. */
+.search-text {
+  color: var(--color-text-soft);
+}
+
+/* Search icon styling inside the search bar. */
+.search-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Shared circular button base for header action buttons. */
+.icon-circle,
+.profile-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Generic icon button in the header, such as notifications. */
+.icon-circle {
+  border: none;
+  background: var(--color-control-muted);
+  color: var(--color-text-main);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* User/profile button in the header.
+   Uses a stronger brand colour so it stands out as the account control. */
+.profile-circle {
+  background: var(--color-avatar);
+  color: var(--color-text-inverse);
+  border: none;
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.profile-circle:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-tight);
+}
+
+/* =========================
+   FLOATING NAV / USER PANELS
+   Purpose:
+   - Styles the two floating overlay panels used for navigation and user actions.
+   - Controls their closed/open visual states, internal row layout, icons, and action buttons.
+   - Also includes anchor offset rules for scrolling to page sections.
+   Related HTML:
+   - .floating-menu
+   - .floating-user-panel
+   - .menu-item-row
+   - .menu-item-left
+   - .menu-icon
+   - .menu-divider
+   - .user-panel-top
+   - .user-panel-profile
+   - .user-panel-profile-btn
+   - .user-mini-icon
+   - .user-name
+   - .export-btn
+   - .menu-icon-right-btn
+   - #sectionCharts
+   - #sectionDataOptions
+========================= */
+
+/* Shared base style for both floating overlay panels.
+   This defines their size, background, rounded shape, shadow, and hidden default state. */
 .floating-menu,
 .floating-user-panel {
+  position: absolute;
+  top: 70px;
+  z-index: 1000;
+
+  padding: 16px;
+  background: var(--color-panel-bg);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-floating);
   backdrop-filter: blur(6px);
-}
 
-.floating-menu,
-.floating-user-panel {
   opacity: 0;
-  transform: translateY(-8px) scale(0.98);
+  transform: translateY(-5px) scale(0.98);
   transition: all 0.2s ease;
   pointer-events: none;
 }
 
+/* Left floating navigation panel.
+   Anchors the user panel to the right side of the topbar area. */
+.floating-menu {
+  left: var(--floating-panel-edge-gap);
+  width: var(--floating-panel-width);
+}
+
+/* Right floating user panel.
+   Anchors the user panel to the right side of the topbar area. */
+
+.floating-user-panel {
+  right: var(--floating-panel-edge-gap);
+  width: var(--floating-panel-width);
+}
+.floating-user-panel {
+  right: 21px;
+  width: 228px;
+}
+
+/* Open state for both floating panels.
+   Makes the panel visible, clickable, and moves it into place. */
 .floating-menu.open,
 .floating-user-panel.open {
   opacity: 1;
@@ -452,36 +593,977 @@ body {
   pointer-events: auto;
 }
 
-.floating-menu,
-.floating-user-panel {
-  top: 120px; /* same value for both */
+/* Standard row layout for floating panel items.
+   Used for clickable menu rows and keeps left/right content aligned. */
+.menu-item-row {
+  min-height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
-.floating-menu {
-  left: 32px; /* was probably 20–24 */
+.menu-item-row:hover {
+  background: var(--color-hover-glass);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
 }
 
-.content-bottom {
-  margin-top: -20px;
+
+.menu-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.card,
-.floating-menu,
-.floating-user-panel {
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+.menu-item-row span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
 }
 
-.status-pill:hover {
-  background: #bfc5cf;
+.menu-icon {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-icon-main);
+  flex-shrink: 0;
 }
 
-.floating-menu div:hover,
-.floating-user-panel div:hover {
-  background: rgba(0,0,0,0.05);
+.menu-icon-weather{
+  width: 19px;
+  height: 19px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menu-icon,
+.menu-icon-right {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-icon-main);
+  flex-shrink: 0;
+}
+
+.menu-icon svg,
+.menu-icon-right svg,
+.menu-icon-right-btn svg{
+  width: 19px;
+  height: 19px;
+  stroke: var(--color-icon-main);
+  stroke-width: 1.8;
+}
+
+.menu-item-left i,
+.menu-item-left svg,
+.menu-icon-right-btn i,
+.menu-icon-right-btn svg {
+  width: 19px;
+  height: 19px;
+  color: var(--color-icon-main);
+  stroke: var(--color-icon-main);
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
+.menu-icon-right-btn {
+  border: none;
+  background: transparent;
+  color: var(--color-icon-main);
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-icon i,
+.menu-icon-right-btn i {
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.7;
+  color: var(--color-icon-main);
+}
+
+.menu-item-row span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-main);
+}
+
+.menu-item-row span {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-icon-main);
+}
+
+.menu-icon-right-btn {
+  border: none;
+  background: transparent;
+  color: var(--color-icon-main);
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Divider line used between groups of floating panel actions. */
+.menu-divider {
+  height: 1px;
+  background: var(--color-rule);
+  margin: 9px 0;
+}
+
+/* Top row inside the user panel.
+   Used to separate the user identity block from the export button. */
+.user-panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-right: 10px;
+
+}
+
+/* User identity grouping inside the user panel.
+   Aligns the avatar and username together. */
+.user-panel-profile {
+  display: flex;
+  align-items: center;
+  stroke-width: 1;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: var(--radius-pill);
+
+  transition:
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.user-panel-profile-btn:hover .user-panel-profile {
+  background: var(--color-hover-glass);
+  box-shadow: var(--shadow-tight);
+  transform: translateY(-1px);
+
+}
+
+/* used to have a background change on hover. uses background color to push out button */
+.user-panel-profile-btn:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+} 
+
+/* Clickable profile button wrapper.
+   Used so the user profile area behaves like a button without looking heavy. */
+/* Clickable profile button wrapper.
+   Keeps the button itself invisible so only the inner profile content gets hover styling. */
+.user-panel-profile-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* User identity grouping inside the user panel.
+   Aligns the avatar and username together and owns the hover surface. */
+.user-panel-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: var(--radius-pill);
+
+  transition:
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* Hover state only affects the visible profile content, not the outer button space. */
+.user-panel-profile-btn:hover .user-panel-profile {
+  background: transparent;
+
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+
+/* Small circular avatar inside the user panel. */
+.user-mini-icon {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: var(--color-avatar);
+  color: var(--color-text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+/* Username label inside the user panel. */
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.menu-icon {
+  position: relative;
+}
+
+.export-count {
+  display: none;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.weather-popup {
+  display: none;
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: var(--color-panel-bg);
+
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-icon-main);
+
+  padding: 18px;
   border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+/* ===========================================================================================================================
+   ABOUT PAGE POPOUT 
+
+============================================================================================================================= */
+
+.about-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 2000;
+
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.about-overlay.show {
+  display: flex;
+}
+
+.about-card {
+  position: relative;
+  width: min(540px, 100%);
+  background: var(--color-panel-bg);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  padding: 28px;
+}
+
+.about-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-control-bg);
+  color: var(--color-icon-main);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-close:hover {
+  background: var(--color-control-hover);
+}
+
+.about-card h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  color: var(--color-text-main);
+}
+
+.about-subtitle {
+  margin: 16px 0 18px;
+  color: var(--color-text-soft);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.about-body {
+  margin: 0 0 16px;
+  color: var(--color-text-soft);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.about-body-final {
+  margin: 16px 0 14px;
+  color: var(--color-text-soft);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.about-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-text-soft);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.about-card li::marker {
+  color: var(--color-brand);
+}
+
+.about-card svg,
+.about-close svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+/* ===========================================================================================================================
+   PAGE ANCHORS
+   Purpose:
+   - Adds scroll offsets for anchored sections.
+   - Prevents the sticky topbar from covering target sections when users jump to them.
+   Related HTML:
+   - #sectionCharts
+   - #sectionDataOptions
+============================================================================================================================= */
+
+/* Scroll offset for chart section anchor.
+   Prevents the sticky topbar from covering the section when scrolled into view. */
+#sectionCharts {
+  scroll-margin-top: 74px;
+}
+
+/* Scroll offset for data/table section anchor.
+   Keeps the section visible below the sticky topbar. */
+#sectionDataOptions {
+  scroll-margin-top: 50px;
+}
+
+/* ===========================================================================================================================
+   TABLE PANEL
+   Purpose:
+   - Styles the main table workspace shown below the chart section.
+   - Controls the table container, table header, rows, dataset switcher, row actions,
+     status controls, and date filter toolbar.
+   Related HTML:
+   - .table-panel
+   - .table-panel-header
+   - .row
+   - #tableRows
+   - .table-head
+   - .table-row
+   - .dataset-switcher
+   - .dataset-btn
+   - .action-cell
+   - .check
+   - .status-pill
+   - .table-controls
+   - .table-toolbar
+   - .date-range-btn
+   - .date-filter-wrap
+   - .date-filter-panel
+   - .date-filter-header
+   - .date-filter-close
+   - .date-filter-option
+   - .apply-filter-btn
+============================================================================================================================= */
+
+/* Main table card container.
+   Sets the table block size, border, padding, and scrollable height area. */
+.table-panel {
+  max-height: 910px; 
+  max-width: 948px;
+  margin: 8px auto 0;
+
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 9px 12px 7px;
+  overflow: hidden;
+}
+
+.table-scroll-x {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 910px;
+}
+
+.table-head,
+#tableRows {
+  min-width: 460px;
+}
+
+#tableRows {
+  width: 100%;
+}
+
+/* =============================================================================================================================
+    TABLE TOP BAR                                                                                                                 */ 
+
+/* Top toolbar above the table body.
+   Holds the dataset switcher on one side and date/filter controls on the other. */
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+/* Container for grouped controls above the table.
+   Used to align utility controls such as filters or extra actions. */
+.table-controls {
+  display: flex;
+  gap: 10px;
+}
+
+/* Dataset switcher container.
+   Holds the Finance / Healthcare / Education buttons above the table. */
+.dataset-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+/* Base dataset button style.
+   Used to switch the table and chart dataset. */
+.dataset-btn {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  background: var(--color-control-bg);
+  color: var(--color-text-main);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* soft glass layer */
+.dataset-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-hover-glass);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+/* Apple-like soft hover */
+.dataset-btn:hover {
+  background: var(--color-hover-glass-strong);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-1px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dataset-btn:hover::before {
+  opacity: 1;
+}
+  
+/* Active dataset button state.
+   Highlights the currently selected dataset. */
+.dataset-btn.active {
+  background: var(--color-brand);
+  color: var(--color-text-inverse);
+}
+
+/* =============================================================================================================================
+    DATE FILTER TOOLBAR                                                                                                       */ 
+
+/* Date range trigger button.
+   Opens the date filter dropdown panel. */
+.date-range-btn {
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-black);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 11px;
   cursor: pointer;
 }
 
-.page-content {
-  transition: opacity 0.2s ease;
+/* Positioning wrapper for the date filter panel.
+   Creates a local positioning context for the dropdown. */
+.date-filter-wrap {
+  position: relative;
+}
+
+/* Date filter dropdown panel.
+   Hidden by default and positioned directly beneath the trigger button. */
+.date-filter-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 260px;
+  background: var(--color-card-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow-date-panel);
+  padding: 16px;
+  display: none;
+  z-index: 9999;
+}
+
+/* Open state for the date filter panel. */
+.date-filter-panel.open {
+  display: block;
+}
+
+/* Header row inside the date filter panel.
+   Holds the title and the close button. */
+.date-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--color-text-main);
+  margin-bottom: 14px;
+}
+
+/* Close button for the date filter panel. */
+.date-filter-close {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Single filter option row inside the date filter panel.
+   Aligns the radio input and label text. */
+.date-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: 12px;
+  color: var(--color-text-soft);
+  cursor: pointer;
+}
+
+/* Accent colour for the radio inputs inside filter options. */
+.date-filter-option input {
+  accent-color: var(--color-critical);
+}
+
+/* Apply button at the bottom of the date filter panel.
+   Used to confirm the selected date range. */
+.apply-filter-btn {
+  margin-top: 16px;
+  width: 100%;
+  border: none;
+  background: var(--color-control-hover);
+  color: var(--color-text-main);
+  border-radius: var(--radius-pill);
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Hover state for the export button.
+   Adds a color and text contrast highlight to show interactivity. */
+.apply-filter-btn:hover {
+  background: var(--color-hover-glass);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =============================================================================================================================
+    TABLE HEADER                                                                                                                 */ 
+
+/* Header area at the top of the table panel.
+   Holds the section title and collapse control. */
+.table-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 3px 9px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.table-head > div,
+.table-row > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  min-width: 0;
+}
+
+.truncate-text {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-cell {
+  position: relative;
+  min-width: 0;
+}
+
+.truncate-cell::after {
+  content: attr(data-full);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  max-width: 280px;
+  width: max-content;
+  padding: 6px 10px;
+
+  background: var(--color-lower-section-bg);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-section-bg);
+  border-radius: 3px;
+  box-shadow: var(--shadow-tight);
+
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease, visibility 0.12s ease;
+
+  pointer-events: none;
+  z-index: 50;
+}
+
+.truncate-cell:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Table section title styling. */
+.table-panel-header h2 {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+/* Small count spacing inside the table section title. */
+.table-panel-header h2 span {
+  margin-left: 4px;
+}
+
+/* Minimal collapse button used in the table header. */
+.collapse-btn {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--color-text-soft);
+  cursor: pointer;
+}
+
+/* Action column toggle button. */
+.action-column-toggle {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-text-soft);
+  cursor: pointer;
+}
+
+.action-column-toggle:hover {
+  color: var(--color-text-main);
+}
+
+/* =============================================================================================================================
+    TABLE GRID                                                                                                                 */ 
+
+/* Shared row grid structure.
+   Used by both table headers and table data rows to keep columns aligned. */
+.row {
+  display: grid;
+  /* grid-template-columns: 120px 1.8fr 1.2fr 1.2fr 1fr 1.3fr; */
+  grid-template-columns: 134px 1.1fr 1fr 1fr 0.9fr 1.1fr;
+  align-items: stretch;
+  column-gap: 12px;
+}
+
+/* Collapsed state.
+   Used when Actions/Edit mode is hidden. */
+.table-panel.actions-collapsed .table-head.row,
+.table-panel.actions-collapsed .table-row.row {
+  grid-template-columns: 0 1.5fr 1fr 1fr 0.9fr 1.1fr;
+}
+
+.table-panel.actions-collapsed .table-head > div:first-child,
+.table-panel.actions-collapsed .table-row > div:first-child {
+  overflow: hidden;
+  width: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+/* Table rows wrapper.
+   Ensures the dynamic rows area stretches across the full available width. */
+#tableRows {
+  width: 100%;
+}
+
+/* Table column heading row.
+   Used for the top labels above the data rows. */
+.table-head {
+  padding: 12px 8px;
+  color: var(--color-text-soft);
+  font-size: 11px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+/* =============================================================================================================================
+    TABLE ROWS                                                                                                                 */ 
+
+/* Main table row styling.
+   Controls text colour, spacing, and row separation. */
+.table-row {
+  padding: 11px 8px;
+  color: var(--color-table-row-text);
+  font-size: 11px;
+  border-bottom: 1px solid var(--color-row-divider);
+}
+
+/* Removes the border from the last row so the table ends cleanly. */
+.table-row:last-child {
+  border-bottom: none;
+}
+
+/* Hover state for table rows.
+   Gives a subtle background highlight to show interactivity. */
+.table-row:hover {
+  background: var(--color-hover-muted);
+}
+
+/* Active state for a selected row.
+   Uses a light brand-colour tint to show current focus. */
+.table-row.active {
+  background: var(--color-brand-row);
+}
+
+/* =============================================================================================================================
+    TABLE ACTIONS                                                                                                                 */ 
+
+/* Left action cell inside each row.
+   Aligns the check indicator and status button together. */
+.action-cell {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+/* Base pill button used for row actions like Review / Ignore. */
+.status-pill {
+  border: none;
+  background: var(--color-control-bg);
+  color: var(--color-text-main);
+  border-radius: var(--radius-pill);
+  padding: 7px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* Spacing for the inner icon/text marker inside the status pill. */
+.status-pill span {
+  margin-left: 5px;
+}
+
+/* Muted variation of the status pill. */
+.status-pill.muted {
+  background: var(--color-control-muted);
+  color: var(--color-text-subtle);
+}
+
+/* Hover state for the status pill button. */
+.status-pill:hover {
+  background: var(--color-control-dark-hover);
+}
+
+/* Critical variation of the status pill. */
+.status-pill.critical {
+  background: var(--color-critical);
+  color: var(--color-text-inverse);
+}
+
+.row-toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-control-bg);
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.row-toggle span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-text-inverse);
+
+  box-shadow: var(--shadow-toggle);
+
+  transition: transform 0.2s ease;
+}
+
+.row-toggle.checked {
+  background: var(--color-success);
+}
+
+.row-toggle.checked span {
+  transform: translateX(18px);
+}
+
+.row-toggle:hover {
+  box-shadow: 0 0 0 3px rgba(40, 200, 74, 0.12);
+}
+
+.status-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.status-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 130px;
+
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-dropdown);
+  padding: 6px;
+  z-index: 100;
+}
+
+.status-wrap.open .status-menu {
+  display: flex;
+}
+
+.status-menu button {
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--color-text-main);
+  font-size: 11px;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.status-menu button:hover {
+  background: var(--color-hover-menu);
+}
+
+/* ===========================================================================================================================
+   FOOTER
+   Purpose:
+   - Styles the footer area that sits beneath the main table/content sections.
+   Related HTML:
+   - .footer
+============================================================================================================================= */
+
+/* Page footer.
+   Aligns footer content to the right and gives the footer the same light background as the lower page area. */
+.footer {
+  background: var(--color-lower-section-bg);
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
 }
