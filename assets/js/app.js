@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WHY: Finds the main menu controls so the navigation panel can open and close. */
   const menuToggle = document.getElementById("menuToggle");
-  const userToggle = document.getElementById("userToggle");
   const floatingMenu = document.getElementById("floatingMenu");
-  const floatingUserPanel = document.getElementById("floatingUserPanel");
 
   /* WHY: Finds chart panel controls so users can reveal extra chart information. */
   const chartInfoToggle = document.getElementById("chartInfoToggle");
@@ -34,19 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const outcomePanel = document.getElementById("outcomePanel");
   const recommendedActionPanel = document.getElementById("recommendedActionPanel");
 
-  /* WHY: Keeps old feedback controls safe if they exist in the page in future versions. */
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-
   /* WHY: Finds the table date filter controls so the selected range can be shown to users. */
   const tableDateRangeBtn = document.getElementById("tableDateRangeBtn");
   const tableDateFilterPanel = document.getElementById("tableDateFilterPanel");
   const tableDateFilterClose = document.getElementById("tableDateFilterClose");
   const tableApplyDateFilter = document.getElementById("tableApplyDateFilter");
 
-
-  /* WHY: Finds user, export, and table elements used by the dashboard interactions. */
-  const userPageBtn = document.getElementById("userPageBtn");
+  /* WHY: Finds export and table elements used by the dashboard interactions. */
   /* WHY: Finds the weather popup so the open-all control can show or hide it with the panels. */
   const weatherBtn = document.getElementById("weatherBtn");
   const weatherPopup = document.getElementById("weatherPopup");
@@ -465,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeFloatingPanels() {
   /* WHY: Each check keeps the helper safe if a panel is missing from the HTML. */
   if (floatingMenu) floatingMenu.classList.remove("open");
-  if (floatingUserPanel) floatingUserPanel.classList.remove("open");
+
   if (tableDateFilterPanel) tableDateFilterPanel.classList.remove("open");
   }
 
@@ -535,24 +527,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* WHY: Keeps support for a user panel if that older control exists in the page. */
-  if (userToggle && floatingUserPanel) {
-    userToggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-      floatingUserPanel.classList.toggle("open");
-    });
-  }
-
   /* WHY: Prevents clicks inside the navigation panel from closing it immediately. */
   if (floatingMenu) {
     floatingMenu.addEventListener("click", (event) => {
-      event.stopPropagation();
-    });
-  }
-
-  /* WHY: Prevents clicks inside the user panel from closing it immediately. */
-  if (floatingUserPanel) {
-    floatingUserPanel.addEventListener("click", (event) => {
       event.stopPropagation();
     });
   }
@@ -635,13 +612,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* WHY: Keeps a placeholder hook for a future user page without breaking the current app. */
-  if (userPageBtn) {
-    userPageBtn.addEventListener("click", () => {
-      console.log("Go to user page");
-    });
-  }
-
   /* WHY: Exports only the rows users have selected. */
   if (exportBtn) {
     exportBtn.addEventListener("click", () => {
@@ -681,21 +651,6 @@ if (recommendedActionPanel) {
     recommendedActionPanel.classList.toggle("expanded");
   });
 }
-
-  /* WHY: Keeps older yes/no feedback buttons mutually exclusive if they are present. */
-  if (yesBtn && noBtn) {
-    yesBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      yesBtn.classList.toggle("active");
-      noBtn.classList.remove("active");
-    });
-
-    noBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      noBtn.classList.toggle("active");
-      yesBtn.classList.remove("active");
-    });
-  }
 
   /* WHY: Opens or closes the table date filter panel. */
     if (tableDateRangeBtn && tableDateFilterPanel) {

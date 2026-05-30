@@ -1,24 +1,3 @@
-/* Final recommended order for style.css
-
-This is the clean order:
-
-1. GLOBAL
-2. PAGE SHELL
-3. TOP BAR
-4. TOP BAR ELEMENTS
-5. FLOATING NAV / USER PANELS
-6. TABLE
-    * TABLE PANEL
-    * TABLE TOP BAR
-    * DATE FILTER TOOLBAR
-    * TABLE HEADER
-    * TABLE GRID
-    * TABLE ROWS
-    * TABLE ACTIONS
-7. FOOTER
-
-That would make the file read in the same order as the page. */
-
 /* ===========================================================================================================================
    GLOBAL
    Purpose:
@@ -226,36 +205,6 @@ button {
   font-family: inherit;
 }
 
-.btn-base {
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  background: var(--color-control-bg);
-  color: var(--color-text-main);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1;
-  cursor: pointer;
-  transition:
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.18s ease;
-}
-
-.btn-base:hover {
-  background: var(--color-control-hover);
-  box-shadow: var(--shadow-soft);
-  transform: translateY(-1px);
-}
-
-.btn-base.is-active {
-  background: var(--color-brand);
-  border-color: var(--color-brand);
-  color: var(--color-text-inverse);
-}
-
 /* Root height setup.
    Allows full-height page sections and layout wrappers to size correctly. */
 html,
@@ -366,25 +315,6 @@ body {
   gap: 8px;
 }
 
-/* Center header area.
-   Used for centered content like a search bar without affecting side alignment. */
-.topbar-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  padding: 0 20px;
-  width: 100%;
-  pointer-events: none;
-}
-
-/* Re-enables interaction for the actual search bar inside the center area.
-   The parent is pointer-events: none so only the real control should be clickable. */
-.topbar-center .search-bar {
-  pointer-events: auto;
-}
-
 /* =========================
    TOP BAR ELEMENTS
    Purpose:
@@ -453,35 +383,6 @@ body {
   color: var(--color-text-main);
 }
 
-/* Search bar container.
-   Styles the centered pill-shaped search area in the topbar. */
-.search-bar {
-  width: 100%;
-  max-width: 275px;
-  height: 39px;
-  padding: 0 19px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  background: var(--color-control-bg);
-  border-radius: var(--radius-pill);
-  color: var(--color-text-soft);
-  font-size: 11px;
-}
-
-/* Search placeholder / text styling. */
-.search-text {
-  color: var(--color-text-soft);
-}
-
-/* Search icon styling inside the search bar. */
-.search-icon {
-  font-size: 16px;
-  line-height: 1;
-}
-
 /* Shared circular button base for header action buttons. */
 .icon-circle,
 .profile-circle {
@@ -547,8 +448,7 @@ body {
 
 /* Shared base style for both floating overlay panels.
    This defines their size, background, rounded shape, shadow, and hidden default state. */
-.floating-menu,
-.floating-user-panel {
+.floating-menu {
   position: absolute;
   top: 70px;
   z-index: 1000;
@@ -572,22 +472,9 @@ body {
   width: var(--floating-panel-width);
 }
 
-/* Right floating user panel.
-   Anchors the user panel to the right side of the topbar area. */
-
-.floating-user-panel {
-  right: var(--floating-panel-edge-gap);
-  width: var(--floating-panel-width);
-}
-.floating-user-panel {
-  right: 21px;
-  width: 228px;
-}
-
 /* Open state for both floating panels.
    Makes the panel visible, clickable, and moves it into place. */
-.floating-menu.open,
-.floating-user-panel.open {
+.floating-menu.open {
   opacity: 1;
   transform: translateY(0) scale(1);
   pointer-events: auto;
@@ -1072,13 +959,6 @@ body {
   border-bottom: 1px solid var(--color-divider);
 }
 
-/* Container for grouped controls above the table.
-   Used to align utility controls such as filters or extra actions. */
-.table-controls {
-  display: flex;
-  gap: 10px;
-}
-
 /* Dataset switcher container.
    Holds the Finance / Healthcare / Education buttons above the table. */
 .dataset-switcher {
@@ -1319,30 +1199,6 @@ body {
 /* Small count spacing inside the table section title. */
 .table-panel-header h2 span {
   margin-left: 4px;
-}
-
-/* Minimal collapse button used in the table header. */
-.collapse-btn {
-  border: none;
-  background: transparent;
-  font-size: 13px;
-  color: var(--color-text-soft);
-  cursor: pointer;
-}
-
-/* Action column toggle button. */
-.action-column-toggle {
-  border: none;
-  background: transparent;
-  padding: 0;
-  font: inherit;
-  font-weight: 600;
-  color: var(--color-text-soft);
-  cursor: pointer;
-}
-
-.action-column-toggle:hover {
-  color: var(--color-text-main);
 }
 
 /* =============================================================================================================================

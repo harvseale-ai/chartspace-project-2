@@ -1,3 +1,4 @@
+
 /* ===========================================================================================================================
    CHART CARD LAYOUT
    Purpose:
@@ -57,142 +58,6 @@
   margin: 7px 0 0;
   font-size: 11px;
   color: var(--color-chart-text-secondary);
-}
-
-
-
-/* ===========================================================================================================================
-   CHART CHART-CONTROLS
-   Purpose:
-   - Styles small interactive controls related to the chart.
-   - Includes feedback buttons, metric labels, and the toggle switch.
-   Related HTML:
-   - .chart-controls
-   - .chart-metric-label
-   - .chart-feedback-btn
-   - .chart-switch
-   - .chart-switch-slider
-============================================================================================================================= */
-
-/* Container for grouped chart controls.
-   Allows controls to sit in one row and wrap if space gets tighter. */
-.chart-controls {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-/* Small label text used near metrics or switches.
-   Helps explain what a nearby value or control represents. */
-.chart-metric-label {
-  font-size: 13px;
-  color: var(--color-chart-metric);
-}
-
-/* Button style for chart feedback actions.
-   Keeps the buttons minimal so they feel like lightweight UI actions. */
-.chart-feedback-btn {
-  border: none;
-  background: var(--color-transparent);
-  color: var(--color-chart-feedback);
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  padding: 0;
-}
-
-/* Inner text/icon spacing inside chart feedback buttons. */
-.chart-feedback-btn span {
-  font-size: 13px;
-}
-
-/* Active state for selected chart feedback button.
-   Makes the selected action darker and bolder. */
-.chart-feedback-btn.active {
-  font-weight: 700;
-  color: var(--color-text-main);
-}
-
-/* Outer wrapper for the chart toggle switch.
-   Creates the fixed-size switch area. */
-.chart-switch {
-  position: relative;
-  display: inline-block;
-  width: 46px;
-  height: 26px;
-}
-
-/* Native checkbox is hidden visually.
-   The visible switch is built using the slider element instead. */
-.chart-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* Visible slider background for the custom switch.
-   This is the track behind the moving toggle circle. */
-.chart-switch-slider {
-  position: absolute;
-  inset: 0;
-  background: var(--color-chart-toggle-track);
-  border-radius: 999px;
-  transition: 0.25s ease;
-  cursor: pointer;
-}
-
-/* Circular knob inside the custom switch.
-   Moves left to right when checked. */
-.chart-switch-slider::before {
-  content: "";
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  left: 2px;
-  top: 2px;
-  background: var(--color-text-inverse);
-  border-radius: 50%;
-  transition: 0.25s ease;
-}
-
-/* Checked state for the switch track.
-   Changes background colour when the toggle is on. */
-.chart-switch input:checked + .chart-switch-slider {
-  background: var(--color-chart-toggle-active);
-}
-
-/* Checked state for the switch knob.
-   Moves the knob to the right when enabled. */
-.chart-switch input:checked + .chart-switch-slider::before {
-  transform: translateX(20px);
-}
-
-/* ------------ */
-
-/* =========================
-   CHART HEADER ACTIONS
-   Purpose:
-   - Styles the small action group in the chart header.
-   - Used for light actions or text-based controls.
-   Related HTML:
-   - .actions
-========================= */
-
-/* Horizontal action group in the chart header.
-   Keeps action items aligned and evenly spaced. */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-/* Small text styling for items inside the actions group. */
-.actions span {
-  font-size: 11px;
-  color: var(--color-chart-action-text);
 }
 
 /* =========================
@@ -387,7 +252,6 @@ body.dark-mode .chart-title-row h2 {
 .month-label {
   text-anchor: middle;
 }
-
 
 /* ===========================================================================================================================
    SIDE PANELS
@@ -647,7 +511,6 @@ body.dark-mode .chart-title-row h2 {
     padding-right: 6px;
   }
 }
-
 
 @media (max-width: 700px) {
   .card-title-block {

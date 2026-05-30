@@ -2,13 +2,13 @@
 window.chartspaceDatasets = {
   /* WHY: Provides the default finance dataset shown when the dashboard first loads. */
   finance: {
-    chartTitle: "Finance Chart",
-    chartSubtitle: "Monthly policy activity by sector",
-    tableTitle: "Finance events",
-    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    seriesLight: [12, 18, 15, 26, 23, 12],
-    seriesDark: [8, 11, 5, 9, 6, 3],
-    activeIndex: 3,
+    chartTitle: "Finance Revenue Chart",
+    chartSubtitle: "Northbridge Capital Group monthly revenue vs last year",
+    tableTitle: "Finance revenue records",
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    seriesLight: [12.4, 18.1, 15.6, 26.2, 23.5, 13.1, 17.8, 21.4, 24.9, 34.5, 31.2, 28.6],
+    seriesDark: [8.7, 11.4, 5.2, 9.3, 6.5, 3.4, 10.8, 14.2, 17.6, 19.1, 22.4, 25.8],
+    activeIndex: 9,
     /* WHY: Supplies the HTML shown in the left chart information panels for finance. */
     description: `
       <div data-panel="description">
@@ -18,18 +18,19 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Data Overview</strong>
             <p>
-              Source: Skills Monitor<br />
-              Data Type: Monthly aggregated records<br />
-              Last Updated: 12 Sep 2026
+              Company: Northbridge Capital Group<br />
+              Sector: Finance<br />
+              Data Type: Monthly revenue in millions<br />
+              Period: Jan to Dec 2025
             </p>
           </div>
 
           <div class="panel-section">
             <strong>Transformation</strong>
             <p>
-              Raw data is grouped by month and normalised<br />
-              Duplicate entries are removed<br />
-              Values are averaged across reporting periods
+              Revenue is grouped by calendar month<br />
+              Current-year values are compared with last year<br />
+              Values are rounded to one decimal place
             </p>
           </div>
 
@@ -37,17 +38,17 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Trend of key performance metric<br />
-              Highlight: Peak activity in April
+              Focus: Full-year revenue performance<br />
+              Highlight: October full-year revenue peak
             </p>
           </div>
 
           <div class="panel-section">
             <strong>Insights</strong>
             <p>
-              Steady growth observed from Jan → Apr<br />
-              Slight decline in May<br />
-              Recovery begins in June
+              Revenue strengthens through Q3 and Q4<br />
+              Current year stays ahead of last year<br />
+              October shows the strongest finance performance
             </p>
           </div>
         </div>
@@ -60,17 +61,17 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Status Overview</strong>
             <p>
-              Data Type: Monthly aggregated records<br />
-              Last Updated: 12 Sep 2025
+              Revenue Type: Monthly reported revenue<br />
+              Comparison: Current year vs previous year
             </p>
           </div>
 
           <div class="panel-section">
             <strong>Transformation</strong>
             <p>
-              Raw data is grouped by month and normalised<br />
-              Duplicate entries are removed<br />
-              Values are averaged across reporting periods
+              Monthly values align with the 12 table rows<br />
+              Previous-year values provide the baseline<br />
+              Each row records one monthly revenue signal
             </p>
           </div>
 
@@ -78,17 +79,17 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Trend of key performance metric<br />
-              Highlight: Peak activity in April
+              Focus: Revenue growth trend<br />
+              Highlight: October is the strongest month
             </p>
           </div>
 
           <div class="panel-section">
             <strong>Insights</strong>
             <p>
-              Steady growth observed from Jan → Apr<br />
-              Slight decline in May<br />
-              Recovery begins in June
+              Lending and acquisition activity improve late year<br />
+              October and November show strong momentum<br />
+              Margin pressure should still be monitored
             </p>
           </div>
         </div>
@@ -101,18 +102,19 @@ window.chartspaceDatasets = {
         <div class="side-divider"></div>
         <div class="side-panel-content">
           <div class="panel-section">
-            <strong>Table Mapping</strong>
+            <strong>Revenue Mapping</strong>
             <p>
-              User actions are logged and fed back into the system
+              Each table row maps to one month of revenue<br />
+              User actions are logged against monthly signals
             </p>
           </div>
 
           <div class="panel-section">
             <strong>Notes</strong>
             <p>
-              Data is refreshed weekly<br />
-              Minor delays may occur during ingestion<br />
-              Outliers are not removed in this view
+              Data is reviewed across the full year<br />
+              Outliers remain visible for finance review<br />
+              Revenue signals support planning decisions
             </p>
           </div>
         </div>
@@ -125,18 +127,17 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Plan of Action</strong>
             <p>
-              Each row represents a detected event<br />
-              Status reflects user action<br />
-              Source links back to originating dataset
+              Review Q4 acquisition and lending channels<br />
+              Repeat tactics linked to October performance
             </p>
           </div>
 
           <div class="panel-section">
             <strong>Notes</strong>
             <p>
-              Data is refreshed weekly<br />
-              Minor delays may occur during ingestion<br />
-              Outliers are not removed in this view
+              Compare each month against last year<br />
+              Check whether late-year growth is seasonal<br />
+              Keep finance team review notes attached
             </p>
           </div>
         </div>
@@ -146,79 +147,124 @@ window.chartspaceDatasets = {
     rows: [
       [
         "Review",
-        "Skills and Post-16 Education Reform",
-        "Mention",
-        "12 Sep 2025",
+        "Northbridge January revenue baseline",
+        "Forecast update",
+        "31 Jan 2025",
+        "Medium",
+        "Revenue Monitor",
+        false
+      ],
+      [
+        "Ignore",
+        "Northbridge February lending revenue lift",
+        "Revenue growth",
+        "28 Feb 2025",
         "High",
-        "Skills Monitor",
+        "Finance Report",
+        false
+      ],
+      [
+        "Review",
+        "Northbridge March card services slowdown",
+        "Revenue drop",
+        "31 Mar 2025",
+        "Medium",
+        "Market Filing",
+        false
+      ],
+      [
+        "Review",
+        "Northbridge April acquisition campaign peak",
+        "Revenue growth",
+        "30 Apr 2025",
+        "High",
+        "CRM Pipeline",
+        false
+      ],
+      [
+        "Ignore",
+        "Northbridge May wealth management uplift",
+        "Revenue growth",
+        "31 May 2025",
+        "High",
+        "Board Pack",
+        false
+      ],
+      [
+        "Review",
+        "Northbridge June margin pressure review",
+        "Margin pressure",
+        "30 Jun 2025",
+        "Medium",
+        "Forecast Model",
+        false
+      ],
+      [
+        "Ignore",
+        "Northbridge July account growth update",
+        "Pipeline increase",
+        "31 Jul 2025",
+        "Medium",
+        "Revenue Operations",
+        false
+      ],
+      [
+        "Review",
+        "Northbridge August regional revenue improvement",
+        "Revenue growth",
+        "31 Aug 2025",
+        "High",
+        "Revenue Monitor",
+        false
+      ],
+      [
+        "Review",
+        "Northbridge September commercial banking uplift",
+        "Revenue growth",
+        "30 Sep 2025",
+        "High",
+        "Finance Report",
+        false
+      ],
+      [
+        "Ignore",
+        "Northbridge October full-year revenue peak",
+        "Revenue growth",
+        "31 Oct 2025",
+        "High",
+        "Forecast Model",
         true
       ],
       [
-        "Ignore",
-        "NHS Workforce Planning Update",
-        "Updated",
-        "10 Sep 2025",
-        "Medium",
-        "Health Monitor",
-        false
-      ],
-      [
-        "Ignore",
-        "Regional Investment Programme",
-        "New",
-        "09 Sep 2025",
-        "Low",
-        "Policy Tracker",
-        false
-      ],
-      [
         "Review",
-        "Department Funding Allocation Review",
-        "Updated",
-        "08 Sep 2025",
-        "Medium",
-        "Finance Monitor",
-        false
-      ],
-      [
-        "Ignore",
-        "Education Standards Consultation",
-        "New",
-        "07 Sep 2025",
-        "Low",
-        "Skills Monitor",
-        false
-      ],
-      [
-        "Review",
-        "Public Sector Hiring Freeze Proposal",
-        "Mention",
-        "06 Sep 2025",
+        "Northbridge November portfolio revenue increase",
+        "Revenue growth",
+        "30 Nov 2025",
         "High",
-        "Policy Tracker",
+        "Board Pack",
         false
       ],
       [
-        "Ignore",
-        "Transport Infrastructure Bill Update",
-        "Updated",
-        "05 Sep 2025",
+        "Review",
+        "Northbridge December year-end forecast revision",
+        "Forecast update",
+        "31 Dec 2025",
         "Medium",
-        "Bill Monitor",
+        "Revenue Monitor",
         false
       ]
     ]
   },
 
-  /* WHY: Provides a second dataset so users can compare healthcare activity with finance. */
+  /* WHY: Provides a second dataset so users can compare healthcare revenue with finance. */
   healthcare: {
-    chartTitle: "Healthcare Chart",
-    chartSubtitle: "Monthly healthcare status overview",
-    tableTitle: "Healthcare events",
-    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    seriesLight: [10, 14, 19, 22, 18, 13],
-    seriesDark: [7, 8, 6, 11, 9, 5],
-    activeIndex: 3,
+    chartTitle: "Healthcare Revenue Chart",
+    chartSubtitle: "Medivanta Health Systems monthly revenue vs last year",
+    tableTitle: "Healthcare revenue records",
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    seriesLight: [9.8, 13.6, 16.2, 19.4, 21.1, 18.7, 20.5, 22.9, 24.1, 26.8, 28.4, 30.2],
+    seriesDark: [7.9, 10.2, 12.4, 14.8, 16.5, 15.9, 17.1, 18.6, 20.2, 22.3, 23.7, 25.4],
+    activeIndex: 11,
     /* WHY: Supplies the HTML shown in the left chart information panels for healthcare. */
     description: `
       <div data-panel="description">
@@ -228,16 +274,37 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Data Overview</strong>
             <p>
-              Healthcare monitoring activity by month<br />
-              Monthly status grouping across tracked records
+              Company: Medivanta Health Systems<br />
+              Sector: Healthcare<br />
+              Data Type: Monthly service revenue in millions<br />
+              Period: Jan to Dec 2025
             </p>
           </div>
 
           <div class="panel-section">
-            <strong>Focus</strong>
+            <strong>Transformation</strong>
             <p>
-              Tracks healthcare activity trends<br />
-              Highlights system pressure and service updates
+              Revenue is grouped by service month<br />
+              Current-year service revenue is compared with last year<br />
+              Values are rounded to one decimal place
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Chart Details</strong>
+            <p>
+              Type: Line chart (dual series)<br />
+              Focus: Full-year healthcare revenue<br />
+              Highlight: December service revenue peak
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Insights</strong>
+            <p>
+              Demand builds through the second half<br />
+              Outpatient and diagnostics activity support growth<br />
+              December closes as the strongest service month
             </p>
           </div>
         </div>
@@ -250,8 +317,17 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Status Overview</strong>
             <p>
-              Activity peaks in April<br />
-              Pressure reduces slightly through May and June
+              Revenue Type: Monthly service revenue<br />
+              Comparison: Current year vs previous year
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Transformation</strong>
+            <p>
+              Monthly values align with the 12 table rows<br />
+              Service demand is compared against last year<br />
+              Each row records one monthly revenue signal
             </p>
           </div>
 
@@ -259,8 +335,17 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Healthcare system activity<br />
-              Highlight: Highest activity in April
+              Focus: Healthcare service revenue trend<br />
+              Highlight: December is the strongest month
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Insights</strong>
+            <p>
+              Clinic utilisation improves after mid-year<br />
+              Insurer settlements add late-year uplift<br />
+              Retention risk should still be reviewed
             </p>
           </div>
         </div>
@@ -275,7 +360,17 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Outcome</strong>
             <p>
-              Critical healthcare changes are escalated for action
+              Each table row maps to one month of service revenue<br />
+              High-confidence changes are escalated for review
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Notes</strong>
+            <p>
+              Data is reviewed across the full year<br />
+              Billing and utilisation signals remain visible<br />
+              Revenue signals support service planning
             </p>
           </div>
         </div>
@@ -288,9 +383,18 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Plan of Action</strong>
             <p>
-              Review high-confidence healthcare changes first<br />
-              Compare capacity and staffing records<br />
-              Escalate urgent service updates for follow-up
+              Review patient acquisition costs<br />
+              Improve recurring service retention<br />
+              Repeat channels linked to December demand
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Notes</strong>
+            <p>
+              Compare each month against last year<br />
+              Check outpatient and diagnostics demand<br />
+              Keep service-line review notes attached
             </p>
           </div>
         </div>
@@ -300,70 +404,124 @@ window.chartspaceDatasets = {
     rows: [
       [
         "Review",
-        "Healthcare Capacity Expansion",
-        "New",
-        "25 Aug 2025",
+        "Medivanta January patient service baseline",
+        "Forecast update",
+        "31 Jan 2025",
+        "Medium",
+        "Revenue Monitor",
+        false
+      ],
+      [
+        "Ignore",
+        "Medivanta February outpatient revenue lift",
+        "Revenue growth",
+        "28 Feb 2025",
         "High",
-        "Health Monitor",
+        "Healthcare Report",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta March diagnostics demand",
+        "Service demand",
+        "31 Mar 2025",
+        "High",
+        "Billing System",
+        false
+      ],
+      [
+        "Ignore",
+        "Medivanta April elective care growth",
+        "Revenue growth",
+        "30 Apr 2025",
+        "Medium",
+        "Healthcare Report",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta May service revenue peak",
+        "Revenue growth",
+        "31 May 2025",
+        "High",
+        "Revenue Monitor",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta June retention risk",
+        "Retention risk",
+        "30 Jun 2025",
+        "Medium",
+        "CRM Pipeline",
+        false
+      ],
+      [
+        "Ignore",
+        "Medivanta July clinic utilisation",
+        "Service demand",
+        "31 Jul 2025",
+        "Medium",
+        "Revenue Operations",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta August billing improvement",
+        "Forecast update",
+        "31 Aug 2025",
+        "Low",
+        "Billing System",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta September care programme growth",
+        "Revenue growth",
+        "30 Sep 2025",
+        "High",
+        "Board Pack",
+        false
+      ],
+      [
+        "Ignore",
+        "Medivanta October seasonal service demand",
+        "Seasonal uplift",
+        "31 Oct 2025",
+        "Medium",
+        "Forecast Model",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta November insurer settlement uplift",
+        "Revenue growth",
+        "30 Nov 2025",
+        "High",
+        "Healthcare Report",
+        false
+      ],
+      [
+        "Review",
+        "Medivanta December full-year service revenue peak",
+        "Revenue growth",
+        "31 Dec 2025",
+        "High",
+        "Revenue Monitor",
         true
-      ],
-      [
-        "Ignore",
-        "NHS Staffing Pipeline",
-        "Mention",
-        "23 Aug 2025",
-        "Medium",
-        "Health Monitor",
-        false
-      ],
-      [
-        "Review",
-        "Mental Health Access Review",
-        "Updated",
-        "21 Aug 2025",
-        "High",
-        "Policy Tracker",
-        false
-      ],
-      [
-        "Ignore",
-        "Primary Care Funding Note",
-        "New",
-        "20 Aug 2025",
-        "Low",
-        "Finance Monitor",
-        false
-      ],
-      [
-        "Review",
-        "Emergency Services Performance",
-        "Updated",
-        "18 Aug 2025",
-        "Medium",
-        "Health Monitor",
-        false
-      ],
-      [
-        "Review",
-        "Care Performance",
-        "Updated",
-        "18 Aug 2025",
-        "Low",
-        "Health Monitor",
-        false
       ]
     ]
   },
 
-  /* WHY: Provides a third dataset so users can compare education activity with other sectors. */
+  /* WHY: Provides a third dataset so users can compare education revenue with other sectors. */
   education: {
-    chartTitle: "Education Chart",
-    chartSubtitle: "Education activity and policy monitoring",
-    tableTitle: "Education events",
-    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    seriesLight: [14, 16, 20, 24, 21, 17],
-    seriesDark: [6, 9, 7, 10, 8, 5],
-    activeIndex: 3,
+    chartTitle: "Education Revenue Chart",
+    chartSubtitle: "LearnSphere Academy Group monthly revenue vs last year",
+    tableTitle: "Education revenue records",
+    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    seriesLight: [6.2, 8.5, 14.8, 17.6, 13.9, 10.4, 9.8, 12.6, 21.7, 24.3, 19.5, 15.2],
+    seriesDark: [5.1, 6.9, 10.7, 12.3, 11.5, 8.8, 8.1, 10.4, 16.8, 18.9, 15.7, 12.6],
+    activeIndex: 9,
     /* WHY: Supplies the HTML shown in the left chart information panels for education. */
     description: `
       <div data-panel="description">
@@ -373,8 +531,37 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Data Overview</strong>
             <p>
-              Education policy and reform tracking<br />
-              Monthly grouped activity view
+              Company: LearnSphere Academy Group<br />
+              Sector: Education<br />
+              Data Type: Monthly subscription and course revenue<br />
+              Period: Jan to Dec 2025
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Transformation</strong>
+            <p>
+              Revenue is grouped by calendar month<br />
+              Current-year values are compared with last year<br />
+              Values are rounded to one decimal place
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Chart Details</strong>
+            <p>
+              Type: Line chart (dual series)<br />
+              Focus: Full-year education revenue<br />
+              Highlight: October term revenue peak
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Insights</strong>
+            <p>
+              Revenue lifts around enrolment windows<br />
+              September and October show term-time strength<br />
+              Subscription revenue softens after peak intake
             </p>
           </div>
         </div>
@@ -387,8 +574,17 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Status Overview</strong>
             <p>
-              Education activity rises from January to April<br />
-              Later months show a gradual reduction
+              Revenue Type: Subscription and course revenue<br />
+              Comparison: Current year vs previous year
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Transformation</strong>
+            <p>
+              Monthly values align with the 12 table rows<br />
+              Previous-year revenue provides the baseline<br />
+              Each row records one monthly revenue signal
             </p>
           </div>
 
@@ -396,8 +592,17 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Education policy movement<br />
-              Highlight: Peak reform activity in April
+              Focus: Education revenue movement<br />
+              Highlight: October is the strongest month
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Insights</strong>
+            <p>
+              Enrolment campaigns lift Q3 and Q4 revenue<br />
+              October shows the clearest term-time peak<br />
+              Renewal planning should start before December
             </p>
           </div>
         </div>
@@ -412,7 +617,17 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Outcome</strong>
             <p>
-              Key education changes are sent for triage and follow-up
+              Each table row maps to one month of education revenue<br />
+              Key revenue changes are sent for review
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Notes</strong>
+            <p>
+              Data is reviewed across the full year<br />
+              Enrolment and renewal signals remain visible<br />
+              Revenue signals support intake planning
             </p>
           </div>
         </div>
@@ -425,9 +640,18 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Plan of Action</strong>
             <p>
-              Review funding and reform records together<br />
-              Prioritise high-confidence education updates<br />
-              Track follow-up actions against policy sources
+              Expand successful enrolment campaigns<br />
+              Review renewal planning after October<br />
+              Prepare offers before the next intake window
+            </p>
+          </div>
+
+          <div class="panel-section">
+            <strong>Notes</strong>
+            <p>
+              Compare each month against last year<br />
+              Check term-time uplift and subscription churn<br />
+              Keep enrolment campaign notes attached
             </p>
           </div>
         </div>
@@ -437,47 +661,110 @@ window.chartspaceDatasets = {
     rows: [
       [
         "Review",
-        "Higher Education Funding Reform",
-        "Updated",
-        "04 Sep 2025",
+        "LearnSphere January subscription baseline",
+        "Forecast update",
+        "31 Jan 2025",
+        "Medium",
+        "Revenue Monitor",
+        false
+      ],
+      [
+        "Ignore",
+        "LearnSphere February subscription lift",
+        "Subscription lift",
+        "28 Feb 2025",
+        "Medium",
+        "Education Report",
+        false
+      ],
+      [
+        "Review",
+        "LearnSphere March enrolment campaign impact",
+        "Revenue growth",
+        "31 Mar 2025",
         "High",
-        "Skills Monitor",
+        "CRM Pipeline",
+        false
+      ],
+      [
+        "Review",
+        "LearnSphere April course revenue peak",
+        "Revenue growth",
+        "30 Apr 2025",
+        "High",
+        "Revenue Monitor",
+        false
+      ],
+      [
+        "Ignore",
+        "LearnSphere May post-intake slowdown",
+        "Revenue drop",
+        "31 May 2025",
+        "Medium",
+        "Education Report",
+        false
+      ],
+      [
+        "Review",
+        "LearnSphere June retention review",
+        "Retention risk",
+        "30 Jun 2025",
+        "Low",
+        "Revenue Operations",
+        false
+      ],
+      [
+        "Ignore",
+        "LearnSphere July summer course dip",
+        "Revenue drop",
+        "31 Jul 2025",
+        "Low",
+        "Forecast Model",
+        false
+      ],
+      [
+        "Review",
+        "LearnSphere August pre-intake pipeline",
+        "Pipeline increase",
+        "31 Aug 2025",
+        "Medium",
+        "CRM Pipeline",
+        false
+      ],
+      [
+        "Review",
+        "LearnSphere September enrolment uplift",
+        "Seasonal uplift",
+        "30 Sep 2025",
+        "High",
+        "Education Report",
+        false
+      ],
+      [
+        "Review",
+        "LearnSphere October term revenue peak",
+        "Revenue growth",
+        "31 Oct 2025",
+        "High",
+        "Revenue Monitor",
         true
       ],
       [
         "Ignore",
-        "Apprenticeship Standards Review",
-        "Mention",
-        "03 Sep 2025",
+        "LearnSphere November renewal review",
+        "Retention risk",
+        "30 Nov 2025",
         "Medium",
-        "Skills Monitor",
+        "Billing System",
         false
       ],
       [
         "Review",
-        "School Funding Allocation",
-        "New",
-        "02 Sep 2025",
-        "High",
-        "Finance Monitor",
-        false
-      ],
-      [
-        "Ignore",
-        "Teacher Workforce Strategy",
-        "Updated",
-        "01 Sep 2025",
+        "LearnSphere December course bundle revenue",
+        "Seasonal uplift",
+        "31 Dec 2025",
         "Medium",
-        "Policy Tracker",
-        false
-      ],
-      [
-        "Review",
-        "Curriculum Reform Proposal",
-        "New",
-        "31 Aug 2025",
-        "Low",
-        "Skills Monitor",
+        "Board Pack",
         false
       ]
     ]
