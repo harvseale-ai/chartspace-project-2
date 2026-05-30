@@ -431,8 +431,14 @@ body.dark-mode .chart-title-row h2 {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Hidden side panel state.
+   Used by the chart info button to remove panels from the screen without expanding them. */
+.chart-zone.panels-hidden .chart-side-panel {
+  display: none;
+}
+
 /* Side panel heading style. */
-.chart-side-panel h3 {
+.chart-side-panel h2 {
   margin: 0 0 11px;
   font-size: 12px;
   font-weight: 500;

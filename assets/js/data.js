@@ -1,4 +1,6 @@
+/* WHY: Stores all dashboard datasets globally so app.js can focus on behaviour instead of raw data. */
 window.chartspaceDatasets = {
+  /* WHY: Provides the default finance dataset shown when the dashboard first loads. */
   finance: {
     chartTitle: "Finance Chart",
     chartSubtitle: "Monthly policy activity by sector",
@@ -7,6 +9,7 @@ window.chartspaceDatasets = {
     seriesLight: [12, 18, 15, 26, 23, 12],
     seriesDark: [8, 11, 5, 9, 6, 3],
     activeIndex: 3,
+    /* WHY: Supplies the HTML shown in the left chart information panel for finance. */
     description: `
       <div class="panel-section">
         <strong>Data Overview</strong>
@@ -44,6 +47,7 @@ window.chartspaceDatasets = {
         </p>
       </div>
     `,
+    /* WHY: Supplies the HTML shown in the right chart information panel for finance. */
     outcome: `
       <div class="panel-section">
         <strong>Table Mapping</strong>
@@ -61,6 +65,7 @@ window.chartspaceDatasets = {
         </p>
       </div>
     `,
+    /* WHY: Provides finance table rows in the same column order expected by app.js. */
     rows: [
       [
         "Review",
@@ -128,6 +133,7 @@ window.chartspaceDatasets = {
     ]
   },
 
+  /* WHY: Provides a second dataset so users can compare healthcare activity with finance. */
   healthcare: {
     chartTitle: "Healthcare Chart",
     chartSubtitle: "Monthly healthcare status overview",
@@ -136,6 +142,7 @@ window.chartspaceDatasets = {
     seriesLight: [10, 14, 19, 22, 18, 13],
     seriesDark: [7, 8, 6, 11, 9, 5],
     activeIndex: 3,
+    /* WHY: Supplies the HTML shown in the left chart information panel for healthcare. */
     description: `
       <div class="panel-section">
         <strong>Data Overview</strong>
@@ -153,6 +160,7 @@ window.chartspaceDatasets = {
         </p>
       </div>
     `,
+    /* WHY: Supplies the HTML shown in the right chart information panel for healthcare. */
     outcome: `
       <div class="panel-section">
         <strong>Outcome</strong>
@@ -161,6 +169,7 @@ window.chartspaceDatasets = {
         </p>
       </div>
     `,
+    /* WHY: Provides healthcare table rows in the same column order expected by app.js. */
     rows: [
       [
         "Review",
@@ -219,6 +228,7 @@ window.chartspaceDatasets = {
     ]
   },
 
+  /* WHY: Provides a third dataset so users can compare education activity with other sectors. */
   education: {
     chartTitle: "Education Chart",
     chartSubtitle: "Education activity and policy monitoring",
@@ -227,6 +237,7 @@ window.chartspaceDatasets = {
     seriesLight: [14, 16, 20, 24, 21, 17],
     seriesDark: [6, 9, 7, 10, 8, 5],
     activeIndex: 3,
+    /* WHY: Supplies the HTML shown in the left chart information panel for education. */
     description: `
       <div class="panel-section">
         <strong>Data Overview</strong>
@@ -236,6 +247,7 @@ window.chartspaceDatasets = {
         </p>
       </div>
     `,
+    /* WHY: Supplies the HTML shown in the right chart information panel for education. */
     outcome: `
       <div class="panel-section">
         <strong>Outcome</strong>
@@ -244,6 +256,7 @@ window.chartspaceDatasets = {
         </p>
       </div>
     `,
+    /* WHY: Provides education table rows in the same column order expected by app.js. */
     rows: [
       [
         "Review",

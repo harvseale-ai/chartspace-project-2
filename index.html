@@ -1,15 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- this is a comment test versions -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChartSpace</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/chart.css" />
-    <link rel="icon" type="image/png" href="assets/images/chartspace-logo.png">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  </head>
+  <title>ChartSpace</title>
+
+  <meta
+    name="description"
+    content="ChartSpace is an interactive dashboard for exploring sector activity, chart trends, reviewing event data, and exporting selected records.">
+  <meta name="author" content="ChartSpace">
+  <meta name="theme-color" content="#111318">
+
+  <meta name="apple-mobile-web-app-title" content="ChartSpace">
+
+  <meta property="og:title" content="ChartSpace">
+  <meta
+    property="og:description"
+    content="An interactive dashboard for exploring sector activity, chart trends, reviewing event data, and exporting selected records.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ChartSpace">
+  <meta property="og:image" content="assets/images/chartspace-logo.png">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/chart.css">
+  <link rel="icon" type="image/png" href="assets/images/chartspace-logo.png">
+
+</head>
   <body>
     <div class="page-shell">
       <header class="topbar">
@@ -24,23 +41,23 @@
             <img
               src="assets/images/chartspace-logo.png"
               alt="Chartspace logo"
-            />
+            >
           </div>
 
-          <h3 class="page-tagline">ChartSpace</h3>
+          <h1 class="page-tagline">ChartSpace</h1>
         </div>
         
         <div class="topbar-right">
 
           <button class="icon-circle" id="exportBtn">
-            <div class="menu-icon">
+            <span class="menu-icon">
               <i data-lucide="download"></i>
               <span id="exportCount" class="export-count">0</span>
-            </div>
+            </span>
           </button>
 
           <button class="icon-circle" id="themeToggle" aria-label="Toggle light and dark mode">
-            <div class="menu-icon"> <i data-lucide="eclipse"></i></div>
+            <span class="menu-icon"> <i data-lucide="eclipse"></i></span>
           </button>
 
           <button
@@ -48,9 +65,9 @@
               id="weatherBtn"
               aria-label="Open user menu"
             >
-            <div class="menu-icon-weather">
+            <span class="menu-icon-weather">
               <i data-lucide="cloud-sun"></i>
-            </div>
+            </span>
           </button>
 
           <div id="weatherPopup" class="weather-popup">
@@ -97,19 +114,19 @@
         <section class="content-top" id="sectionCharts">
           <div class="content-inner">
             <div class="chart-wrapper">
-              <div class="chart-zone" id="chartZone">
+              <div class="chart-zone panels-hidden" id="chartZone">
                 <div class="chart-panel-group">
                   <aside
                     class="chart-side-panel chart-side-panel-left chart-side-panel-outside"
                     id="descriptionPanel"
                   >
-                    <h3>Description</h3>
+                    <h2>Description</h2>
                     <div class="side-divider"></div>
                     <div class="side-panel-content">
                       <div class="panel-section">
                         <strong>Data Overview</strong>
                         <p>
-                          Data Type: Monthly aggregated records<br />
+                          Data Type: Monthly aggregated records<br>
                           Last Updated: 12 Sep 2025
                         </p>
                       </div>
@@ -117,8 +134,8 @@
                       <div class="panel-section">
                         <strong>Transformation</strong>
                         <p>
-                          Raw data is grouped by month and normalised<br />
-                          Duplicate entries are removed<br />
+                          Raw data is grouped by month and normalised<br>
+                          Duplicate entries are removed<br>
                           Values are averaged across reporting periods
                         </p>
                       </div>
@@ -126,8 +143,8 @@
                       <div class="panel-section">
                         <strong>Chart Details</strong>
                         <p>
-                          Type: Line chart (dual series)<br />
-                          Focus: Trend of key performance metric<br />
+                          Type: Line chart (dual series)<br>
+                          Focus: Trend of key performance metric<br>
                           Highlight: Peak activity in April
                         </p>
                       </div>
@@ -135,8 +152,8 @@
                       <div class="panel-section">
                         <strong>Insights</strong>
                         <p>
-                          Steady growth observed from Jan → Apr<br />
-                          Slight decline in May<br />
+                          Steady growth observed from Jan → Apr<br>
+                          Slight decline in May<br>
                           Recovery begins in June
                         </p>
                       </div>
@@ -147,13 +164,13 @@
                     class="chart-side-panel chart-side-panel-left chart-side-panel-inside"
                     id="summaryPanel"
                   >
-                    <h3>Summary</h3>
+                    <h2>Summary</h2>
                     <div class="side-divider"></div>
                     <div class="side-panel-content">
                       <div class="panel-section">
                         <strong>Status Overview</strong>
                         <p>
-                          Data Type: Monthly aggregated records<br />
+                          Data Type: Monthly aggregated records<br>
                           Last Updated: 12 Sep 2025
                         </p>
                       </div>
@@ -161,8 +178,8 @@
                       <div class="panel-section">
                         <strong>Transformation</strong>
                         <p>
-                          Raw data is grouped by month and normalised<br />
-                          Duplicate entries are removed<br />
+                          Raw data is grouped by month and normalised<br>
+                          Duplicate entries are removed<br>
                           Values are averaged across reporting periods
                         </p>
                       </div>
@@ -170,8 +187,8 @@
                       <div class="panel-section">
                         <strong>Chart Details</strong>
                         <p>
-                          Type: Line chart (dual series)<br />
-                          Focus: Trend of key performance metric<br />
+                          Type: Line chart (dual series)<br>
+                          Focus: Trend of key performance metric<br>
                           Highlight: Peak activity in April
                         </p>
                       </div>
@@ -179,8 +196,8 @@
                       <div class="panel-section">
                         <strong>Insights</strong>
                         <p>
-                          Steady growth observed from Jan → Apr<br />
-                          Slight decline in May<br />
+                          Steady growth observed from Jan → Apr<br>
+                          Slight decline in May<br>
                           Recovery begins in June
                         </p>
                       </div>
@@ -240,14 +257,14 @@
                     class="chart-side-panel chart-side-panel-right chart-side-panel-inside"
                     id="outcomePanel"
                   >
-                    <h3>Outcome</h3>
+                    <h2>Outcome</h2>
                     <div class="side-divider"></div>
                     <div class="side-panel-content">
                       <div class="panel-section">
                         <strong>Table Mapping</strong>
                         <p>
-                          Each row represents a detected event<br />
-                          Status reflects user action<br />
+                          Each row represents a detected event<br>
+                          Status reflects user action<br>
                           Source links back to originating dataset
                         </p>
                       </div>
@@ -255,8 +272,8 @@
                       <div class="panel-section">
                         <strong>Notes</strong>
                         <p>
-                          Data is refreshed weekly<br />
-                          Minor delays may occur during ingestion<br />
+                          Data is refreshed weekly<br>
+                          Minor delays may occur during ingestion<br>
                           Outliers are not removed in this view
                         </p>
                       </div>
@@ -267,14 +284,14 @@
                     class="chart-side-panel chart-side-panel-right chart-side-panel-outside"
                     id="recommendedActionPanel"
                   >
-                    <h3>Recommended Action</h3>
+                    <h2>Recommended Action</h2>
                     <div class="side-divider"></div>
                     <div class="side-panel-content">
                       <div class="panel-section">
                         <strong>Plan of Action</strong>
                         <p>
-                          Each row represents a detected event<br />
-                          Status reflects user action<br />
+                          Each row represents a detected event<br>
+                          Status reflects user action<br>
                           Source links back to originating dataset
                         </p>
                       </div>
@@ -282,8 +299,8 @@
                       <div class="panel-section">
                         <strong>Notes</strong>
                         <p>
-                          Data is refreshed weekly<br />
-                          Minor delays may occur during ingestion<br />
+                          Data is refreshed weekly<br>
+                          Minor delays may occur during ingestion<br>
                           Outliers are not removed in this view
                         </p>
                       </div>
@@ -340,7 +357,7 @@
                           type="radio"
                           name="tableDateRange"
                           value="24 hours"
-                        />
+                        >
                         <span>24 hours</span>
                       </label>
 
@@ -349,7 +366,7 @@
                           type="radio"
                           name="tableDateRange"
                           value="7 days"
-                        />
+                        >
                         <span>7 days</span>
                       </label>
 
@@ -358,7 +375,7 @@
                           type="radio"
                           name="tableDateRange"
                           value="14 days"
-                        />
+                        >
                         <span>14 days</span>
                       </label>
 
@@ -368,7 +385,7 @@
                           name="tableDateRange"
                           value="30 days"
                           checked
-                        />
+                        >
                         <span>30 days</span>
                       </label>
 
@@ -377,7 +394,7 @@
                           type="radio"
                           name="tableDateRange"
                           value="90 days"
-                        />
+                        >
                         <span>90 days</span>
                       </label>
 
@@ -386,7 +403,7 @@
                           type="radio"
                           name="tableDateRange"
                           value="180 days"
-                        />
+                        >
                         <span>180 days</span>
                       </label>
 
@@ -467,9 +484,9 @@
         document.body.classList.toggle("dark-mode");
 
         if (document.body.classList.contains("dark-mode")) {
-          themeToggle.innerHTML = '<div class="menu-icon"> <i data-lucide="eclipse"></i></div>';
+          themeToggle.innerHTML = '<span class="menu-icon"> <i data-lucide="eclipse"></i></span>';
         } else {
-          themeToggle.innerHTML = '<div class="menu-icon"> <i data-lucide="eclipse"></i></div>';
+          themeToggle.innerHTML = '<span class="menu-icon"> <i data-lucide="eclipse"></i></span>';
         }
 
         lucide.createIcons();
