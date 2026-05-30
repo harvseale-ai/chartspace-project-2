@@ -119,90 +119,14 @@
                   <aside
                     class="chart-side-panel chart-side-panel-left chart-side-panel-outside"
                     id="descriptionPanel"
-                  >
-                    <h2>Description</h2>
-                    <div class="side-divider"></div>
-                    <div class="side-panel-content">
-                      <div class="panel-section">
-                        <strong>Data Overview</strong>
-                        <p>
-                          Data Type: Monthly aggregated records<br>
-                          Last Updated: 12 Sep 2025
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Transformation</strong>
-                        <p>
-                          Raw data is grouped by month and normalised<br>
-                          Duplicate entries are removed<br>
-                          Values are averaged across reporting periods
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Chart Details</strong>
-                        <p>
-                          Type: Line chart (dual series)<br>
-                          Focus: Trend of key performance metric<br>
-                          Highlight: Peak activity in April
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Insights</strong>
-                        <p>
-                          Steady growth observed from Jan → Apr<br>
-                          Slight decline in May<br>
-                          Recovery begins in June
-                        </p>
-                      </div>
-                    </div>
-                  </aside>
+                    aria-live="polite"
+                  ></aside>
 
                   <aside
                     class="chart-side-panel chart-side-panel-left chart-side-panel-inside"
                     id="summaryPanel"
-                  >
-                    <h2>Summary</h2>
-                    <div class="side-divider"></div>
-                    <div class="side-panel-content">
-                      <div class="panel-section">
-                        <strong>Status Overview</strong>
-                        <p>
-                          Data Type: Monthly aggregated records<br>
-                          Last Updated: 12 Sep 2025
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Transformation</strong>
-                        <p>
-                          Raw data is grouped by month and normalised<br>
-                          Duplicate entries are removed<br>
-                          Values are averaged across reporting periods
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Chart Details</strong>
-                        <p>
-                          Type: Line chart (dual series)<br>
-                          Focus: Trend of key performance metric<br>
-                          Highlight: Peak activity in April
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Insights</strong>
-                        <p>
-                          Steady growth observed from Jan → Apr<br>
-                          Slight decline in May<br>
-                          Recovery begins in June
-                        </p>
-                      </div>
-                    </div>
-                  </aside>
+                    aria-live="polite"
+                  ></aside>
                 </div>
 
                 <div class="card chart-card">
@@ -256,56 +180,14 @@
                   <aside
                     class="chart-side-panel chart-side-panel-right chart-side-panel-inside"
                     id="outcomePanel"
-                  >
-                    <h2>Outcome</h2>
-                    <div class="side-divider"></div>
-                    <div class="side-panel-content">
-                      <div class="panel-section">
-                        <strong>Table Mapping</strong>
-                        <p>
-                          Each row represents a detected event<br>
-                          Status reflects user action<br>
-                          Source links back to originating dataset
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Notes</strong>
-                        <p>
-                          Data is refreshed weekly<br>
-                          Minor delays may occur during ingestion<br>
-                          Outliers are not removed in this view
-                        </p>
-                      </div>
-                    </div>
-                  </aside>
+                    aria-live="polite"
+                  ></aside>
 
                   <aside
                     class="chart-side-panel chart-side-panel-right chart-side-panel-outside"
                     id="recommendedActionPanel"
-                  >
-                    <h2>Recommended Action</h2>
-                    <div class="side-divider"></div>
-                    <div class="side-panel-content">
-                      <div class="panel-section">
-                        <strong>Plan of Action</strong>
-                        <p>
-                          Each row represents a detected event<br>
-                          Status reflects user action<br>
-                          Source links back to originating dataset
-                        </p>
-                      </div>
-
-                      <div class="panel-section">
-                        <strong>Notes</strong>
-                        <p>
-                          Data is refreshed weekly<br>
-                          Minor delays may occur during ingestion<br>
-                          Outliers are not removed in this view
-                        </p>
-                      </div>
-                    </div>
-                  </aside>
+                    aria-live="polite"
+                  ></aside>
                 </div>
               </div>
             </div>
@@ -490,33 +372,6 @@
         }
 
         lucide.createIcons();
-      });
-    </script>
-
-    <script>
-      const weatherBtn = document.querySelector("#weatherBtn");
-      const weatherPopup = document.querySelector("#weatherPopup");
-      const weatherText = document.querySelector("#weatherText");
-
-      weatherBtn.addEventListener("click", async () => {
-        weatherPopup.style.display =
-          weatherPopup.style.display === "block" ? "none" : "block";
-
-        weatherText.textContent = "Loading weather...";
-
-        const url = "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current_weather=true";
-
-        const response = await fetch(url);
-        const data = await response.json();
-
-        const temp = data.current_weather.temperature;
-        const wind = data.current_weather.windspeed;
-
-        weatherText.innerHTML = `
-          <strong>London Weather</strong><br>
-          Temperature: ${temp}°C<br>
-          Wind: ${wind} km/h
-        `;
       });
     </script>
 

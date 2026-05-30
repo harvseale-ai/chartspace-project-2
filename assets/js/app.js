@@ -28,11 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const chartTitle = document.querySelector(".card-title-block h2");
   const chartSubtitle = document.querySelector(".card-title-block p");
 
-  /* WHY: Stores side panel content areas so each dataset can show matching context. */
-  const leftPanelContent = document.querySelector(".chart-side-panel-left .side-panel-content");
-  const rightPanelContent = document.querySelector(".chart-side-panel-right .side-panel-content");
-
-  /* WHY: Finds all expandable panels so each one can be opened independently. */
+  /* WHY: Finds all dynamic side panels so each dataset can refresh the full chart context. */
   const descriptionPanel = document.getElementById("descriptionPanel");
   const summaryPanel = document.getElementById("summaryPanel");
   const outcomePanel = document.getElementById("outcomePanel");
@@ -52,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Finds user, export, and table elements used by the dashboard interactions. */
   const userPageBtn = document.getElementById("userPageBtn");
   /* WHY: Finds the weather popup so the open-all control can show or hide it with the panels. */
+  const weatherBtn = document.getElementById("weatherBtn");
   const weatherPopup = document.getElementById("weatherPopup");
+  const weatherText = document.getElementById("weatherText");
   const exportBtn = document.getElementById("exportBtn");
   const exportCount = document.getElementById("exportCount");
 
@@ -416,17 +414,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  /* WHY: Pulls one named panel section out of a trusted dataset HTML string. */
+  function getPanelHtml(panelHtml, panelName) {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = panelHtml || "";
+
+    const panel = wrapper.querySelector(`[data-panel="${panelName}"]`);
+    return panel ? panel.innerHTML.trim() : "";
+  }
+
+  /* WHY: Keeps every side panel in sync with the currently selected dataset. */
+  function updateTextPanels(data) {
+    if (descriptionPanel) descriptionPanel.innerHTML = getPanelHtml(data.description, "description");
+    if (summaryPanel) summaryPanel.innerHTML = getPanelHtml(data.description, "summary");
+    if (outcomePanel) outcomePanel.innerHTML = getPanelHtml(data.outcome, "outcome");
+    if (recommendedActionPanel) {
+      recommendedActionPanel.innerHTML = getPanelHtml(data.outcome, "recommendedAction");
+    }
+  }
+
   /* WHY: Updates all chart and table content for the selected dataset key. */
   function renderDataset(datasetKey) {
     const data = datasets[datasetKey];
     /* WHY: Stops safely if a button points to a dataset that does not exist. */
     if (!data) return;
 
-    /* WHY: Keeps the visible chart text and side panels in sync with the selected dataset. */
+    /* WHY: Keeps the visible chart text in sync with the selected dataset. */
     if (chartTitle) chartTitle.textContent = data.chartTitle;
     if (chartSubtitle) chartSubtitle.textContent = data.chartSubtitle;
-    if (leftPanelContent) leftPanelContent.innerHTML = data.description;
-    if (rightPanelContent) rightPanelContent.innerHTML = data.outcome;
+
+    /* WHY: Refreshes all four context panels whenever the dataset changes. */
+    updateTextPanels(data);
 
     /* WHY: Shows the dataset name and row count above the table. */
     if (tableTitle) {
@@ -486,6 +504,29 @@ document.addEventListener("DOMContentLoaded", () => {
     return chartZone && !chartZone.classList.contains("panels-hidden");
   }
 
+  /* WHY: Loads weather in one place so both weather controls show the same API result. */
+  async function loadWeather() {
+    if (!weatherText) return;
+
+    weatherText.textContent = "Loading weather...";
+
+    try {
+      const url = "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current_weather=true";
+      const response = await fetch(url);
+      const data = await response.json();
+      const temp = data.current_weather.temperature;
+      const wind = data.current_weather.windspeed;
+
+      weatherText.innerHTML = `
+        <strong>London Weather</strong><br>
+        Temperature: ${temp}°C<br>
+        Wind: ${wind} km/h
+      `;
+    } catch (error) {
+      weatherText.textContent = "Weather unavailable.";
+    }
+  }
+
   /* WHY: Opens or closes the floating navigation menu from the header button. */
   if (menuToggle && floatingMenu) {
     menuToggle.addEventListener("click", (event) => {
@@ -531,7 +572,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WHY: Opens or closes all chart side panels together from the menu control. */
   if (openAllToggle) {
-    openAllToggle.addEventListener("click", (event) => {
+    openAllToggle.addEventListener("click", async (event) => {
       event.stopPropagation();
 
       /* WHY: Uses the expanded state so this button stays focused on expand and collapse. */
@@ -543,6 +584,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (weatherPopup) {
         weatherPopup.style.display = shouldExpand ? "block" : "none";
+      }
+
+      if (shouldExpand) {
+        await loadWeather();
+      }
+    });
+  }
+
+  /* WHY: Lets the weather button open the popup and refresh the same weather API data. */
+  if (weatherBtn && weatherPopup) {
+    weatherBtn.addEventListener("click", async () => {
+      const shouldShowWeather = weatherPopup.style.display !== "block";
+
+      weatherPopup.style.display = shouldShowWeather ? "block" : "none";
+
+      if (shouldShowWeather) {
+        await loadWeather();
       }
     });
   }

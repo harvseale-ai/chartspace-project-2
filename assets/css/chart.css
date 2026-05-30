@@ -562,9 +562,25 @@ body.dark-mode .chart-title-row h2 {
   .chart-panel-group {
     flex-direction: column;
     align-items: stretch;
+    width: 150px;
     gap: 16px;
   }
+
+    /* Inside panels on mobile/tablet still allow more reading space when opened. */
+  .chart-side-panel-inside.expanded .side-panel-content {
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+
+  /* Outside panels on mobile/tablet stay slightly shorter when opened. */
+  .chart-side-panel-outside.expanded .side-panel-content {
+    max-height: 160px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
 }
+
 
 /* tablet / mobile layout
    Moves the chart card to the top and stacks both panel groups underneath. */
@@ -619,14 +635,14 @@ body.dark-mode .chart-title-row h2 {
 
   /* Inside panels on mobile/tablet still allow more reading space when opened. */
   .chart-side-panel-inside.expanded .side-panel-content {
-    max-height: 260px;
+    max-height: 160px;
     overflow-y: auto;
     padding-right: 6px;
   }
 
   /* Outside panels on mobile/tablet stay slightly shorter when opened. */
   .chart-side-panel-outside.expanded .side-panel-content {
-    max-height: 180px;
+    max-height: 80px;
     overflow-y: auto;
     padding-right: 6px;
   }
