@@ -31,7 +31,7 @@
    This controls the main chart block width on desktop. */
 .chart-card {
   flex: 0 0 auto;
-  width: 938px;
+  width: 800px;
 }
 
 /* Header row inside the chart card.
@@ -77,6 +77,12 @@
   gap: 7px;
 }
 
+.chart-title-row h2 {
+  /* display: inline; */
+  /* width: auto; */
+  font-size: 28px;
+}
+
 body.dark-mode .chart-title-row h2 {
   color: var(--color-text-main);
 }
@@ -89,7 +95,7 @@ body.dark-mode .chart-title-row h2 {
   line-height: 1;
   color: var(--color-text-main);
   cursor: pointer;
-  margin-top: 7px;
+  margin-top: 2px;
 }
 
 /* =========================
@@ -432,7 +438,7 @@ body.dark-mode .chart-title-row h2 {
 
     /* Inside panels on mobile/tablet still allow more reading space when opened. */
   .chart-side-panel-inside.expanded .side-panel-content {
-    max-height: 226px;
+    max-height: 160px;
     overflow-y: auto;
     padding-right: 6px;
   }

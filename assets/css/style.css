@@ -243,7 +243,7 @@ body {
 /* Main content wrapper inside the page shell.
    Keeps the page content stacked vertically beneath the topbar. */
 .page-content {
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
   transition: opacity 0.2s ease;
@@ -918,7 +918,7 @@ body {
    Sets the table block size, border, padding, and scrollable height area. */
 .table-panel {
   max-height: 910px; 
-  max-width: 948px;
+  max-width: 800px;
   min-height: 482px;
   margin: 8px auto 0;
 
@@ -1423,4 +1423,5 @@ body {
   display: flex;
   justify-content: flex-end;
   padding: 16px;
+  font-size: small;
 }
