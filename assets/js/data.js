@@ -4,8 +4,13 @@ window.chartspaceDatasets = {
   finance: {
     chartTitle: "Finance Revenue Chart",
     chartSubtitle: "Northbridge Capital Group monthly revenue vs last year",
-    tableTitle: "Finance revenue records",
-    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    tableTitle: "Revenue records",
+    metrics: {
+      peakRevenue: "£34.5m",
+      yearOnYearChange: "+34%",
+      totalRevenue: "£247.2m"
+    },
+    months: ["Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
     seriesLight: [12.4, 18.1, 15.6, 26.2, 23.5, 13.1, 17.8, 21.4, 24.9, 34.5, 31.2, 28.6],
     seriesDark: [8.7, 11.4, 5.2, 9.3, 6.5, 3.4, 10.8, 14.2, 17.6, 19.1, 22.4, 25.8],
     activeIndex: 9,
@@ -21,7 +26,7 @@ window.chartspaceDatasets = {
               Company: Northbridge Capital Group<br />
               Sector: Finance<br />
               Data Type: Monthly revenue in millions<br />
-              Period: Jan to Dec 2025
+              Period: Jun 2025 to May 2026
             </p>
           </div>
 
@@ -38,8 +43,8 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Full-year revenue performance<br />
-              Highlight: October full-year revenue peak
+              Focus: 12-month revenue performance<br />
+              Highlight: March 12-month revenue peak
             </p>
           </div>
 
@@ -48,7 +53,7 @@ window.chartspaceDatasets = {
             <p>
               Revenue strengthens through Q3 and Q4<br />
               Current year stays ahead of last year<br />
-              October shows the strongest finance performance
+              March shows the strongest finance performance
             </p>
           </div>
         </div>
@@ -80,7 +85,7 @@ window.chartspaceDatasets = {
             <p>
               Type: Line chart (dual series)<br />
               Focus: Revenue growth trend<br />
-              Highlight: October is the strongest month
+              Highlight: March is the strongest month
             </p>
           </div>
 
@@ -88,7 +93,7 @@ window.chartspaceDatasets = {
             <strong>Insights</strong>
             <p>
               Lending and acquisition activity improve late year<br />
-              October and November show strong momentum<br />
+              March and April show strong momentum<br />
               Margin pressure should still be monitored
             </p>
           </div>
@@ -112,7 +117,7 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Notes</strong>
             <p>
-              Data is reviewed across the full year<br />
+              Data is reviewed across the 12-month period<br />
               Outliers remain visible for finance review<br />
               Revenue signals support planning decisions
             </p>
@@ -128,7 +133,7 @@ window.chartspaceDatasets = {
             <strong>Plan of Action</strong>
             <p>
               Review Q4 acquisition and lending channels<br />
-              Repeat tactics linked to October performance
+              Repeat tactics linked to March performance
             </p>
           </div>
 
@@ -147,108 +152,108 @@ window.chartspaceDatasets = {
     rows: [
       [
         "Review",
-        "Northbridge January revenue baseline",
+        "Northbridge June revenue baseline",
         "Forecast update",
-        "31 Jan 2025",
+        "30 Jun 2025",
         "Medium",
         "Revenue Monitor",
         false
       ],
       [
-        "Ignore",
-        "Northbridge February lending revenue lift",
+        "Review",
+        "Northbridge July lending revenue lift",
         "Revenue growth",
-        "28 Feb 2025",
+        "31 Jul 2025",
         "High",
         "Finance Report",
         false
       ],
       [
         "Review",
-        "Northbridge March card services slowdown",
+        "Northbridge August card services slowdown",
         "Revenue drop",
-        "31 Mar 2025",
+        "31 Aug 2025",
         "Medium",
         "Market Filing",
         false
       ],
       [
         "Review",
-        "Northbridge April acquisition campaign peak",
+        "Northbridge September acquisition campaign peak",
         "Revenue growth",
-        "30 Apr 2025",
+        "30 Sep 2025",
         "High",
         "CRM Pipeline",
         false
       ],
       [
-        "Ignore",
-        "Northbridge May wealth management uplift",
+        "Review",
+        "Northbridge October wealth management uplift",
         "Revenue growth",
-        "31 May 2025",
+        "31 Oct 2025",
         "High",
         "Board Pack",
         false
       ],
       [
         "Review",
-        "Northbridge June margin pressure review",
+        "Northbridge November margin pressure review",
         "Margin pressure",
-        "30 Jun 2025",
+        "30 Nov 2025",
         "Medium",
         "Forecast Model",
         false
       ],
       [
-        "Ignore",
-        "Northbridge July account growth update",
+        "Review",
+        "Northbridge December account growth update",
         "Pipeline increase",
-        "31 Jul 2025",
+        "31 Dec 2025",
         "Medium",
         "Revenue Operations",
         false
       ],
       [
         "Review",
-        "Northbridge August regional revenue improvement",
+        "Northbridge January regional revenue improvement",
         "Revenue growth",
-        "31 Aug 2025",
+        "31 Jan 2026",
         "High",
         "Revenue Monitor",
         false
       ],
       [
         "Review",
-        "Northbridge September commercial banking uplift",
+        "Northbridge February commercial banking uplift",
         "Revenue growth",
-        "30 Sep 2025",
+        "28 Feb 2026",
         "High",
         "Finance Report",
         false
       ],
       [
-        "Ignore",
-        "Northbridge October full-year revenue peak",
+        "Review",
+        "Northbridge March 12-month revenue peak",
         "Revenue growth",
-        "31 Oct 2025",
+        "31 Mar 2026",
         "High",
         "Forecast Model",
-        true
+        false
       ],
       [
         "Review",
-        "Northbridge November portfolio revenue increase",
+        "Northbridge April portfolio revenue increase",
         "Revenue growth",
-        "30 Nov 2025",
+        "30 Apr 2026",
         "High",
         "Board Pack",
         false
       ],
       [
         "Review",
-        "Northbridge December year-end forecast revision",
+        "Northbridge May period-end forecast revision",
         "Forecast update",
-        "31 Dec 2025",
+        "30 May 2026",
         "Medium",
         "Revenue Monitor",
         false
@@ -260,8 +265,13 @@ window.chartspaceDatasets = {
   healthcare: {
     chartTitle: "Healthcare Revenue Chart",
     chartSubtitle: "Medivanta Health Systems monthly revenue vs last year",
-    tableTitle: "Healthcare revenue records",
-    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    tableTitle: "Revenue records",
+    metrics: {
+      peakRevenue: "£30.2m",
+      yearOnYearChange: "+20%",
+      totalRevenue: "£241.7m"
+    },
+    months: ["Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
     seriesLight: [9.8, 13.6, 16.2, 19.4, 21.1, 18.7, 20.5, 22.9, 24.1, 26.8, 28.4, 30.2],
     seriesDark: [7.9, 10.2, 12.4, 14.8, 16.5, 15.9, 17.1, 18.6, 20.2, 22.3, 23.7, 25.4],
     activeIndex: 11,
@@ -277,7 +287,7 @@ window.chartspaceDatasets = {
               Company: Medivanta Health Systems<br />
               Sector: Healthcare<br />
               Data Type: Monthly service revenue in millions<br />
-              Period: Jan to Dec 2025
+              Period: Jun 2025 to May 2026
             </p>
           </div>
 
@@ -294,8 +304,8 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Full-year healthcare revenue<br />
-              Highlight: December service revenue peak
+              Focus: 12-month healthcare revenue<br />
+              Highlight: May service revenue peak
             </p>
           </div>
 
@@ -304,7 +314,7 @@ window.chartspaceDatasets = {
             <p>
               Demand builds through the second half<br />
               Outpatient and diagnostics activity support growth<br />
-              December closes as the strongest service month
+              May closes as the strongest service month
             </p>
           </div>
         </div>
@@ -336,7 +346,7 @@ window.chartspaceDatasets = {
             <p>
               Type: Line chart (dual series)<br />
               Focus: Healthcare service revenue trend<br />
-              Highlight: December is the strongest month
+              Highlight: May is the strongest month
             </p>
           </div>
 
@@ -368,7 +378,7 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Notes</strong>
             <p>
-              Data is reviewed across the full year<br />
+              Data is reviewed across the 12-month period<br />
               Billing and utilisation signals remain visible<br />
               Revenue signals support service planning
             </p>
@@ -385,7 +395,7 @@ window.chartspaceDatasets = {
             <p>
               Review patient acquisition costs<br />
               Improve recurring service retention<br />
-              Repeat channels linked to December demand
+              Repeat channels linked to May demand
             </p>
           </div>
 
@@ -404,111 +414,111 @@ window.chartspaceDatasets = {
     rows: [
       [
         "Review",
-        "Medivanta January patient service baseline",
+        "Medivanta June patient service baseline",
         "Forecast update",
-        "31 Jan 2025",
+        "30 Jun 2025",
         "Medium",
         "Revenue Monitor",
         false
       ],
       [
-        "Ignore",
-        "Medivanta February outpatient revenue lift",
+        "Review",
+        "Medivanta July outpatient revenue lift",
         "Revenue growth",
-        "28 Feb 2025",
+        "31 Jul 2025",
         "High",
         "Healthcare Report",
         false
       ],
       [
         "Review",
-        "Medivanta March diagnostics demand",
+        "Medivanta August diagnostics demand",
         "Service demand",
-        "31 Mar 2025",
+        "31 Aug 2025",
         "High",
         "Billing System",
         false
       ],
       [
-        "Ignore",
-        "Medivanta April elective care growth",
+        "Review",
+        "Medivanta September elective care growth",
         "Revenue growth",
-        "30 Apr 2025",
+        "30 Sep 2025",
         "Medium",
         "Healthcare Report",
         false
       ],
       [
         "Review",
-        "Medivanta May service revenue peak",
+        "Medivanta October service revenue peak",
         "Revenue growth",
-        "31 May 2025",
+        "31 Oct 2025",
         "High",
         "Revenue Monitor",
         false
       ],
       [
         "Review",
-        "Medivanta June retention risk",
+        "Medivanta November retention risk",
         "Retention risk",
-        "30 Jun 2025",
+        "30 Nov 2025",
         "Medium",
         "CRM Pipeline",
         false
       ],
       [
-        "Ignore",
-        "Medivanta July clinic utilisation",
+        "Review",
+        "Medivanta December clinic utilisation",
         "Service demand",
-        "31 Jul 2025",
+        "31 Dec 2025",
         "Medium",
         "Revenue Operations",
         false
       ],
       [
         "Review",
-        "Medivanta August billing improvement",
+        "Medivanta January billing improvement",
         "Forecast update",
-        "31 Aug 2025",
+        "31 Jan 2026",
         "Low",
         "Billing System",
         false
       ],
       [
         "Review",
-        "Medivanta September care programme growth",
+        "Medivanta February care programme growth",
         "Revenue growth",
-        "30 Sep 2025",
+        "28 Feb 2026",
         "High",
         "Board Pack",
         false
       ],
       [
-        "Ignore",
-        "Medivanta October seasonal service demand",
+        "Review",
+        "Medivanta March seasonal service demand",
         "Seasonal uplift",
-        "31 Oct 2025",
+        "31 Mar 2026",
         "Medium",
         "Forecast Model",
         false
       ],
       [
         "Review",
-        "Medivanta November insurer settlement uplift",
+        "Medivanta April insurer settlement uplift",
         "Revenue growth",
-        "30 Nov 2025",
+        "30 Apr 2026",
         "High",
         "Healthcare Report",
         false
       ],
       [
         "Review",
-        "Medivanta December full-year service revenue peak",
+        "Medivanta May 12-month service revenue peak",
         "Revenue growth",
-        "31 Dec 2025",
+        "30 May 2026",
         "High",
         "Revenue Monitor",
-        true
+        false
       ]
     ]
   },
@@ -517,8 +527,13 @@ window.chartspaceDatasets = {
   education: {
     chartTitle: "Education Revenue Chart",
     chartSubtitle: "LearnSphere Academy Group monthly revenue vs last year",
-    tableTitle: "Education revenue records",
-    months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    tableTitle: "Revenue records",
+    metrics: {
+      peakRevenue: "£24.3m",
+      yearOnYearChange: "+25%",
+      totalRevenue: "£174.5m"
+    },
+    months: ["Jun 25", "Jul 25", "Aug 25", "Sep 25", "Oct 25", "Nov 25", "Dec 25", "Jan 26", "Feb 26", "Mar 26", "Apr 26", "May 26"],
     seriesLight: [6.2, 8.5, 14.8, 17.6, 13.9, 10.4, 9.8, 12.6, 21.7, 24.3, 19.5, 15.2],
     seriesDark: [5.1, 6.9, 10.7, 12.3, 11.5, 8.8, 8.1, 10.4, 16.8, 18.9, 15.7, 12.6],
     activeIndex: 9,
@@ -534,7 +549,7 @@ window.chartspaceDatasets = {
               Company: LearnSphere Academy Group<br />
               Sector: Education<br />
               Data Type: Monthly subscription and course revenue<br />
-              Period: Jan to Dec 2025
+              Period: Jun 2025 to May 2026
             </p>
           </div>
 
@@ -551,8 +566,8 @@ window.chartspaceDatasets = {
             <strong>Chart Details</strong>
             <p>
               Type: Line chart (dual series)<br />
-              Focus: Full-year education revenue<br />
-              Highlight: October term revenue peak
+              Focus: 12-month education revenue<br />
+              Highlight: March term revenue peak
             </p>
           </div>
 
@@ -560,7 +575,7 @@ window.chartspaceDatasets = {
             <strong>Insights</strong>
             <p>
               Revenue lifts around enrolment windows<br />
-              September and October show term-time strength<br />
+              February and March show term-time strength<br />
               Subscription revenue softens after peak intake
             </p>
           </div>
@@ -593,7 +608,7 @@ window.chartspaceDatasets = {
             <p>
               Type: Line chart (dual series)<br />
               Focus: Education revenue movement<br />
-              Highlight: October is the strongest month
+              Highlight: March is the strongest month
             </p>
           </div>
 
@@ -601,8 +616,8 @@ window.chartspaceDatasets = {
             <strong>Insights</strong>
             <p>
               Enrolment campaigns lift Q3 and Q4 revenue<br />
-              October shows the clearest term-time peak<br />
-              Renewal planning should start before December
+              March shows the clearest term-time peak<br />
+              Renewal planning should start before May
             </p>
           </div>
         </div>
@@ -625,7 +640,7 @@ window.chartspaceDatasets = {
           <div class="panel-section">
             <strong>Notes</strong>
             <p>
-              Data is reviewed across the full year<br />
+              Data is reviewed across the 12-month period<br />
               Enrolment and renewal signals remain visible<br />
               Revenue signals support intake planning
             </p>
@@ -641,7 +656,7 @@ window.chartspaceDatasets = {
             <strong>Plan of Action</strong>
             <p>
               Expand successful enrolment campaigns<br />
-              Review renewal planning after October<br />
+              Review renewal planning after March<br />
               Prepare offers before the next intake window
             </p>
           </div>
@@ -661,108 +676,108 @@ window.chartspaceDatasets = {
     rows: [
       [
         "Review",
-        "LearnSphere January subscription baseline",
+        "LearnSphere June subscription baseline",
         "Forecast update",
-        "31 Jan 2025",
+        "30 Jun 2025",
         "Medium",
         "Revenue Monitor",
         false
       ],
       [
-        "Ignore",
-        "LearnSphere February subscription lift",
+        "Review",
+        "LearnSphere July subscription lift",
         "Subscription lift",
-        "28 Feb 2025",
+        "31 Jul 2025",
         "Medium",
         "Education Report",
         false
       ],
       [
         "Review",
-        "LearnSphere March enrolment campaign impact",
+        "LearnSphere August enrolment campaign impact",
         "Revenue growth",
-        "31 Mar 2025",
+        "31 Aug 2025",
         "High",
         "CRM Pipeline",
         false
       ],
       [
         "Review",
-        "LearnSphere April course revenue peak",
+        "LearnSphere September course revenue peak",
         "Revenue growth",
-        "30 Apr 2025",
+        "30 Sep 2025",
         "High",
         "Revenue Monitor",
         false
       ],
       [
-        "Ignore",
-        "LearnSphere May post-intake slowdown",
+        "Review",
+        "LearnSphere October post-intake slowdown",
         "Revenue drop",
-        "31 May 2025",
+        "31 Oct 2025",
         "Medium",
         "Education Report",
         false
       ],
       [
         "Review",
-        "LearnSphere June retention review",
+        "LearnSphere November retention review",
         "Retention risk",
-        "30 Jun 2025",
+        "30 Nov 2025",
         "Low",
         "Revenue Operations",
         false
       ],
       [
-        "Ignore",
-        "LearnSphere July summer course dip",
+        "Review",
+        "LearnSphere December summer course dip",
         "Revenue drop",
-        "31 Jul 2025",
+        "31 Dec 2025",
         "Low",
         "Forecast Model",
         false
       ],
       [
         "Review",
-        "LearnSphere August pre-intake pipeline",
+        "LearnSphere January pre-intake pipeline",
         "Pipeline increase",
-        "31 Aug 2025",
+        "31 Jan 2026",
         "Medium",
         "CRM Pipeline",
         false
       ],
       [
         "Review",
-        "LearnSphere September enrolment uplift",
+        "LearnSphere February enrolment uplift",
         "Seasonal uplift",
-        "30 Sep 2025",
+        "28 Feb 2026",
         "High",
         "Education Report",
         false
       ],
       [
         "Review",
-        "LearnSphere October term revenue peak",
+        "LearnSphere March term revenue peak",
         "Revenue growth",
-        "31 Oct 2025",
+        "31 Mar 2026",
         "High",
         "Revenue Monitor",
-        true
+        false
       ],
       [
-        "Ignore",
-        "LearnSphere November renewal review",
+        "Review",
+        "LearnSphere April renewal review",
         "Retention risk",
-        "30 Nov 2025",
+        "30 Apr 2026",
         "Medium",
         "Billing System",
         false
       ],
       [
         "Review",
-        "LearnSphere December course bundle revenue",
+        "LearnSphere May course bundle revenue",
         "Seasonal uplift",
-        "31 Dec 2025",
+        "30 May 2026",
         "Medium",
         "Board Pack",
         false

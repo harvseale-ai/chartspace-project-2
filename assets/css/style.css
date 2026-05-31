@@ -919,6 +919,7 @@ body {
 .table-panel {
   max-height: 910px; 
   max-width: 948px;
+  min-height: 482px;
   margin: 8px auto 0;
 
   background: var(--color-card-bg);

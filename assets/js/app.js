@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Stores the chart title text nodes so dataset changes can update the heading. */
   const chartTitle = document.querySelector(".card-title-block h2");
   const chartSubtitle = document.querySelector(".card-title-block p");
+  /* WHY: Stores the headline metric cards so each company can show its own revenue totals. */
+  const summaryValues = document.querySelectorAll(".summary-value");
+  const summaryLabels = document.querySelectorAll(".summary-label");
 
   /* WHY: Finds all dynamic side panels so each dataset can refresh the full chart context. */
   const descriptionPanel = document.getElementById("descriptionPanel");
@@ -54,16 +57,40 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Defines the y-axis values shown on the chart grid. */
   const yTicks = [50, 40, 30, 20, 10, 0];
 
-  /* WHY: Defines the chart drawing area so every chart element uses the same spacing. */
-  const plot = {
-    left: 90,
-    right: 700,
-    top: 40,
-    bottom: 320
-  };
-
   /* WHY: Reads the centralised dataset file while keeping the app safe if it fails to load. */
   const datasets = window.chartspaceDatasets || {};
+  /* WHY: Starts with no date filter so the table shows all demo rows until the user chooses a range. */
+  let selectedDateRangeDays = null;
+  /* WHY: Converts the visible filter labels into day counts the table can compare. */
+  const dateRangeOptions = {
+    "24 hours": 1,
+    "7 days": 7,
+    "14 days": 14,
+    "30 days": 30,
+    "90 days": 90,
+    "180 days": 180
+  };
+
+  /* WHY: Keeps desktop spacing unchanged while giving mobile charts more usable plot width. */
+  function getChartPlotBounds() {
+    const isMobileChart = window.matchMedia("(max-width: 700px)").matches;
+
+    if (isMobileChart) {
+      return {
+        left: 62,
+        right: 720,
+        top: 40,
+        bottom: 320
+      };
+    }
+
+    return {
+      left: 90,
+      right: 700,
+      top: 40,
+      bottom: 320
+    };
+  }
 
   /* WHY: Creates SVG elements with attributes so chart drawing code stays reusable. */
   function createSvgEl(tag, attrs = {}) {
@@ -78,14 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* WHY: Converts a month position into an x-coordinate inside the chart area. */
-  function scaleX(index, labels) {
+  function scaleX(index, labels, plot) {
     /* WHY: Calculates equal spacing so each month is placed evenly across the chart. */
     const step = (plot.right - plot.left) / (labels.length - 1);
     return plot.left + step * index;
   }
 
   /* WHY: Converts a data value into a y-coordinate where higher values appear higher. */
-  function scaleY(value) {
+  function scaleY(value, plot) {
     /* WHY: Sets the chart value range so all datasets share the same vertical scale. */
     const min = 0;
     const max = 50;
@@ -93,13 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* WHY: Draws the horizontal reference lines so users can judge chart values quickly. */
-  function drawGrid() {
+  function drawGrid(plot) {
     /* WHY: Stops chart drawing safely if the SVG is missing from the page. */
     if (!svg) return;
 
     /* WHY: Adds one grid line and label for each y-axis tick value. */
     yTicks.forEach((tick) => {
-      const y = scaleY(tick);
+      const y = scaleY(tick, plot);
 
       svg.appendChild(
         createSvgEl("line", {
@@ -124,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* WHY: Draws month labels along the bottom of the chart. */
-  function drawMonths(labels) {
+  function drawMonths(labels, plot) {
     if (!svg) return;
 
     /* WHY: Places each month below the matching data point. */
     labels.forEach((labelText, index) => {
-      const x = scaleX(index, labels);
+      const x = scaleX(index, labels, plot);
 
       const label = createSvgEl("text", {
         x,
@@ -143,10 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* WHY: Draws a vertical marker to highlight the active month in the dataset. */
-  function drawFocusLine(labels, activeIndex) {
+  function drawFocusLine(labels, activeIndex, plot) {
     if (!svg) return;
 
-    const x = scaleX(activeIndex, labels);
+    const x = scaleX(activeIndex, labels, plot);
 
     svg.appendChild(
       createSvgEl("line", {
@@ -160,12 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* WHY: Draws one chart line and its points so each dataset series can share the same code. */
-  function drawSeries(labels, seriesData, activeIndex, lineClass, pointClass, active = false) {
+  function drawSeries(labels, seriesData, activeIndex, lineClass, pointClass, plot, active = false) {
     if (!svg) return;
 
     /* WHY: Converts data values into the coordinate string needed by an SVG polyline. */
     const points = seriesData
-      .map((value, index) => `${scaleX(index, labels)},${scaleY(value)}`)
+      .map((value, index) => `${scaleX(index, labels, plot)},${scaleY(value, plot)}`)
       .join(" ");
 
     /* WHY: Adds the line first so point circles appear on top of it. */
@@ -180,8 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
     seriesData.forEach((value, index) => {
       svg.appendChild(
         createSvgEl("circle", {
-          cx: scaleX(index, labels),
-          cy: scaleY(value),
+          cx: scaleX(index, labels, plot),
+          cy: scaleY(value, plot),
           r: active && index === activeIndex ? 10 : 7,
           class: active && index === activeIndex ? "point-active" : pointClass
         })
@@ -195,12 +222,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* WHY: Clears old chart elements so the new dataset does not overlap the previous one. */
     svg.innerHTML = "";
+    /* WHY: Uses the current viewport so mobile charts get wider plot spacing without changing desktop. */
+    const plot = getChartPlotBounds();
     /* WHY: Draws chart parts in a clear order from background to foreground. */
-    drawGrid();
-    drawFocusLine(data.months, data.activeIndex);
-    drawSeries(data.months, data.seriesLight, data.activeIndex, "line-light", "point-light", true);
-    drawSeries(data.months, data.seriesDark, data.activeIndex, "line-dark", "point-dark");
-    drawMonths(data.months);
+    drawGrid(plot);
+    drawFocusLine(data.months, data.activeIndex, plot);
+    drawSeries(data.months, data.seriesLight, data.activeIndex, "line-light", "point-light", plot, true);
+    drawSeries(data.months, data.seriesDark, data.activeIndex, "line-dark", "point-dark", plot);
+    drawMonths(data.months, plot);
   }
 
   /* WHY: Converts a row action into the CSS class used for its visual state. */
@@ -264,6 +293,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* WHY: Keeps the export counter correct after new rows are rendered. */
     updateExportCount();
+  }
+
+  /* WHY: Converts table date text into a real Date so rows can be filtered by age. */
+  function parseDetectedDate(dateText) {
+    const parsedDate = new Date(dateText);
+    return Number.isNaN(parsedDate.getTime()) ? null : parsedDate;
+  }
+
+  /* WHY: Keeps only rows detected within the selected number of days from today. */
+  function filterRowsByDateRange(rows, days) {
+    const now = new Date();
+    const cutoffDate = new Date(now);
+    cutoffDate.setDate(now.getDate() - days);
+
+    return rows.filter((row) => {
+      const detectedDate = parseDetectedDate(row[3]);
+
+      if (!detectedDate) return false;
+
+      return detectedDate >= cutoffDate && detectedDate <= now;
+    });
+  }
+
+  /* WHY: Keeps all rows visible when no date range has been applied. */
+  function getVisibleRows(rows) {
+    if (!selectedDateRangeDays) return rows;
+
+    return filterRowsByDateRange(rows, selectedDateRangeDays);
   }
 
   /* WHY: Shows how many rows are selected for export. */
@@ -430,27 +487,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = datasets[datasetKey];
     /* WHY: Stops safely if a button points to a dataset that does not exist. */
     if (!data) return;
+    /* WHY: Applies the selected date range only after the user has chosen one. */
+    const visibleRows = getVisibleRows(data.rows);
 
     /* WHY: Keeps the visible chart text in sync with the selected dataset. */
     if (chartTitle) chartTitle.textContent = data.chartTitle;
     if (chartSubtitle) chartSubtitle.textContent = data.chartSubtitle;
+
+    /* WHY: Updates the headline revenue metrics so they match the selected company dataset. */
+    if (data.metrics && summaryValues.length >= 3 && summaryLabels.length >= 3) {
+      summaryValues[0].textContent = data.metrics.peakRevenue;
+      summaryValues[1].textContent = data.metrics.yearOnYearChange;
+      summaryValues[2].textContent = data.metrics.totalRevenue;
+
+      summaryLabels[0].textContent = "Peak revenue";
+      summaryLabels[1].textContent = "YoY change";
+      summaryLabels[2].textContent = "Total revenue";
+    }
 
     /* WHY: Refreshes all four context panels whenever the dataset changes. */
     updateTextPanels(data);
 
     /* WHY: Shows the dataset name and row count above the table. */
     if (tableTitle) {
-      tableTitle.innerHTML = `${data.tableTitle} <span>(${data.rows.length})</span>`;
+      tableTitle.innerHTML = `${data.tableTitle} <span>(${visibleRows.length})</span>`;
     }
 
     /* WHY: Redraws both main views so chart and table always match. */
     renderChart(data);
-    renderTableRows(data.rows);
+    renderTableRows(visibleRows);
 
     /* WHY: Marks the selected dataset button as active for visual feedback. */
     datasetButtons.forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.dataset === datasetKey);
     });
+  }
+
+  /* WHY: Reuses the active button so table filters can refresh the selected dataset. */
+  function getActiveDatasetKey() {
+    const activeButton = Array.from(datasetButtons).find((btn) => btn.classList.contains("active"));
+    return activeButton ? activeButton.dataset.dataset : "finance";
   }
 
   /* WHY: Provides one helper to close temporary panels when users click away. */
@@ -668,7 +744,7 @@ if (recommendedActionPanel) {
     });
   }
 
-  /* WHY: Applies the selected date range label to the table filter button. */
+  /* WHY: Applies the selected date range to the table rows for the active dataset. */
   if (tableApplyDateFilter && tableDateFilterPanel && tableDateRangeBtn) {
     tableApplyDateFilter.addEventListener("click", (event) => {
       event.stopPropagation();
@@ -680,9 +756,14 @@ if (recommendedActionPanel) {
 
       /* WHY: Updates the button text so the chosen range remains visible. */
       if (selectedRange) {
+        selectedDateRangeDays = dateRangeOptions[selectedRange.value] || null;
         tableDateRangeBtn.textContent = `Last ${selectedRange.value}`;
+      } else {
+        selectedDateRangeDays = null;
+        tableDateRangeBtn.textContent = "All dates";
       }
 
+      renderDataset(getActiveDatasetKey());
       tableDateFilterPanel.classList.remove("open");
     });
   }
@@ -694,11 +775,25 @@ if (recommendedActionPanel) {
     });
   }
 
+  /* WHY: Clears the HTML default so the table filter is off on first page load. */
+  document.querySelectorAll('input[name="tableDateRange"]').forEach((input) => {
+    input.checked = false;
+  });
+
+  if (tableDateRangeBtn) {
+    tableDateRangeBtn.textContent = "All dates";
+  }
+
   /* WHY: Lets each dataset button redraw the dashboard with its own data. */
   datasetButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       renderDataset(btn.dataset.dataset);
     });
+  });
+
+  /* WHY: Redraws the active chart after viewport changes so responsive plot spacing stays correct. */
+  window.addEventListener("resize", () => {
+    renderDataset(getActiveDatasetKey());
   });
 
   /* WHY: Loads the default dataset so the dashboard is populated on first page load. */
