@@ -13,10 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const chartInfoToggle = document.getElementById("chartInfoToggle");
   const chartZone = document.getElementById("chartZone");
   const openAllToggle = document.getElementById("openAllToggle");
+  const themeToggle = document.getElementById("themeToggle");
 
   /* WHY: Finds menu navigation items so clicks can scroll to the correct page section. */
   const navCharts = document.getElementById("navCharts");
   const navDataOptions = document.getElementById("navDataOptions");
+  const aboutBtn = document.getElementById("aboutBtn");
+  const aboutOverlay = document.getElementById("aboutOverlay");
+  const closeAbout = document.getElementById("closeAbout");
 
   /* WHY: Stores page sections as scroll targets for the floating navigation menu. */
   const sectionCharts = document.getElementById("sectionCharts");
@@ -70,6 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "90 days": 90,
     "180 days": 180
   };
+
+  /* WHY: Refreshes Lucide icons after dynamic HTML changes replace icon markup. */
+  function refreshIcons() {
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  }
 
   /* WHY: Keeps desktop spacing unchanged while giving mobile charts more usable plot width. */
   function getChartPlotBounds() {
@@ -359,8 +370,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WHY: Downloads selected rows as a CSV file so users can take data out of the dashboard. */
   function downloadCSV(rows) {
-    /* WHY: Avoids creating an empty file when no rows are selected. */
-    if (rows.length === 0) return;
+    /* WHY: Handles an empty export gracefully instead of creating a blank file. */
+    if (rows.length === 0) {
+      window.alert("Select at least one row before exporting.");
+      return;
+    }
 
     /* WHY: Keeps the exported column order clear and predictable. */
     const headers = ["Action", "Entity", "Change Type", "Detected Date", "Confidence", "Source"];
@@ -590,7 +604,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Temperature: ${temp}°C<br>
         Wind: ${wind} km/h
       `;
-    } catch (error) {
+    } catch {
       weatherText.textContent = "Weather unavailable.";
     }
   }
@@ -607,6 +621,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (floatingMenu) {
     floatingMenu.addEventListener("click", (event) => {
       event.stopPropagation();
+    });
+  }
+
+  /* WHY: Lets users switch between light and dark viewing modes. */
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      themeToggle.innerHTML = '<span class="menu-icon"> <i data-lucide="eclipse"></i></span>';
+      refreshIcons();
     });
   }
 
@@ -654,6 +677,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (shouldShowWeather) {
         await loadWeather();
+      }
+    });
+  }
+
+  /* WHY: Opens the about overlay so users can read the project purpose without leaving the page. */
+  if (aboutBtn && aboutOverlay) {
+    aboutBtn.addEventListener("click", () => {
+      aboutOverlay.classList.add("show");
+      refreshIcons();
+    });
+  }
+
+  /* WHY: Gives users a direct way to close the about overlay. */
+  if (closeAbout && aboutOverlay) {
+    closeAbout.addEventListener("click", () => {
+      aboutOverlay.classList.remove("show");
+    });
+  }
+
+  /* WHY: Closes the about overlay when users click outside the modal card. */
+  if (aboutOverlay) {
+    aboutOverlay.addEventListener("click", (event) => {
+      if (event.target === aboutOverlay) {
+        aboutOverlay.classList.remove("show");
       }
     });
   }
@@ -798,6 +845,7 @@ if (recommendedActionPanel) {
 
   /* WHY: Loads the default dataset so the dashboard is populated on first page load. */
   renderDataset("finance");
+  refreshIcons();
 });
 
 /* WHY: Finds the action column control after the DOM handler because this feature sits outside the main setup block. */

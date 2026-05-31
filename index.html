@@ -350,51 +350,7 @@
 
     <script src="assets/js/data.js"></script>
     <script src="assets/js/app.js"></script>
-
     <script src="https://unpkg.com/lucide@latest"></script>
-
-    <script>
-      if (window.lucide) {
-        window.lucide.createIcons();
-      }
-    </script>
-
-    <script>
-      const themeToggle = document.querySelector("#themeToggle");
-
-      themeToggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-
-        if (document.body.classList.contains("dark-mode")) {
-          themeToggle.innerHTML = '<span class="menu-icon"> <i data-lucide="eclipse"></i></span>';
-        } else {
-          themeToggle.innerHTML = '<span class="menu-icon"> <i data-lucide="eclipse"></i></span>';
-        }
-
-        lucide.createIcons();
-      });
-    </script>
-
-    <script>
-      const aboutBtn = document.querySelector("#aboutBtn");
-      const aboutOverlay = document.querySelector("#aboutOverlay");
-      const closeAbout = document.querySelector("#closeAbout");
-
-      aboutBtn.addEventListener("click", () => {
-        aboutOverlay.classList.add("show");
-        lucide.createIcons();
-      });
-
-      closeAbout.addEventListener("click", () => {
-        aboutOverlay.classList.remove("show");
-      });
-
-      aboutOverlay.addEventListener("click", (event) => {
-        if (event.target === aboutOverlay) {
-          aboutOverlay.classList.remove("show");
-        }
-      });
-    </script>
 
   </body>
 </html>

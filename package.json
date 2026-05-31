@@ -1,0 +1,27 @@
+{
+  "name": "chartspace-project-2",
+  "version": "1.0.0",
+  "description": "ChartSpace is a single-page JavaScript dashboard for monitoring sector activity across finance, healthcare, and education. It turns monthly event data into a visual chart, contextual side panels, and an interactive table so users can scan trends, review records, and export selected rows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint assets/js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harvseale-ai/chartspace-project-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/harvseale-ai/chartspace-project-2/issues"
+  },
+  "homepage": "https://github.com/harvseale-ai/chartspace-project-2#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.1",
+    "globals": "^17.6.0"
+  }
+}
