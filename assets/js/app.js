@@ -56,6 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Stores table controls so rows and dataset buttons can be updated dynamically. */
   const tableTitle = document.getElementById("tableTitle");
   const tableRows = document.getElementById("tableRows");
+  const tablePanel = document.querySelector(".table-panel");
+  const actionColumnToggle = document.getElementById("actionColumnToggle");
   const datasetButtons = document.querySelectorAll(".dataset-btn");
 
   /* WHY: Defines the y-axis values shown on the chart grid. */
@@ -79,6 +81,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function refreshIcons() {
     if (window.lucide) {
       window.lucide.createIcons();
+    }
+  }
+
+  /* WHY: Lets keyboard users activate custom button-like elements with Enter or Space. */
+  function handleKeyboardActivation(event, callback) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      callback();
+    }
+  }
+
+  /* WHY: Announces whether the date filter panel is open for assistive technology. */
+  function setDateFilterOpen(isOpen) {
+    if (tableDateFilterPanel) {
+      tableDateFilterPanel.classList.toggle("open", isOpen);
+    }
+
+    if (tableDateRangeBtn) {
+      tableDateRangeBtn.setAttribute("aria-expanded", String(isOpen));
     }
   }
 
@@ -245,12 +266,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WHY: Converts a row action into the CSS class used for its visual state. */
   function getStatusClass(action) {
-  /* WHY: Critical rows need a stronger visual style. */
-  if (action === "Critical") return "critical";
-  /* WHY: Ignored rows need a muted visual style. */
-  if (action === "Ignore") return "muted";
-  /* WHY: Review is the default state, so it does not need an extra class. */
-  return "";
+    /* WHY: Critical rows need a stronger visual style. */
+    if (action === "Critical") return "critical";
+    /* WHY: Ignored rows need a muted visual style. */
+    if (action === "Ignore") return "muted";
+    /* WHY: Review is the default state, so it does not need an extra class. */
+    return "";
   }
 
   /* WHY: Builds the table from data so the page can change datasets without hard-coded rows. */
@@ -264,36 +285,46 @@ document.addEventListener("DOMContentLoaded", () => {
     rows.forEach(([action, entity, changeType, detectedDate, confidence, source, checked]) => {
       const row = document.createElement("div");
       row.className = "table-row row";
+      row.setAttribute("role", "row");
 
       /* WHY: Uses a template so each generated row keeps the same structure and controls. */
       row.innerHTML = `
-        <div class="action-cell">
-          <button class="row-toggle ${checked ? "checked" : ""}" type="button" aria-label="Toggle row action">
+        <div class="action-cell" role="cell">
+          <button
+            class="row-toggle ${checked ? "checked" : ""}"
+            type="button"
+            aria-label="Toggle export selection for ${entity}"
+          >
             <span></span>
           </button>
 
             <div class="status-wrap">
-              <button class="status-pill ${getStatusClass(action)}" type="button">
+              <button
+                class="status-pill ${getStatusClass(action)}"
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded="false"
+              >
                 ${action} <span>⌄</span>
               </button>
 
-              <div class="status-menu">
-                <button type="button" data-status="Review">Review</button>
-                <button type="button" data-status="Critical">Critical</button>
-                <button type="button" data-status="Ignore">Ignore</button>
+              <div class="status-menu" role="menu">
+                <button type="button" data-status="Review" role="menuitem">Review</button>
+                <button type="button" data-status="Critical" role="menuitem">Critical</button>
+                <button type="button" data-status="Ignore" role="menuitem">Ignore</button>
               </div>
             </div>
         </div>
 
-        <div class="truncate-cell" data-full="${entity}">
+        <div class="truncate-cell" data-full="${entity}" role="cell">
           <span class="truncate-text">${entity}</span>
         </div>
 
-        <div>${changeType}</div>
-        <div>${detectedDate}</div>
-        <div>${confidence}</div>
+        <div role="cell">${changeType}</div>
+        <div role="cell">${detectedDate}</div>
+        <div role="cell">${confidence}</div>
 
-        <div class="truncate-cell" data-full="${source}">
+        <div class="truncate-cell" data-full="${source}" role="cell">
           <span class="truncate-text">${source}</span>
         </div>
       `;
@@ -439,10 +470,14 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".status-wrap.open").forEach((wrap) => {
           if (wrap !== statusWrap) {
             wrap.classList.remove("open");
+            const openButton = wrap.querySelector(".status-pill");
+            if (openButton) openButton.setAttribute("aria-expanded", "false");
           }
         });
 
         statusWrap.classList.toggle("open");
+        /* WHY: Announces whether the row status menu is open for assistive technology. */
+        statusPill.setAttribute("aria-expanded", String(statusWrap.classList.contains("open")));
         return;
       }
 
@@ -464,6 +499,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         pill.innerHTML = `${newStatus} <span>⌄</span>`;
         statusWrap.classList.remove("open");
+        pill.setAttribute("aria-expanded", "false");
       }
     });
   }
@@ -473,6 +509,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!event.target.closest(".status-wrap")) {
       document.querySelectorAll(".status-wrap.open").forEach((wrap) => {
         wrap.classList.remove("open");
+        const openButton = wrap.querySelector(".status-pill");
+        if (openButton) openButton.setAttribute("aria-expanded", "false");
       });
     }
   });
@@ -533,7 +571,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* WHY: Marks the selected dataset button as active for visual feedback. */
     datasetButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.dataset === datasetKey);
+      const isActive = btn.dataset.dataset === datasetKey;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", String(isActive));
     });
   }
 
@@ -545,10 +585,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* WHY: Provides one helper to close temporary panels when users click away. */
   function closeFloatingPanels() {
-  /* WHY: Each check keeps the helper safe if a panel is missing from the HTML. */
-  if (floatingMenu) floatingMenu.classList.remove("open");
+    /* WHY: Each check keeps the helper safe if a panel is missing from the HTML. */
+    if (floatingMenu) floatingMenu.classList.remove("open");
+    if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
 
-  if (tableDateFilterPanel) tableDateFilterPanel.classList.remove("open");
+    setDateFilterOpen(false);
   }
 
   /* WHY: Keeps all side-panel controls using the same list of panels. */
@@ -565,7 +606,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function setChartPanelsExpanded(isExpanded) {
     getChartPanels().forEach((panel) => {
       panel.classList.toggle("expanded", isExpanded);
+      panel.setAttribute("aria-expanded", String(isExpanded));
     });
+  }
+
+  /* WHY: Keeps mouse and keyboard expansion using the same side-panel state logic. */
+  function toggleChartPanel(panel) {
+    const isExpanded = !panel.classList.contains("expanded");
+    panel.classList.toggle("expanded", isExpanded);
+    panel.setAttribute("aria-expanded", String(isExpanded));
   }
 
   /* WHY: Checks the shared panel state so different buttons do not conflict. */
@@ -578,6 +627,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function setChartPanelsVisible(isVisible) {
     if (chartZone) {
       chartZone.classList.toggle("panels-hidden", !isVisible);
+    }
+
+    if (chartInfoToggle) {
+      chartInfoToggle.setAttribute("aria-expanded", String(isVisible));
     }
   }
 
@@ -614,6 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener("click", (event) => {
       event.stopPropagation();
       floatingMenu.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(floatingMenu.classList.contains("open")));
     });
   }
 
@@ -627,8 +681,10 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Lets users switch between light and dark viewing modes. */
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.toggle("dark-mode");
       themeToggle.innerHTML = '<span class="menu-icon"> <i data-lucide="eclipse"></i></span>';
+      /* WHY: Lets assistive technology announce whether dark mode is currently active. */
+      themeToggle.setAttribute("aria-pressed", String(isDarkMode));
       refreshIcons();
     });
   }
@@ -657,9 +713,11 @@ document.addEventListener("DOMContentLoaded", () => {
       /* WHY: Keeps panels visible while this control expands or collapses their content. */
       setChartPanelsVisible(true);
       setChartPanelsExpanded(shouldExpand);
+      openAllToggle.setAttribute("aria-expanded", String(shouldExpand));
 
       if (weatherPopup) {
         weatherPopup.style.display = shouldExpand ? "block" : "none";
+        if (weatherBtn) weatherBtn.setAttribute("aria-expanded", String(shouldExpand));
       }
 
       if (shouldExpand) {
@@ -674,6 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const shouldShowWeather = weatherPopup.style.display !== "block";
 
       weatherPopup.style.display = shouldShowWeather ? "block" : "none";
+      weatherBtn.setAttribute("aria-expanded", String(shouldShowWeather));
 
       if (shouldShowWeather) {
         await loadWeather();
@@ -686,6 +745,10 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutBtn.addEventListener("click", () => {
       aboutOverlay.classList.add("show");
       refreshIcons();
+    });
+
+    aboutBtn.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => aboutBtn.click());
     });
   }
 
@@ -716,6 +779,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       floatingMenu.classList.remove("open");
+      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+    });
+
+    navCharts.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => navCharts.click());
     });
   }
 
@@ -730,8 +798,13 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       floatingMenu.classList.remove("open");
+      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
       setChartPanelsVisible(false);
       setChartPanelsExpanded(false);
+    });
+
+    navDataOptions.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => navDataOptions.click());
     });
   }
 
@@ -743,43 +816,71 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* WHY: Lets users collapse action controls to make the table easier to scan. */
+  if (actionColumnToggle && tablePanel) {
+    actionColumnToggle.addEventListener("click", () => {
+      tablePanel.classList.toggle("actions-collapsed");
+      /* WHY: Updates the button label so users understand the current table mode. */
+      const isCollapsed = tablePanel.classList.contains("actions-collapsed");
+      actionColumnToggle.textContent = isCollapsed ? "Actions" : "Edit mode";
+      /* WHY: Announces whether the table action controls are currently visible. */
+      actionColumnToggle.setAttribute("aria-pressed", String(!isCollapsed));
+    });
+  }
+
   /* WHY: Allows the description panel to expand for easier reading. */
   if (descriptionPanel) {
-  descriptionPanel.addEventListener("click", (event) => {
-    event.stopPropagation();
-    descriptionPanel.classList.toggle("expanded");
-  });
-}
+    descriptionPanel.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleChartPanel(descriptionPanel);
+    });
 
-/* WHY: Allows the summary panel to expand for easier reading. */
-if (summaryPanel) {
-  summaryPanel.addEventListener("click", (event) => {
-    event.stopPropagation();
-    summaryPanel.classList.toggle("expanded");
-  });
-}
+    descriptionPanel.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => toggleChartPanel(descriptionPanel));
+    });
+  }
 
-/* WHY: Allows the outcome panel to expand for easier reading. */
-if (outcomePanel) {
-  outcomePanel.addEventListener("click", (event) => {
-    event.stopPropagation();
-    outcomePanel.classList.toggle("expanded");
-  });
-}
+  /* WHY: Allows the summary panel to expand for easier reading. */
+  if (summaryPanel) {
+    summaryPanel.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleChartPanel(summaryPanel);
+    });
 
-/* WHY: Allows the recommended action panel to expand for easier reading. */
-if (recommendedActionPanel) {
-  recommendedActionPanel.addEventListener("click", (event) => {
-    event.stopPropagation();
-    recommendedActionPanel.classList.toggle("expanded");
-  });
-}
+    summaryPanel.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => toggleChartPanel(summaryPanel));
+    });
+  }
+
+  /* WHY: Allows the outcome panel to expand for easier reading. */
+  if (outcomePanel) {
+    outcomePanel.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleChartPanel(outcomePanel);
+    });
+
+    outcomePanel.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => toggleChartPanel(outcomePanel));
+    });
+  }
+
+  /* WHY: Allows the recommended action panel to expand for easier reading. */
+  if (recommendedActionPanel) {
+    recommendedActionPanel.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleChartPanel(recommendedActionPanel);
+    });
+
+    recommendedActionPanel.addEventListener("keydown", (event) => {
+      handleKeyboardActivation(event, () => toggleChartPanel(recommendedActionPanel));
+    });
+  }
 
   /* WHY: Opens or closes the table date filter panel. */
-    if (tableDateRangeBtn && tableDateFilterPanel) {
+  if (tableDateRangeBtn && tableDateFilterPanel) {
     tableDateRangeBtn.addEventListener("click", (event) => {
       event.stopPropagation();
-      tableDateFilterPanel.classList.toggle("open");
+      setDateFilterOpen(!tableDateFilterPanel.classList.contains("open"));
     });
   }
 
@@ -787,7 +888,7 @@ if (recommendedActionPanel) {
   if (tableDateFilterClose && tableDateFilterPanel) {
     tableDateFilterClose.addEventListener("click", (event) => {
       event.stopPropagation();
-      tableDateFilterPanel.classList.remove("open");
+      setDateFilterOpen(false);
     });
   }
 
@@ -811,7 +912,7 @@ if (recommendedActionPanel) {
       }
 
       renderDataset(getActiveDatasetKey());
-      tableDateFilterPanel.classList.remove("open");
+      setDateFilterOpen(false);
     });
   }
 
@@ -847,18 +948,3 @@ if (recommendedActionPanel) {
   renderDataset("finance");
   refreshIcons();
 });
-
-/* WHY: Finds the action column control after the DOM handler because this feature sits outside the main setup block. */
-const actionColumnToggle = document.getElementById("actionColumnToggle");
-const tablePanel = document.querySelector(".table-panel");    
-
-/* WHY: Lets users collapse action controls to make the table easier to scan. */
-if (actionColumnToggle && tablePanel) {
-  actionColumnToggle.addEventListener("click", () => {
-    tablePanel.classList.toggle("actions-collapsed");
-    /* WHY: Updates the button label so users understand the current table mode. */
-    const isCollapsed = tablePanel.classList.contains("actions-collapsed");
-    actionColumnToggle.textContent = isCollapsed ? "Actions" : "Edit mode";
-  });
-
-}

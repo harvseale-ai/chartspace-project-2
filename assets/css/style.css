@@ -205,6 +205,15 @@ button {
   font-family: inherit;
 }
 
+/* WHY: Makes keyboard focus visible without changing the normal mouse/touch design. */
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
 /* Root height setup.
    Allows full-height page sections and layout wrappers to size correctly. */
 html,

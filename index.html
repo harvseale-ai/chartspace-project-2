@@ -31,7 +31,13 @@
     <div class="page-shell">
       <header class="topbar">
         <div class="topbar-left">
-          <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+          <button
+            class="menu-btn"
+            id="menuToggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="floatingMenu"
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -49,35 +55,46 @@
         
         <div class="topbar-right">
 
-          <button class="icon-circle" id="exportBtn">
+          <button
+            class="icon-circle"
+            id="exportBtn"
+            aria-label="Export selected rows"
+          >
             <span class="menu-icon">
               <i data-lucide="download"></i>
               <span id="exportCount" class="export-count">0</span>
             </span>
           </button>
 
-          <button class="icon-circle" id="themeToggle" aria-label="Toggle light and dark mode">
+          <button
+            class="icon-circle"
+            id="themeToggle"
+            aria-label="Toggle light and dark mode"
+            aria-pressed="false"
+          >
             <span class="menu-icon"> <i data-lucide="eclipse"></i></span>
           </button>
 
           <button
               class="profile-circle"
               id="weatherBtn"
-              aria-label="Open user menu"
+              aria-label="Open weather summary"
+              aria-expanded="false"
+              aria-controls="weatherPopup"
             >
             <span class="menu-icon-weather">
               <i data-lucide="cloud-sun"></i>
             </span>
           </button>
 
-          <div id="weatherPopup" class="weather-popup">
+          <div id="weatherPopup" class="weather-popup" role="status" aria-live="polite">
             <p id="weatherText">Loading weather...</p>
           </div>
 
         </div>
 
         <div class="floating-menu" id="floatingMenu">
-          <div class="menu-item-row" id="navCharts">
+          <div class="menu-item-row" id="navCharts" role="button" tabindex="0">
             <div class="menu-item-left">
               <i data-lucide="bar-chart-3"></i>
               <span>Charts</span>
@@ -87,12 +104,13 @@
               id="openAllToggle"
               class="menu-icon-right-btn"
               aria-label="Open all panels"
+              aria-expanded="false"
             >
               <i data-lucide="maximize-2"></i>
             </button>
           </div>
 
-          <div class="menu-item-row" id="navDataOptions">
+          <div class="menu-item-row" id="navDataOptions" role="button" tabindex="0">
             <div class="menu-item-left">
               <i data-lucide="file-text"></i>
               <span>Data Options</span>
@@ -101,7 +119,7 @@
 
           <div class="menu-divider"></div>
 
-          <div class="menu-item-row" id="aboutBtn">
+          <div class="menu-item-row" id="aboutBtn" role="button" tabindex="0">
             <div class="menu-item-left">
               <i data-lucide="info"></i>
               <span>About</span>
@@ -120,12 +138,18 @@
                     class="chart-side-panel chart-side-panel-left chart-side-panel-outside"
                     id="descriptionPanel"
                     aria-live="polite"
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
                   ></aside>
 
                   <aside
                     class="chart-side-panel chart-side-panel-left chart-side-panel-inside"
                     id="summaryPanel"
                     aria-live="polite"
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
                   ></aside>
                 </div>
 
@@ -139,6 +163,8 @@
                           id="chartInfoToggle"
                           class="chart-info-btn"
                           aria-label="Toggle chart info"
+                          aria-expanded="false"
+                          aria-controls="chartZone"
                         >
                           ⓘ
                         </button>
@@ -170,7 +196,7 @@
                       id="chartSvg"
                       class="chart-svg"
                       viewBox="0 0 760 420"
-                      aria-label="Line chart"
+                      aria-label="Revenue line chart comparing current year and previous year by month"
                       role="img"
                     ></svg>
                   </div>
@@ -181,12 +207,18 @@
                     class="chart-side-panel chart-side-panel-right chart-side-panel-inside"
                     id="outcomePanel"
                     aria-live="polite"
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
                   ></aside>
 
                   <aside
                     class="chart-side-panel chart-side-panel-right chart-side-panel-outside"
                     id="recommendedActionPanel"
                     aria-live="polite"
+                    role="button"
+                    tabindex="0"
+                    aria-expanded="false"
                   ></aside>
                 </div>
               </div>
@@ -199,13 +231,13 @@
             <div class="table-panel actions-collapsed">
                 <div class="table-toolbar">
                   <div class="dataset-switcher">
-                    <button class="dataset-btn active" data-dataset="finance">
+                    <button class="dataset-btn active" data-dataset="finance" aria-pressed="true">
                       Finance
                     </button>
-                    <button class="dataset-btn" data-dataset="healthcare">
+                    <button class="dataset-btn" data-dataset="healthcare" aria-pressed="false">
                       Healthcare
                     </button>
-                    <button class="dataset-btn" data-dataset="education">
+                    <button class="dataset-btn" data-dataset="education" aria-pressed="false">
                       Education
                     </button>
                   </div>
@@ -215,11 +247,16 @@
                   <h2 id="tableTitle">Revenue records <span>(12)</span></h2>
 
                   <div class="date-filter-wrap">
-                    <button class="date-range-btn" id="actionColumnToggle">
+                    <button class="date-range-btn" id="actionColumnToggle" aria-pressed="false">
                       Actions
                     </button>
-                    <button class="date-range-btn" id="tableDateRangeBtn">
-                      Last 30 days
+                    <button
+                      class="date-range-btn"
+                      id="tableDateRangeBtn"
+                      aria-expanded="false"
+                      aria-controls="tableDateFilterPanel"
+                    >
+                      All dates
                     </button>
 
                     <div class="date-filter-panel" id="tableDateFilterPanel">
@@ -266,7 +303,6 @@
                           type="radio"
                           name="tableDateRange"
                           value="30 days"
-                          checked
                         >
                         <span>30 days</span>
                       </label>
@@ -295,17 +331,17 @@
                     </div>
                   </div>
                 </div>
-              <div class="table-scroll-x">
-                <div class="table-head row" id="tableHead">
-                  <div>Actions</div>
-                  <div><span class="truncate-text">Entity / Event</span></div>
-                  <div><span class="truncate-text">Change Type</span></div>
-                  <div><span class="truncate-text">Detected Date</span></div>
-                  <div><span class="truncate-text">Confidence</span></div>
-                  <div><span class="truncate-text">Source</span></div>
+              <div class="table-scroll-x" role="table" aria-labelledby="tableTitle">
+                <div class="table-head row" id="tableHead" role="row">
+                  <div role="columnheader">Actions</div>
+                  <div role="columnheader"><span class="truncate-text">Entity / Event</span></div>
+                  <div role="columnheader"><span class="truncate-text">Change Type</span></div>
+                  <div role="columnheader"><span class="truncate-text">Detected Date</span></div>
+                  <div role="columnheader"><span class="truncate-text">Confidence</span></div>
+                  <div role="columnheader"><span class="truncate-text">Source</span></div>
                 </div>
 
-                <div id="tableRows"></div>
+                <div id="tableRows" role="rowgroup"></div>
               </div>
             </div>
           </div>
@@ -315,14 +351,20 @@
 
     <footer class="footer">© 2026 Chart Dashboard</footer>
 
-    <div id="aboutOverlay" class="about-overlay">
+    <div
+      id="aboutOverlay"
+      class="about-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="aboutTitle"
+    >
       <div class="about-card">
-        <button id="closeAbout" class="about-close">
+        <button id="closeAbout" class="about-close" aria-label="Close about dialog">
           <i data-lucide="x"></i>
         </button>
 
 
-        <h2>About ChartSpace</h2>
+        <h2 id="aboutTitle">About ChartSpace</h2>
 
           <p class="about-subtitle">A visual monitoring dashboard for tracking sector activity and logged changes.</p>
 
