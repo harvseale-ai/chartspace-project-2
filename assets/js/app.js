@@ -74,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "14 days": 14,
     "30 days": 30,
     "90 days": 90,
-    "180 days": 180
+    "180 days": 180,
+    "365 days": 365
   };
 
   /* WHY: Refreshes Lucide icons after dynamic HTML changes replace icon markup. */
@@ -646,14 +647,30 @@ document.addEventListener("DOMContentLoaded", () => {
     weatherText.textContent = "Loading weather...";
 
     try {
-      const url = "https://api.open-meteo.com/v1/forecast?latitude=51.5072&longitude=-0.1276&current_weather=true";
+      const londonWeather = { latitude: 51.5072, longitude: -0.1276, label: "London Weather" };
+      const weatherLocation = await new Promise((resolve) => {
+        if (!navigator.geolocation) {
+          resolve(londonWeather);
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          (position) => resolve({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            label: "Your Location Weather"
+          }),
+          () => resolve(londonWeather)
+        );
+      });
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${weatherLocation.latitude}&longitude=${weatherLocation.longitude}&current_weather=true`;
       const response = await fetch(url);
       const data = await response.json();
       const temp = data.current_weather.temperature;
       const wind = data.current_weather.windspeed;
 
       weatherText.innerHTML = `
-        <strong>London Weather</strong><br>
+        <strong>${weatherLocation.label}</strong><br>
         Temperature: ${temp}°C<br>
         Wind: ${wind} km/h
       `;
