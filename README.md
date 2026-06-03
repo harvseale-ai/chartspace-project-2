@@ -154,6 +154,6 @@ AI support included:
 - Performance and UX optimisation suggestions for responsive layout, chart spacing, table density, side-panel behaviour, and clearer user feedback.
 - Reflection and checklist review to compare the project against the WAES submission requirements.
 
-AI helped identify missing checklist items such as README documentation, validation evidence, deployment notes, unused files, and JavaScript separation. It also helped organise the Git history into clearer commits so the project development path is easier to review.
+AI helped identify missing checklist items such as README documentation, validation evidence, deployment notes, unused files, and JavaScript separation. It also helped organise the Git history into clearer commits so the project development path is easier to review and improve accessibility controls.
 
 The main benefit was faster feedback on project readiness, code quality, and code refactoring. The main limitation was that AI suggestions still needed complete human review, as they would consistently overcomplicate tasks and create large, unnecessary file edits.
