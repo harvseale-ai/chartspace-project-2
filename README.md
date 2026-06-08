@@ -1,5 +1,7 @@
 # ChartSpace
 
+[Website Link](https://harvseale-ai.github.io/chartspace-project-2/)
+
 ChartSpace is a single-page JavaScript dashboard for monitoring sector activity across finance, healthcare, and education. It turns monthly event data into a visual chart, contextual side panels, and an interactive table so users can scan trends, review records, and export selected rows.
 
 ## User Value
@@ -107,10 +109,7 @@ Checks completed during development:
 - Internal image references checked for the logo asset
 - Unused `.DS_Store` files removed and ignored with `.gitignore`
 
-Checks still to complete before final submission:
-
-- Test the deployed site on mobile, tablet, and desktop
-- Confirm there are no console errors in the browser
+[Validator and Test Documentation](https://docs.google.com/document/d/1GLVGgPR4crN_6JHYbnytQOfY64nLtw4a6V7bRIu83Q8/edit?tab=t.0)
 
 ## Screenshots
 

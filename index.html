@@ -94,15 +94,16 @@
         </div>
 
         <div class="floating-menu" id="floatingMenu">
-          <div class="menu-item-row" id="navCharts" role="button" tabindex="0">
-            <div class="menu-item-left">
+          <div class="menu-item-row">
+            <button class="menu-item-main" id="navCharts" type="button">
               <i data-lucide="bar-chart-3"></i>
               <span>Charts</span>
-            </div>
+            </button>
 
             <button
               id="openAllToggle"
               class="menu-icon-right-btn"
+              type="button"
               aria-label="Open all panels"
               aria-expanded="false"
             >
@@ -110,21 +111,21 @@
             </button>
           </div>
 
-          <div class="menu-item-row" id="navDataOptions" role="button" tabindex="0">
-            <div class="menu-item-left">
+          <button class="menu-item-row" id="navDataOptions" type="button">
+            <span class="menu-item-left">
               <i data-lucide="file-text"></i>
               <span>Data Options</span>
-            </div>
-          </div>
+            </span>
+          </button>
 
           <div class="menu-divider"></div>
 
-          <div class="menu-item-row" id="aboutBtn" role="button" tabindex="0">
-            <div class="menu-item-left">
+          <button class="menu-item-row" id="aboutBtn" type="button">
+            <span class="menu-item-left">
               <i data-lucide="info"></i>
               <span>About</span>
-            </div>
-          </div>
+            </span>
+          </button>
         </div>
       </header>
 
@@ -134,23 +135,23 @@
             <div class="chart-wrapper">
               <div class="chart-zone panels-hidden" id="chartZone">
                 <div class="chart-panel-group">
-                  <aside
+                  <div
                     class="chart-side-panel chart-side-panel-left chart-side-panel-outside"
                     id="descriptionPanel"
                     aria-live="polite"
                     role="button"
                     tabindex="0"
                     aria-expanded="false"
-                  ></aside>
+                  ></div>
 
-                  <aside
+                  <div
                     class="chart-side-panel chart-side-panel-left chart-side-panel-inside"
                     id="summaryPanel"
                     aria-live="polite"
                     role="button"
                     tabindex="0"
                     aria-expanded="false"
-                  ></aside>
+                  ></div>
                 </div>
 
                 <div class="card chart-card">
@@ -203,23 +204,23 @@
                 </div>
 
                 <div class="chart-panel-group">
-                  <aside
+                  <div
                     class="chart-side-panel chart-side-panel-right chart-side-panel-inside"
                     id="outcomePanel"
                     aria-live="polite"
                     role="button"
                     tabindex="0"
                     aria-expanded="false"
-                  ></aside>
+                  ></div>
 
-                  <aside
+                  <div
                     class="chart-side-panel chart-side-panel-right chart-side-panel-outside"
                     id="recommendedActionPanel"
                     aria-live="polite"
                     role="button"
                     tabindex="0"
                     aria-expanded="false"
-                  ></aside>
+                  ></div>
                 </div>
               </div>
             </div>

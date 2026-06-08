@@ -494,10 +494,17 @@ body {
 .menu-item-row {
   min-height: 44px;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 8px 10px;
+  border: 0;
   border-radius: var(--radius-md);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
 
   transition:
     background-color 0.18s ease,
@@ -516,6 +523,20 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.menu-item-main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
 }
 
 .menu-item-row span {

@@ -1,3 +1,4 @@
+/* 1. Application Startup */
 /* WHY: Waits until the HTML exists before selecting page elements and attaching events. */
 document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Stores the chart SVG so the app can draw and redraw the graph in one place. */
@@ -63,8 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /* WHY: Defines the y-axis values shown on the chart grid. */
   const yTicks = [50, 40, 30, 20, 10, 0];
 
+  /* 2. Central Dataset System */
   /* WHY: Reads the centralised dataset file while keeping the app safe if it fails to load. */
   const datasets = window.chartspaceDatasets || {};
+
+  /* 6. Date Filtering */
   /* WHY: Starts with no date filter so the table shows all demo rows until the user chooses a range. */
   let selectedDateRangeDays = null;
   /* WHY: Converts the visible filter labels into day counts the table can compare. */
@@ -85,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /* 9. Accessibility Features */
   /* WHY: Lets keyboard users activate custom button-like elements with Enter or Space. */
   function handleKeyboardActivation(event, callback) {
     if (event.key === "Enter" || event.key === " ") {
@@ -104,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /* 11. Responsive Behaviour */
   /* WHY: Keeps desktop spacing unchanged while giving mobile charts more usable plot width. */
   function getChartPlotBounds() {
     const isMobileChart = window.matchMedia("(max-width: 700px)").matches;
@@ -125,9 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  /* WHY: Creates SVG elements with attributes so chart drawing code stays reusable. */
+  /* 3. Chart Rendering System */
+  /* WHY: Creates SVG elements with attributes so chart drawing code stays reusable. (small helper for building SVG chart parts) */
   function createSvgEl(tag, attrs = {}) {
-    /* WHY: SVG elements need the SVG namespace, unlike normal HTML elements. */
+    /* WHY: SVG elements need the SVG namespace, unlike normal HTML elements. (createSvgEl() is a reusable SVG builder. It creates chart elements like lines, labels, and points, applies their attributes, and returns the finished element so the chart can draw itself dynamically.) */
     const node = document.createElementNS(SVG_NS, tag);
     /* WHY: Loops through attributes so each chart element can be configured from one object. */
     Object.entries(attrs).forEach(([key, value]) => {
@@ -265,6 +272,10 @@ document.addEventListener("DOMContentLoaded", () => {
     drawMonths(data.months, plot);
   }
 
+    /* ===============================
+      4. Dynamic Table Rendering 
+    =============================== */
+
   /* WHY: Converts a row action into the CSS class used for its visual state. */
   function getStatusClass(action) {
     /* WHY: Critical rows need a stronger visual style. */
@@ -366,6 +377,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return filterRowsByDateRange(rows, selectedDateRangeDays);
   }
 
+  /* ===============================
+      7. CSV Export 
+    =============================== */
+
   /* WHY: Shows how many rows are selected for export. */
   function updateExportCount() {
     if (!exportCount) return;
@@ -438,6 +453,16 @@ document.addEventListener("DOMContentLoaded", () => {
     /* WHY: Frees the temporary file URL after the download has started. */
     URL.revokeObjectURL(url);
   }
+
+  /* ===============================
+
+       8. Event Listeners and User Interaction  
+
+       This block uses one event listener on the table to manage all row interactions. 
+       It detects whether the user clicked an export toggle, a status dropdown, or a status option. 
+       It highlights the active row, updates export selections, opens and closes status menus, changes row status styles, and keeps ARIA attributes updated for accessibility.
+
+    =============================== */
 
   /* WHY: Attaches one click listener to the table so generated rows work automatically. */
   if (tableRows) {
@@ -515,6 +540,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
+  /* ===============================
+      5. Dataset Switching // Side Panel Management
+    =============================== */
 
   /* WHY: Pulls one named panel section out of a trusted dataset HTML string. */
   function getPanelHtml(panelHtml, panelName) {
@@ -640,6 +669,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return chartZone && !chartZone.classList.contains("panels-hidden");
   }
 
+  /* ===============================
+      10. External Weather API 
+    =============================== */
+
   /* WHY: Loads weather in one place so both weather controls show the same API result. */
   async function loadWeather() {
     if (!weatherText) return;
@@ -678,6 +711,10 @@ document.addEventListener("DOMContentLoaded", () => {
       weatherText.textContent = "Weather unavailable.";
     }
   }
+
+  /*  ===============================
+      Floating navigation
+     =============================== */
 
   /* WHY: Opens or closes the floating navigation menu from the header button. */
   if (menuToggle && floatingMenu) {
@@ -763,10 +800,6 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutOverlay.classList.add("show");
       refreshIcons();
     });
-
-    aboutBtn.addEventListener("keydown", (event) => {
-      handleKeyboardActivation(event, () => aboutBtn.click());
-    });
   }
 
   /* WHY: Gives users a direct way to close the about overlay. */
@@ -799,9 +832,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
     });
 
-    navCharts.addEventListener("keydown", (event) => {
-      handleKeyboardActivation(event, () => navCharts.click());
-    });
   }
 
   /* WHY: Scrolls to the table section and hides chart panels to focus on data options. */
@@ -820,9 +850,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setChartPanelsExpanded(false);
     });
 
-    navDataOptions.addEventListener("keydown", (event) => {
-      handleKeyboardActivation(event, () => navDataOptions.click());
-    });
   }
 
   /* WHY: Exports only the rows users have selected. */
@@ -962,6 +989,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* WHY: Loads the default dataset so the dashboard is populated on first page load. */
+  /* Conclusion */
   renderDataset("finance");
   refreshIcons();
 });
